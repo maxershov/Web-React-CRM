@@ -21,6 +21,7 @@ module.exports = {
         watchContentBase: true,
         progress: true,
         contentBase: path.join(__dirname, 'dist'),
+        writeToDisk: true,
         historyApiFallback: true, // on 404 load publicPath => for BrowserRouter on refresh
     },
     resolve: {
@@ -51,7 +52,16 @@ module.exports = {
     },
     plugins: [new HtmlWebpackPlugin({
         template: path.join(__dirname, 'src', 'assets', 'index.html'),
-        title: "Web-React-CRM"
+        title: "Web-React-CRM",
+        minify: {
+            removeComments: true,
+            collapseWhitespace: true,
+            removeRedundantAttributes: true,
+            useShortDoctype: true,
+            removeEmptyAttributes: true,
+            keepClosingSlash: true,
+            minifyURLs: true,
+          }
     }), new UglifyJsPlugin({
         parallel: true,
     })]
