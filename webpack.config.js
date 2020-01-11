@@ -36,13 +36,7 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                include: path.join(__dirname, 'src/components'),
-                use: [
-                  'style-loader',
-                  {
-                    loader: 'css-loader'
-                  }
-                ]
+                loader: ['style-loader','css-loader']
               },
             {
                 loader: require.resolve('file-loader'),

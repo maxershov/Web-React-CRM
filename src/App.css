@@ -1,0 +1,314 @@
+* {
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+    --img-width: 25vw;
+    --img-height: 25vw;
+    --form-width: 25vw;
+    --back-color: rgba(224, 224, 224, 0.2);
+    --back-color-light: rgba(224, 224, 224, 0.1);
+    --form-color: rgba(224, 224, 224, 0.6);
+    --table-color: #005ccc
+}
+
+::-webkit-scrollbar {
+    /*hide -y scrollbar*/
+    display: none;
+}
+
+html {
+    /* font-family: 'Courier New', Courier, monospace; */
+    /* do i need flex?? try to del
+  */
+    font-size: 1rem;
+    background-color: rgb(0, 0, 0);
+    background-image: url('./images/01.jpeg');
+    background-size: 100vw;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    /* width: 100vw; */
+}
+
+.font_white_shadow {
+    text-shadow: 2px 2px 0.1rem black;
+    font-size: 1.2rem;
+    color: white;
+}
+
+.table {
+    background-color: var(--back-color);
+    /* font-size: 1.2rem; */
+    /* color: white; */
+    /* text-shadow: 2px 2px 0.1rem black; */
+}
+
+#tablePhoto:hover {
+    position: absolute;
+    object-fit: contain;
+    width: 15vw;
+    height: 40vh;
+    background-color: var(--table-color);
+}
+
+.table input {
+    background-color: var(--back-color) !important;
+}
+
+.menu-container {
+    display: flex;
+    margin: 0 0 0.3em 0;
+}
+
+.menu-container>button {
+    color: black;
+    background-color: var(--back-color);
+    /* background-color: transparent; */
+    flex: 1;
+    text-shadow: 2px 1px 0.2em white;
+    padding: 0.4rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    border: none;
+}
+
+.menu-container>button:hover,
+.menu-container>button:focus {
+    border: none;
+    background-color: var(--back-color-light);
+    color: white;
+    outline: none;
+    transition: color .2s linear;
+}
+
+.userParams {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    grid-template-rows: repeat(4, auto);
+    /* grid-gap: 1rem; */
+    /* flex-wrap: wrap; */
+    justify-items: center;
+    align-content: flex-start;
+}
+
+.userParams-container {
+    grid-column: 2/3;
+    grid-row: 1/3;
+    width: 100%;
+}
+
+.userParams .img-container {
+    grid-column: 1/2;
+    grid-row: 1/3;
+    width: 90%;
+    height: 90%;
+    /* width: var(--img-width);
+    height: var(--img-height); */
+    display: flex;
+    background-color: inherit;
+}
+
+.userParams .img-container>img {
+    padding-top: 1rem;
+    flex: 1;
+    max-width: 95%;
+    max-height: 95%;
+    object-fit: contain;
+}
+
+.userParams label,
+.table,
+.testPage,
+.calendar,
+.mainPage textarea {
+    animation: fadein .5s;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+        transform: translate(-1em);
+    }
+    to {
+        opacity: 1
+    }
+}
+
+*>label {
+    /* display: inline-block; */
+    /* width: fit-content; */
+    /* width: var(--form-width); */
+    display: block;
+    font-size: 1.4rem;
+    font-weight: 700;
+    width: 80%;
+    /* font-style: oblique; */
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    text-align: center;
+    color: white;
+    text-shadow: 2px 2px 0.1rem black;
+    letter-spacing: 0.04em;
+}
+
+*>input {
+    color: black;
+    border: none;
+    border-bottom: 1px solid black;
+    /* width: var(--form-width); */
+    width: 80%;
+    font-size: 1.35rem;
+    background-color: var(--back-color);
+    /* background-color: transparent; */
+    margin-bottom: 0.5rem;
+    font-weight: bolder;
+    text-shadow: 0 0 0.1em white;
+}
+
+*>input:hover {
+    background-color: rgba(224, 224, 224, 0.4);
+    transition: background-color .5s linear;
+}
+
+*>input::placeholder {
+    font-size: 1.3rem;
+    color: rgba(0, 0, 0, 0.5);
+    text-shadow: none;
+    font-weight: initial;
+}
+
+.absolute_position_button button {
+    position: absolute;
+}
+
+.userParams button,
+.mainPage button {
+    /* width: var(--form-width); */
+    width: 30vw;
+    /* position: absolute; */
+    border-style: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 0.3rem;
+    background-image: linear-gradient(to right, #005C97 0%, #363795 51%, #005C97 100%);
+}
+
+.userParams-container form button,
+.daysField button,
+.rentField button,
+.myActionFields button,
+.newProfileField button {
+    display: none;
+}
+
+.userParams-container>*:hover>form>button,
+.userParams-container>*:hover>button,
+.myActionFields>*:hover button,
+.newProfileField:hover button {
+    display: block;
+}
+
+.notesField>button {
+    display: block;
+}
+
+.notesField>textarea {
+    /* height: calc(var(--img-height) /3); */
+    background-color: var(--form-color);
+    /* width: var(--form-width); */
+    /* width: 100%; */
+    /* width: 90vw; */
+    /* width: inherit; */
+    width: 80%;
+    height: 15vh;
+    font-size: inherit;
+    /* margin-right: 5em; */
+}
+
+.notesField {
+    /* background-color: var(--back-color-light); */
+    grid-column: 3/4;
+    grid-row: 2/3;
+    width: 100%;
+}
+
+.historyTable {
+    margin-top: 1vw;
+    grid-column: 1/4;
+    grid-row: 3/4;
+    width: 95%;
+}
+
+.myActionFields {
+    /* background-color: var(--back-color-light); */
+    /* border: solid; */
+    grid-column: 3/4;
+    grid-row: 1/2;
+    width: 100%;
+}
+
+.calendar button {
+    background-image: none;
+}
+
+.calendar {
+    background: var(--back-color) !important;
+    /* background-image: none; */
+}
+
+.mainPage {
+    margin: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: repeat(5, auto);
+    justify-items: center;
+    align-content: flex-start;
+    /* grid-gap: 1rem; */
+}
+
+.tableMain {
+    margin-left: 5%;
+    width: 90%;
+    grid-column: 1/3;
+    grid-row: 4/5;
+}
+
+.calendarMain {
+    grid-column: 1/2;
+    grid-row: 1/3;
+    /* width: 10px !important; */
+}
+
+.notesMain {
+    grid-column: 2/3;
+    grid-row: 1/3;
+    width: 100%;
+}
+
+.notesMain>textarea {
+    width: 100%;
+    height: 70%;
+    background-color: var(--back-color);
+}
+
+.newProfileField {
+    margin: 1rem;
+    grid-column: 2/3;
+    grid-row: 3/4;
+    width: 50%;
+}
+
+.newCodeField {
+    margin: 1rem;
+    grid-column: 1/2;
+    grid-row: 3/4;
+    width: 100%;
+}
+
+.testPage {
+    background-color: var(--back-color);
+    margin: 1rem;
+    font-weight: 500;
+}
