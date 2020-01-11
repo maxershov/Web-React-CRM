@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getPhotoFunc } from '../App';
 import UserParams from './UserParams';
-import TestPage from './TestPage';
 import MyTable from './MyTable';
 import ShortTable from './ShortTable';
 import MainPage from './MainPage';
@@ -15,8 +14,6 @@ const MainContent = (props) => {
       return (<MainPage func={props.setRenderPage} getPhoto={getPhotoFunc} renderPerson={props.renderPerson} />);
     case 'PROFILE_PAGE':
       return (<UserParams deletePerson={props.deletePerson} />);
-    case 'TEST_PAGE':
-      return (<TestPage />);
     case 'EMPLOYEE_PAGE':
       return (<ShortTable tableType="СОТРУДНИК" />);
     case 'LOST_TABLE_PAGE':
