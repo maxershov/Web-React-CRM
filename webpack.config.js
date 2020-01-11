@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
     mode: 'development',
@@ -26,7 +27,6 @@ module.exports = {
         extensions: ['.jsx','.js', '.json'],
         modules: ['node_modules'],
     },
-
     module: {
         rules: [
             {
@@ -52,5 +52,5 @@ module.exports = {
     plugins: [new HtmlWebpackPlugin({
         template: path.join(__dirname, 'src', 'assets', 'index.html'),
         title: "Web-React-CRM"
-    })]
+    }), new UglifyJsPlugin]
 };
