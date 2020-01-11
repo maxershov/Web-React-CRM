@@ -8,7 +8,8 @@ const HistoryTable = (props) => {
 
   return (
     <div className="historyTable">
-      <ReactTable className="table font_white_shadow -striped -highlight"
+      <ReactTable
+        className="table font_white_shadow -striped -highlight"
         data={parsedData[0].activity}
         columns={[{
           Header: () => <strong>Тип</strong>,
@@ -21,9 +22,9 @@ const HistoryTable = (props) => {
           headerClassName: 'dateTable',
           // width: 100,
           sortMethod: (a, b) => {
-            a = getDaysLeft(a);
-            b = getDaysLeft(b);
-            return (a === null) - (b === null) || +(a > b) || -(a < b);
+            const dayA = getDaysLeft(a);
+            const dayB = getDaysLeft(b);
+            return (dayA === null) - (dayB === null) || +(dayA > dayB) || -(dayA < dayB);
           }
         }, {            
           Header: () => <strong>Время</strong>,
@@ -41,10 +42,10 @@ const HistoryTable = (props) => {
           headerClassName: 'amountTable',
           // width: 400,
           style: { 'whiteSpace': 'unset' }
-        }]
-        }
+        }]}
         defaultSorted={[{id: 'date',desc: true}]}
-        defaultPageSize={10} />
+        defaultPageSize={10}
+      />
     </div>
     )
 }

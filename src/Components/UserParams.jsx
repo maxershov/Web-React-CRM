@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable import/no-cycle */
 /* eslint-disable spaced-comment */
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
@@ -37,7 +40,7 @@ const UserParams = (props) => {
           <>
             <MyForm className="photoId" formLabel="Изменить код фото:" baseValue={data[id].photoId} inputType="photoId" type="PERSON" />
             <label>Удаление:</label>
-            <button onClick={() => deletePerson(data[id].code)}>Удалить пользователя</button>
+            <button type="button" onClick={() => deletePerson(data[id].code)}>Удалить пользователя</button>
           </>
         ) : undefined}
         <MyForm formLabel="Имя:" baseValue={data[id].personName} inputType="personName" type="PERSON" />

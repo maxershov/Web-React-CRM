@@ -32,8 +32,8 @@ const MyDeposite = (props) => {
             <label>Сумма списания/пополнения:</label>
             <br />
             <input className="numInput" type="number" width="40" height="50" value={amount} onChange={event => setAmount(event.target.value)} />
-            <button style={{ float: "left", height: "30px", width: "50px" }} onClick={plus}>+</button>
-            <button style={{ float: "left", height: "30px", width: "50px" }} onClick={minus}>-</button>
+            <button type="button" style={{ float: "left", height: "30px", width: "50px" }} onClick={plus}>+</button>
+            <button type="button" style={{ float: "left", height: "30px", width: "50px" }} onClick={minus}>-</button>
           </form>
           <MyCalendarWithButtons setParentDate={setDateDeposite} сalendarName="Дата изменения депозита:" dateType="setParent" date={dateDeposite} />
         </div>
@@ -44,7 +44,7 @@ const MyDeposite = (props) => {
           <form onSubmit={() => changeRenderDeposite(true)}>
             <label>Депозит:</label>
             <input type="number" readOnly value={deposite} />
-            <button onClick={() => changeRenderDeposite(true)}>Изменить</button>
+            <button type="button" onClick={() => changeRenderDeposite(true)}>Изменить</button>
           </form>
         </div>
 )

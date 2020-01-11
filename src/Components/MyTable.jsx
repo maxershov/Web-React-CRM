@@ -4,6 +4,7 @@ import ReactTable from 'react-table';
 import { connect } from 'react-redux';
 import { getDaysLeft, renderPersonFunc, getPhotoFunc } from '../App';
 
+const openProfileImg = require('../images/profileLogo.svg');
 
 // render table first => fail.  Set loaderSpinner and state later
 
@@ -136,7 +137,7 @@ const MyTable = (props) => {
             width: 55,
             headerClassName: 'headerTable',
             getFooterProps: () => ({ style: { background: 'blue' } }),
-            Cell: (value) => (<button type="button" onClick={() => renderPersonFunc(value.original.code)}><img width={30} height={30} alt="editImg" src={require('../images/profileLogo.svg')} /></button>)
+            Cell: (value) => (<button type="button" onClick={() => renderPersonFunc(value.original.code)}><img width={30} height={30} alt="editImg" src={openProfileImg} /></button>)
           }
         ]}
       defaultSorted={[{id: 'personName',desc: false}]}

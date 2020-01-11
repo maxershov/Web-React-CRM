@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { connect } from 'react-redux';
 
@@ -5,9 +6,6 @@ const Header = (props) => {
   const { renderMain, renderTable, renderLostTable, renderProfile, renderEmployeeTable, renderTestPage, renderLeadTable} = props;
   return (
     <nav className="menu-container">
-
-
-    
       <button type="button" onClick={renderMain}>Главная</button>
       <button type="button" onClick={renderTable}>Клиенты</button>
       <button type="button" onClick={renderLostTable}>Прошлые</button>

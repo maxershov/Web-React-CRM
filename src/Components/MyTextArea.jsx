@@ -13,8 +13,6 @@ const MyTextArea = (props) => {
       } else if (props.type === 'DAY_DATA') {
         props.dayObject.notes = notesData;
         addNewDayDataToJSON(props.dayObject);
-      } else {
-        console.log('ERROR IN NOTES ' + notesData);
       }
     }
   }
@@ -23,8 +21,8 @@ const MyTextArea = (props) => {
   }, [props.notesValue]);
   return (
     <>
-      <textarea onChange={event => setNotesData(event.target.value)} onKeyDown={saveNotes} value={notesData}></textarea>
-      <button id="clickNotes" onClick={saveNotes}>Изменить</button>
+      <textarea onChange={event => setNotesData(event.target.value)} onKeyDown={saveNotes} value={notesData} />
+      <button type="button" id="clickNotes" onClick={saveNotes}>Изменить</button>
     </>
   )
 }

@@ -1,8 +1,10 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import ReactTable from 'react-table';
 import { connect } from 'react-redux';
 import { getPhotoFunc, renderPersonFunc, getDaysLeft } from '../App';
 
+const openProfileImg = require('../images/profileLogo.svg');
 
 const ShortTable = (props) => {
 
@@ -13,9 +15,9 @@ const ShortTable = (props) => {
     width: 300,
     headerClassName: 'headerTable',
     sortMethod: (a, b) => {
-      a = getDaysLeft(a);
-      b = getDaysLeft(b);
-      return (a === null) - (b === null) || +(a > b) || -(a < b);
+      const dayA = getDaysLeft(a);
+      const dayB = getDaysLeft(b);
+      return (dayA === null) - (dayB === null) || +(dayA > dayB) || -(dayA < dayB);
     }
   }
   const employeeObj = {
@@ -37,9 +39,9 @@ const ShortTable = (props) => {
     width: 300,
     headerClassName: 'headerTable',
     sortMethod: (a, b) => {
-      a = getDaysLeft(a);
-      b = getDaysLeft(b);
-      return (a === null) - (b === null) || +(a > b) || -(a < b);
+      const dayA = getDaysLeft(a);
+      const dayB = getDaysLeft(b);
+      return (dayA === null) - (dayB === null) || +(dayA > dayB) || -(dayA < dayB);
     }
   }
 
@@ -89,7 +91,7 @@ const ShortTable = (props) => {
           width: 55,
           headerClassName: 'headerTable',
           getFooterProps: () => ({ style: { background: 'blue' } }),
-          Cell: (value) => (<button onClick={() => renderPersonFunc(value.original.code)}><img width={30} height={30} alt="editImg" src={require('../images/profileLogo.svg')} /></button>)
+          Cell: (value) => (<button type="button" onClick={() => renderPersonFunc(value.original.code)}><img width={30} height={30} alt="editImg" src={openProfileImg} /></button>)
         }
       ]}
         defaultSorted={[{id: 'personName',desc: false}]}

@@ -5,10 +5,12 @@
     "prettier"
   ],
   "rules": {
-    "jsx-quotes": [
-      1,
-      "prefer-double"
-    ]
+    "jsx-quotes": [ 1, "prefer-double"],
+    "jsx-a11y/label-has-associated-control": "off",
+    "react/prop-types": 0,
+    "react/jsx-one-expression-per-line": "off",
+    "react/destructuring-assignment": "off",
+    "import/no-cycle": 0
   },
   "plugins": [
     "prettier"

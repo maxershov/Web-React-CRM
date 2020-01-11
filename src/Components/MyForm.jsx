@@ -14,10 +14,13 @@ const MyForm = (props) => {
   }
   return (
     <div className={`${props.inputType}Field absolute_position_button`}>
-      <form name="myForm" onSubmit={sendToDb}><label>{props.formLabel}</label>
+      <form name="myForm" onSubmit={sendToDb}>
+        <label>{props.formLabel}</label>
         <input placeholder={placeholder} type="text" name={props.inputType} onChange={event => setValue(event.target.value)} value={inputValue} />
         <button type="submit">Изменить</button>
-      </form></div>);
+      </form>
+    </div>
+);
 }
 
 

@@ -12,18 +12,18 @@ const MainContent = (props) => {
     case 'TABLE_PAGE':
       return (<MyTable />);
     case 'MAIN_PAGE':
-      return (<MainPage func={props.setRenderPage} getPhoto={getPhotoFunc} renderPerson={props.renderPerson}></MainPage>);
+      return (<MainPage func={props.setRenderPage} getPhoto={getPhotoFunc} renderPerson={props.renderPerson} />);
     case 'PROFILE_PAGE':
-      return (<UserParams deletePerson={props.deletePerson}></UserParams>);
+      return (<UserParams deletePerson={props.deletePerson} />);
     case 'TEST_PAGE':
       return (<TestPage />);
     case 'EMPLOYEE_PAGE':
-      return (<ShortTable tableType={'СОТРУДНИК'} />);
+      return (<ShortTable tableType="СОТРУДНИК" />);
     case 'LOST_TABLE_PAGE':
-      return (<ShortTable tableType={'НЕТ'} />);
+      return (<ShortTable tableType="НЕТ" />);
     case 'LEAD_TABLE_PAGE':
-      return (<ShortTable tableType={'ЛИД'} />);
-    default: return (<MainPage func={props.setRenderPage}></MainPage>);
+      return (<ShortTable tableType="ЛИД" />);
+    default: return (<MainPage func={props.setRenderPage} />);
   }
 }
 

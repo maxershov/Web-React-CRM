@@ -14,7 +14,7 @@ module.exports = {
     },
     devServer: {
         port: 8080,
-        open: true,
+        open: 'chrome',
         hot: true,
         compress: true,
         watchContentBase: true,

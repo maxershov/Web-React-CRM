@@ -2,7 +2,7 @@
 import React from 'react';
 
 
-const TestPage = (props) => {
+const TestPage = () => {
   return (
     <div className="testPage font_white_shadow" />
   );

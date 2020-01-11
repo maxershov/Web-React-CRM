@@ -1,5 +1,5 @@
 {
-  "name": "crmreact",
+  "name": "Web-React-CRM",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,8 +7,16 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --config ./webpack.config.js"
   },
-  "author": "",
+  "repository": {
+      "type": "git",
+      "url": "git+https://github.com/maxershov/Web-React-CRM.git"
+  },
+  "author": "MaxErshov",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maxershov/Web-React-CRM/issues"
+},
+"homepage": "https://github.com/maxershov/Web-React-CRM#readme",
   "dependencies": {
     "cowsay-browser": "^1.1.8",
     "moment": "^2.24.0",
