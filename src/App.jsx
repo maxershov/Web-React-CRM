@@ -10,17 +10,6 @@ import store from './store/store'
 import { getPersonStore, getDayDataStore, getActivityStore, getActivityStoreCode } from './store/storeGetters'
 
 
-// Use test data => in electron app data taken from SQLite or JSON and load from .global electron 
-
-const personData = [{"personName":"Иванов Иван Иванович","contract":"6 мес","dateBirth":"","telNum":"","code":"111111","autoMonth":"","remain":null,"days":null,"photoId":0,"rent":null,"deposite":2000,"notes":""},{"personName":"Test Person One","contract":"3 мес","dateBirth":"01-01-1970","telNum":"","code":"222222","autoMonth":"","remain":null,"days":null,"photoId":0,"rent":null,"deposite":null,"notes":""}];
-store.dispatch({ type: 'CHANGE_PERSON_DATA', data: JSON.stringify(personData) });
-
-const dayData = [{"date":"13-12-2019","notes":"13 тест","history":[]},{"date":"12-12-2019","notes":"","history":[]}];
-store.dispatch({ type: 'CHANGE_DAY_DATA', data: JSON.stringify(dayData) });
-
-
-const activityData = [{"code":"111111","activity":[]},{"code":"222222","activity":[]}];
-store.dispatch({ type: 'CHANGE_ACTIVITY_DATA', data: JSON.stringify(activityData) });
 const App = (props) => {
     return (
       <Provider store={store}>
@@ -168,7 +157,6 @@ export function getDaysLeft(date) {
         return null;
     } 
         return (moment(date, 'DD-MM-YYYY').startOf('day').diff(moment().startOf('day'), 'days'))
-    
 }
 
 export function renderPersonFunc(code) {

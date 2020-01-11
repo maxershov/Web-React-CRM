@@ -1,4 +1,5 @@
-const initState = { data: {} };
+const activityData = [{"code":"111111","activity":[]},{"code":"222222","activity":[]}];
+const initState = { data: JSON.stringify(activityData) };
 
 export default function activityReducer(state = initState, action) {
     // console.log('inSTATEfirstPAGE' + JSON.stringify(state));

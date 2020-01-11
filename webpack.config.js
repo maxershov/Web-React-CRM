@@ -46,11 +46,13 @@ module.exports = {
                     esModule: false,
                     //   fix problem with img [object Module] in browser
                 },
-            }
+            },
         ]
     },
     plugins: [new HtmlWebpackPlugin({
         template: path.join(__dirname, 'src', 'assets', 'index.html'),
         title: "Web-React-CRM"
-    }), new UglifyJsPlugin]
+    }), new UglifyJsPlugin({
+        parallel: true,
+    })]
 };
