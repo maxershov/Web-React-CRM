@@ -1,11 +1,12 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
     context: path.resolve(__dirname),
+    mode: 'development',
     entry: './src/index.js',
-    mode:'production',
+    devtool: 'source-map',
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'main.js',
@@ -16,7 +17,6 @@ module.exports = {
         port: 8080,
         open: true,
         hot: true,
-        compress: true,
         watchContentBase: true,
         progress: true,
         contentBase: path.join(__dirname, 'dist'),
@@ -53,16 +53,5 @@ module.exports = {
     plugins: [new HtmlWebpackPlugin({
         template: path.join(__dirname, 'src', 'assets', 'index.html'),
         title: "Web-React-CRM",
-        minify: {
-            removeComments: true,
-            collapseWhitespace: true,
-            removeRedundantAttributes: true,
-            useShortDoctype: true,
-            removeEmptyAttributes: true,
-            keepClosingSlash: true,
-            minifyURLs: true,
-          }
-    }), new UglifyJsPlugin({
-        parallel: true,
     })]
 };
