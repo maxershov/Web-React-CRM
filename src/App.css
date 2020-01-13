@@ -107,7 +107,6 @@ html {
 
 .userParams label,
 .table,
-.testPage,
 .calendar,
 .mainPage textarea {
     animation: fadein .5s;
@@ -176,8 +175,6 @@ html {
 }
 
 .userParams-container form button,
-.daysField button,
-.rentField button,
 .myActionFields button,
 .newProfileField button {
     display: none;
@@ -273,10 +270,4 @@ html {
     grid-column: 1/2;
     grid-row: 3/4;
     width: 100%;
-}
-
-.testPage {
-    background-color: var(--back-color);
-    margin: 1rem;
-    font-weight: 500;
 }

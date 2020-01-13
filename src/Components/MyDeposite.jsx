@@ -43,8 +43,7 @@ const MyDeposite = (props) => {
         <div className="depositeField">
           <form onSubmit={() => changeRenderDeposite(true)}>
             <label>Депозит:</label>
-            <input type="number" readOnly value={deposite} />
-            <button type="button" onClick={() => changeRenderDeposite(true)}>Изменить</button>
+            <input onClick={() => changeRenderDeposite(true)} type="number" readOnly value={deposite} />
           </form>
         </div>
 )

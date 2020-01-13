@@ -10,17 +10,16 @@ const MyCalendarWithButtons = (props) => {
 
   function changeDate(dateTo) {
     const date = moment(dateTo).format('DD-MM-YYYY');
-    // changeRenderCalendar(false);
     props.dateType === 'setParent' ?
       props.setParentDate(date) :
       ChangeProfileValue(getStoreId(), date, props.dateType);
+      setRenderCalendar('none');
   }
   return (
     <>
       <div className={`${props.dateType  }Field`}>
         <label>{props.сalendarName}</label>
-        <input type="text" readOnly value={props.date} />
-        <button type="button" onClick={() => setRenderCalendar('block')}>Выбрать новую дату</button>
+        <input onClick={() => setRenderCalendar('block')} type="text" readOnly value={props.date} />
       </div>
       <div style={{display:renderCalendar}} className="calendar" id="calendar">
         <Calendar className="calendar" onChange={date => changeDate(date)} />
