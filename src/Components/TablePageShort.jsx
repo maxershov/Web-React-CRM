@@ -78,11 +78,16 @@ const TablePageShort = (props) => {
             headerClassName: 'headerTable',
             getFooterProps: () => ({ style: { background: 'blue' } }),
             filterMethod: (filter, row) => {
-              if (row.personName.toLowerCase().startsWith(filter.value.toLowerCase())) { // sort by second name
+              const name = row._original.personName;
+              const code = row._original.code;
+              if (name.toLowerCase().startsWith(filter.value.toLowerCase())) { // sort by second name
                 return true;
               }
-              if (row.personName.includes(" ")) { // sort by first name
-                if (row.personName.toLowerCase().split(' ')[1].startsWith(filter.value.toLowerCase())) {
+              if (code.toLowerCase().startsWith(filter.value.toLowerCase())) { // sort by second name
+                return true;
+              }
+              if (name.includes(" ")) { // sort by first name
+                if (name.toLowerCase().split(' ')[1].startsWith(filter.value.toLowerCase())) {
                   return true;
                 }
               }
