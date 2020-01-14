@@ -4,8 +4,6 @@ import ReactTable from 'react-table';
 import { connect } from 'react-redux';
 import { getPhotoFunc, renderPersonFunc, getDaysLeft } from '../App';
 
-const openProfileImg = require('../images/profileLogo.svg');
-
 const TablePageShort = (props) => {
 
   const leadObj = {
@@ -68,37 +66,30 @@ const TablePageShort = (props) => {
         columns={[
           {
             Header: () => <strong>Фото</strong>,
-            accessor: 'photoId',
             headerClassName: 'headerTable',
+            width: 95,
+            Cell: (value) => (
+              <img onClick={() => renderPersonFunc(value.original.code)} id="tablePhoto" alt="tablePhoto" height={80} src={getPhotoFunc(value.original.photoId)} />)
+          },
+          {
+            Header: () => 'Имя',
+            id: 'rowCode',
             width: 150,
-            Cell: ({ value }) => (
-              <img id="tablePhoto" alt="tablePhoto" height={60} src={getPhotoFunc(value)} />)
-          }, {
-            Header: () => <strong>Имя</strong>,
-            accessor: 'personName',
             headerClassName: 'headerTable',
-            width: 350,
+            getFooterProps: () => ({ style: { background: 'blue' } }),
             filterMethod: (filter, row) => {
-              if (row[filter.id].toLowerCase().startsWith(filter.value.toLowerCase())) { // sort by second name
+              if (row.personName.toLowerCase().startsWith(filter.value.toLowerCase())) { // sort by second name
                 return true;
               }
-              if (row[filter.id].includes(" ")) { // sort by first name
-                if (row[filter.id].toLowerCase().split(' ')[1].startsWith(filter.value.toLowerCase())) {
+              if (row.personName.includes(" ")) { // sort by first name
+                if (row.personName.toLowerCase().split(' ')[1].startsWith(filter.value.toLowerCase())) {
                   return true;
                 }
               }
             },
-            style: { whiteSpace: 'unset' } // allow for words wrap inside
+            Cell: (value) => (<button type="link" onClick={() => renderPersonFunc(value.original.code)}>{value.original.personName}</button>)
           },
-          tableRow,
-          {
-            Header: () => '',
-            id: 'rowCode',
-            width: 55,
-            headerClassName: 'headerTable',
-            getFooterProps: () => ({ style: { background: 'blue' } }),
-            Cell: (value) => (<button type="button" onClick={() => renderPersonFunc(value.original.code)}><img width={30} height={30} alt="editImg" src={openProfileImg} /></button>)
-          }
+          tableRow
         ]}
         defaultSorted={[{ id: 'personName', desc: false }]}
         defaultPageSize={20}

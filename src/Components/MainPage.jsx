@@ -8,8 +8,6 @@ import AreaNotes from './AreaNotes';
 import { getPhotoFunc, renderPersonFunc, getIndexByCode, getDateObj } from '../App';
 import FormData from './FormData';
 
-const openProfileImg = require('../images/profileLogo.svg');
-
 
 const MainPage = (props) => {
   const personData = JSON.parse(props.personData);

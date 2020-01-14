@@ -42,6 +42,14 @@ html {
     background-color: var(--table-color);
 }
 
+.table button {
+    background:none;
+    border:none;
+    text-shadow: 2px 2px 0.1rem black;
+    font-size: 1.2rem;
+    color: white;
+}
+
 .table input {
     background-color: var(--back-color) !important;
 }
