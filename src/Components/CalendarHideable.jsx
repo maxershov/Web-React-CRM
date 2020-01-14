@@ -5,7 +5,7 @@ import { ChangeProfileValue } from '../App';
 import { getStoreId } from '../store/storeGetters';
 
 
-const MyCalendarWithButtons = (props) => {
+const CalendarHideable = (props) => {
   const [renderCalendar,setRenderCalendar] = useState('none');
 
   function changeDate(dateTo) {
@@ -30,4 +30,4 @@ const MyCalendarWithButtons = (props) => {
 );
 }
 
-export default MyCalendarWithButtons;
+export default CalendarHideable;

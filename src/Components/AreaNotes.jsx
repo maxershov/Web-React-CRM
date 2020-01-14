@@ -3,7 +3,7 @@ import { ChangeProfileValue, addNewDayDataToJSON } from '../App';
 import { getStoreId } from '../store/storeGetters';
 
 
-const MyTextArea = (props) => {
+const AreaNotes = (props) => {
   const [notesData, setNotesData] = useState(props.notesValue);
 
   const saveNotes = (event) => {
@@ -27,4 +27,4 @@ const MyTextArea = (props) => {
   )
 }
 
-export default MyTextArea;
+export default AreaNotes;

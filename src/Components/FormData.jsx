@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ChangeProfileValue, addNewPersonToJSON } from '../App';
 import { getStoreId } from '../store/storeGetters';
 
-const MyForm = (props) => {
+const FormData = (props) => {
   const [inputValue, setValue] = useState(props.baseValue);
   const placeholder = `Добавить ${  props.formLabel.slice(0, -1).toLowerCase()}`;
   const sendToDb = (event) => {
@@ -25,4 +25,4 @@ const MyForm = (props) => {
 
 
 
-export default MyForm;
+export default FormData;

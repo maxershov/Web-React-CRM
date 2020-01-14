@@ -4,9 +4,9 @@ import ReactTable from 'react-table';
 import Calendar from 'react-calendar';
 import { connect } from 'react-redux';
 import CodeScanner from './CodeScanner'
-import MyTextArea from './MyTextArea';
+import AreaNotes from './AreaNotes';
 import { getPhotoFunc, renderPersonFunc, getIndexByCode, getDateObj } from '../App';
-import MyForm from './MyForm';
+import FormData from './FormData';
 
 const openProfileImg = require('../images/profileLogo.svg');
 
@@ -23,8 +23,8 @@ const MainPage = (props) => {
     <>
       <div className="mainPage">
         <Calendar className="calendar calendarMain" value={moment(loadedDate, 'DD-MM-YYYY').toDate()} onChange={(date) => changeLoadDate(date)} />
-        <div className="notesMain"><MyTextArea notesValue={data.notes} type="DAY_DATA" dayObject={data} cols="80" rows="10" /></div>
-        <div className="newProfileField"><MyForm baseValue="" formLabel="Новый профиль:" type="NEW_PERSON" /></div>
+        <div className="notesMain"><AreaNotes notesValue={data.notes} type="DAY_DATA" dayObject={data} cols="80" rows="10" /></div>
+        <div className="newProfileField"><FormData baseValue="" formLabel="Новый профиль:" type="NEW_PERSON" /></div>
         <div className="newCodeField"><CodeScanner dayObject={data} date={loadedDate} /></div>
       </div>
       <div className="tableMain">

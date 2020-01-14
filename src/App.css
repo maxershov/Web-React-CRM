@@ -74,7 +74,7 @@ html {
     transition: color .2s linear;
 }
 
-.userParams {
+.userPage {
     display: grid;
     grid-template-columns: 1fr 2fr 2fr;
     grid-template-rows: repeat(4, auto);
@@ -82,13 +82,13 @@ html {
     align-content: flex-start;
 }
 
-.userParams-container {
+.userPage-container {
     grid-column: 2/3;
     grid-row: 1/3;
     width: 100%;
 }
 
-.userParams .img-container {
+.userPage .img-container {
     grid-column: 1/2;
     grid-row: 1/3;
     width: 90%;
@@ -97,7 +97,7 @@ html {
     background-color: inherit;
 }
 
-.userParams .img-container>img {
+.userPage .img-container>img {
     padding-top: 1rem;
     flex: 1;
     max-width: 95%;
@@ -105,7 +105,7 @@ html {
     object-fit: contain;
 }
 
-.userParams label,
+.userPage label,
 .table,
 .calendar,
 .mainPage textarea {
@@ -163,7 +163,7 @@ html {
     position: absolute;
 }
 
-.userParams button,
+.userPage button,
 .mainPage button {
     width: 30vw;
     border-style: none;
@@ -174,15 +174,15 @@ html {
     background-image: linear-gradient(to right, #005C97 0%, #363795 51%, #005C97 100%);
 }
 
-.userParams-container form button,
-.myActionFields button,
+.userPage-container form button,
+FieldsAction button,
 .newProfileField button {
     display: none;
 }
 
-.userParams-container>*:hover>form>button,
-.userParams-container>*:hover>button,
-.myActionFields>*:hover button,
+.userPage-container>*:hover>form>button,
+.userPage-container>*:hover>button,
+FieldsAction>*:hover button,
 .newProfileField:hover button {
     display: block;
 }
@@ -204,14 +204,14 @@ html {
     width: 100%;
 }
 
-.historyTable {
+.tableHistory {
     margin-top: 1vw;
     grid-column: 1/4;
     grid-row: 3/4;
     width: 95%;
 }
 
-.myActionFields {
+.FieldsAction {
     grid-column: 3/4;
     grid-row: 1/2;
     width: 100%;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import moment from 'moment';
-import MyCalendarWithButtons from './MyCalendarWithButtons';
+import CalendarHideable from './CalendarHideable';
 import { pushNewActivity} from '../App';
 
 
@@ -16,7 +16,7 @@ const MyActionFields = (props) => {
     pushNewActivity(props.code, JSON.stringify(newActivity));
   }
   return (
-    <div className="myActionFields">
+    <div className="FieldsAction">
       <form onSubmit={sendActionsToSQL}>
         <label>Тип события:</label>
         <input type="text" value={actionType} placeholder="Выберите или введите тип события" name="type" list="typeList" onChange={event => setActionType(event.target.value)} />
@@ -43,7 +43,7 @@ const MyActionFields = (props) => {
               <option key={person} value={person}>{person}</option>)}
           </datalist>
         </div>
-        <MyCalendarWithButtons setParentDate={setActionDate} сalendarName="Дата события:" dateType="setParent" date={actionDate} />
+        <CalendarHideable setParentDate={setActionDate} сalendarName="Дата события:" dateType="setParent" date={actionDate} />
         <button type="submit">Добавить событие</button>
       </form>
     </div>
