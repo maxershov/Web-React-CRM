@@ -1,13 +1,22 @@
 import React, { useState } from 'react';
-import moment from 'moment';
-import ReactTable from 'react-table';
-import Calendar from 'react-calendar';
 import { connect } from 'react-redux';
-import CodeScanner from './CodeScanner'
+import moment from 'moment';
+import ReactTable, { ReactTableDefaults } from 'react-table';
+import Calendar from 'react-calendar';
 import AreaNotes from './AreaNotes';
-import { getPhotoFunc, renderPersonFunc, getIndexByCode, getDateObj } from '../App';
-import FormData from './FormData';
+import CodeScanner from './CodeScanner'
 
+import FormData from './FormData';
+import { getPhotoFunc, renderPersonFunc, getIndexByCode, getDateObj  } from '../App';
+
+// set classname to headers => in css set word-wrap for small screens 
+const columnDefaults = { ...ReactTableDefaults.column, headerClassName: 'tableHeader' }
+
+
+// set width to table colums by .className size
+function widthForTable(value) {
+  return Math.round(window.innerWidth * (value / 100))
+}
 
 const MainPage = (props) => {
   const personData = JSON.parse(props.personData);
@@ -28,44 +37,41 @@ const MainPage = (props) => {
       <div className="tableMain">
         <ReactTable
           className="table -striped -highlight"
+          previousText="Назад"
+          nextText="Вперед"
+          loadingText="Загрузка"
+          noDataText="Нет данных"
+          pageText="Страница"
+          ofText="из"
+          rowsText="профилей"
           data={data.history}
+          column={columnDefaults}
           columns={[
-          {
-            Header: () => <strong>Фото</strong>,
-            id: 'photo',
-            headerClassName: 'photoTable',
-            width: 200,
-            Cell: (value) => (
-              <div><img height={60} alt="personPhoto" src={getPhotoFunc(personData[getIndexByCode(value.original.code)].photoId)} /></div>)
-          },
-          {
-            Header: () => <strong>Имя</strong>,
-            id: 'name',
-            headerClassName: 'nameTable',
-            width: 430,
-            style: { whiteSpace: 'unset' },
-            Cell: (value) => (personData[getIndexByCode(value.original.code)].personName)
-          },
-          {
-            Header: () => <strong>Время</strong>,
-            width: 100,
-            headerClassName: 'timeTable',
-            accessor: 'time'
-          }, {
-            Header: () => '',
-            accessor: 'code',
-            width: 55,
-            headerClassName: 'codeTable',
-            getFooterProps: () => ({ style: { background: 'blue' } }),
-            Cell: (value) => (<button type="button" onClick={() => renderPersonFunc(value.original.code)}><img width={30} height={30} alt="editImg" src={openProfileImg} /></button>)
-          }]}
+            {
+              Header: 'Фото',
+              width: widthForTable(20),
+              accessor: 'code',
+              Cell: ({ value }) => (
+                <img onClick={() => renderPersonFunc(value)} id="tablePhoto" alt="tablePhoto" height={80} src={getPhotoFunc(personData[getIndexByCode(value)].photoId)} />)
+            },
+            {
+              Header: 'Имя',
+              accessor: 'code',
+              width: widthForTable(60),
+              style: { whiteSpace: 'unset' },
+              Cell: ({ value }) => (<button type="link" onClick={() => renderPersonFunc(value)}>{personData[getIndexByCode(value)].personName}</button>)
+            },
+            {
+              Header: 'Время',
+              width: widthForTable(20),
+              accessor: 'time'
+            }]}
           defaultSorted={[{
-          id: 'time',
-          desc: true
-        }]}
+            id: 'time',
+            desc: true
+          }]}
           defaultPageSize={5}
         />
-
       </div>
     </>
   );
@@ -79,5 +85,4 @@ const mapStateToProps = state => {
   }
 }
 
-// export default MainPage;
 export default connect(mapStateToProps)(MainPage);

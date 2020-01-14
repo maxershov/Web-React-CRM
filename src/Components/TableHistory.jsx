@@ -1,7 +1,15 @@
 import React from 'react';
-import ReactTable from 'react-table';
+import ReactTable, { ReactTableDefaults } from 'react-table';
 import { connect } from 'react-redux';
 import { getDaysLeft } from '../App';
+
+// set classname to headers => in css set word-wrap for small screens 
+const columnDefaults = { ...ReactTableDefaults.column, headerClassName: 'tableHeader' }
+
+// set width to table colums by .className size
+function widthForTable(value) {
+  return Math.round(window.innerWidth * (value / 100))
+}
 
 const TableHistory = (props) => {
   const parsedData = JSON.parse(props.activityData).filter(obj => { return obj.code === props.code });
@@ -9,6 +17,7 @@ const TableHistory = (props) => {
   return (
     <div className="tableHistory">
       <ReactTable
+        className="table font_white_shadow -striped -highlight"
         previousText="Назад"
         nextText="Вперед"
         loadingText="Загрузка"
@@ -16,38 +25,35 @@ const TableHistory = (props) => {
         pageText="Страница"
         ofText="из"
         rowsText="профилей"
-        className="table font_white_shadow -striped -highlight"
         data={parsedData[0].activity}
+        column={columnDefaults}
         columns={[{
-          Header: () => <strong>Тип</strong>,
+          Header: 'Тип',
           accessor: 'type',
-          headerClassName: 'typeTable',
-          // width: 170
+          style: { whiteSpace: 'unset' },
+          width: widthForTable(20)
         }, {
-          Header: () => <strong>Дата</strong>,
+          Header: 'Дата',
           accessor: 'date',
-          headerClassName: 'dateTable',
-          // width: 100,
+          width: widthForTable(10),
           sortMethod: (a, b) => {
             const dayA = getDaysLeft(a);
             const dayB = getDaysLeft(b);
             return (dayA === null) - (dayB === null) || +(dayA > dayB) || -(dayA < dayB);
           }
         }, {
-          Header: () => <strong>Время</strong>,
-          // width: 100,
-          headerClassName: 'timeTable',
+          Header: 'Время',
+          width: widthForTable(10),
           accessor: 'time'
         }, {
-          Header: () => <strong>Имя</strong>,
+          Header: 'Имя',
           accessor: 'person',
-          headerClassName: 'nameTable',
-          // width: 220
+          style: { whiteSpace: 'unset' },
+          width: widthForTable(20)
         }, {
-          Header: () => <strong>Значение</strong>,
+          Header: 'Значение',
           accessor: 'amount',
-          headerClassName: 'amountTable',
-          // width: 400,
+          width: widthForTable(40),
           style: { 'whiteSpace': 'unset' }
         }]}
         defaultSorted={[{ id: 'date', desc: true }]}

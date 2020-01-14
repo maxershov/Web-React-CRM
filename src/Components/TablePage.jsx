@@ -1,8 +1,17 @@
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
-import ReactTable from 'react-table';
+import ReactTable, { ReactTableDefaults } from 'react-table';
 import { connect } from 'react-redux';
-import { getDaysLeft, renderPersonFunc, getPhotoFunc } from '../App';
+import { getDaysLeft, renderPersonFunc, getPhotoFunc} from '../App';
+
+
+// set width to table colums by .className size
+function widthForTable(value) {
+  return Math.round(window.innerWidth * (value / 100))
+}
+
+// set classname to headers => in css set word-wrap for small screens 
+const columnDefaults = { ...ReactTableDefaults.column, headerClassName: 'tableHeader' }
 
 
 const TablePage = (props) => {
@@ -16,65 +25,49 @@ const TablePage = (props) => {
       pageText="Страница"
       ofText="из"
       rowsText="профилей"
+      headerClassName="tableHeader"
+      column={columnDefaults}
       data={(JSON.parse(props.personData)).filter(obj => { return obj.contract !== 'СОТРУДНИК' && obj.contract !== 'НЕТ' && obj.contract !== 'ЛИД' })}
       filterable
       defaultFilterMethod={(filter, row) =>
         String(row[filter.id]) === filter.value}
       columns={[
         {
-          Header: () => <strong>Фото</strong>,
-          headerClassName: 'headerTable',
-          width: 95,
+          Header: 'Фото',
+          width: widthForTable(10),
           Cell: (value) => (
             <img onClick={() => renderPersonFunc(value.original.code)} id="tablePhoto" alt="tablePhoto" height={80} src={getPhotoFunc(value.original.photoId)} />)
         },
         {
-          Header: () => 'Имя',
+          Header: 'Имя',
           id: 'rowCode',
-          width: 150,
-          headerClassName: 'headerTable',
-          getFooterProps: () => ({ style: { background: 'blue' } }),
+          width: widthForTable(25),
+          style: { whiteSpace: 'unset' },
           filterMethod: (filter, row) => {
             const name = row._original.personName;
             const code = row._original.code;
-            if (name.toLowerCase().startsWith(filter.value.toLowerCase())) { // sort by second name
-              return true;
-            }
-            if (code.toLowerCase().startsWith(filter.value.toLowerCase())) { // sort by second name
-              return true;
-            }
+            if (name.toLowerCase().startsWith(filter.value.toLowerCase())) return true; // sort by second name
+            if (code.toLowerCase().startsWith(filter.value.toLowerCase())) return true; // sort by second name
             if (name.includes(" ")) { // sort by first name
-              if (name.toLowerCase().split(' ')[1].startsWith(filter.value.toLowerCase())) {
-                return true;
-              }
+              if (name.toLowerCase().split(' ')[1].startsWith(filter.value.toLowerCase())) return true;
             }
           },
           Cell: (value) => (<button type="link" onClick={() => renderPersonFunc(value.original.code)}>{value.original.personName}</button>)
-        }, {
-          Header: () => <strong>Контракт</strong>,
+        }
+        ,{
+          Header: 'Контракт',
           accessor: 'contract',
-          width: 210,
-          headerClassName: 'headerTable',
+          style: { whiteSpace: 'unset' },
+          width: widthForTable(17,5),
           filterMethod: (filter, row) => {
-            if (row[filter.id].toLowerCase().startsWith(filter.value.toLowerCase())) { // sort by second name
-              return true;
-            }
+            if (row[filter.id].toLowerCase().startsWith(filter.value.toLowerCase())) return true;// sort by second name
             if (row[filter.id].includes(" ")) { // sort by first name
-              if (row[filter.id].toLowerCase().split(' ')[1].startsWith(filter.value.toLowerCase())) {
-                return true;
-              }
+              if (row[filter.id].toLowerCase().split(' ')[1].startsWith(filter.value.toLowerCase())) return true;
             }
           },
         }, {
-          Header: () => (
-            <strong>
-              Остаток
-                <br />
-              Дней
-              </strong>
-          ),
-          width: 90,
-          headerClassName: 'headerTable',
+          Header: 'Остаток Дней',
+          width: widthForTable(9),
           accessor: 'days',
           sortMethod: (a, b) => {
             const dayA = getDaysLeft(a);
@@ -83,27 +76,12 @@ const TablePage = (props) => {
           },
           Cell: ({ value }) => (getDaysLeft(value))
         }, {
-          Header: () => (
-            <strong>
-              Трен
-                <br />
-              ки
-              </strong>
-          ),
-          style: { whiteSpace: 'unset' },
-          width: 75,
-          headerClassName: 'headerTable',
+          Header: 'Тренировки',
+          width: widthForTable(9),
           accessor: 'remain'
         }, {
-          Header: () => (
-            <strong>
-              Аренда
-                <br />
-              Дней
-              </strong>
-          ),
-          width: 80,
-          headerClassName: 'headerTable',
+          Header: 'Аренда Дней',
+          width: widthForTable(9),
           accessor: 'rent',
           sortMethod: (a, b) => {
             const dayA = getDaysLeft(a);
@@ -112,26 +90,12 @@ const TablePage = (props) => {
           },
           Cell: ({ value }) => (getDaysLeft(value))
         }, {
-          Header: () => (
-            <strong>
-              Депо
-                <br />
-              зит
-              </strong>
-          ),
-          width: 70,
-          headerClassName: 'headerTable',
+          Header: 'Депозит',
+          width: widthForTable(11,5),
           accessor: 'deposite'
-        },{
-          Header: () => (
-            <strong>
-              Парк
-                <br />
-              овка
-              </strong>
-          ),
-          width: 75,
-          headerClassName: 'headerTable',
+        }, {
+          Header: 'Парковка',
+          width: widthForTable(9),
           accessor: 'autoMonth'
         }
       ]}
@@ -140,6 +104,8 @@ const TablePage = (props) => {
     />
   )
 }
+
+
 
 const mapStateToProps = state => {
   return {

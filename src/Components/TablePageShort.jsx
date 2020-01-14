@@ -1,16 +1,23 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import ReactTable from 'react-table';
+import ReactTable, { ReactTableDefaults } from 'react-table';
 import { connect } from 'react-redux';
 import { getPhotoFunc, renderPersonFunc, getDaysLeft } from '../App';
+
+// set classname to headers => in css set word-wrap for small screens 
+const columnDefaults = { ...ReactTableDefaults.column, headerClassName: 'tableHeader' }
+
+// set width to table colums by .className size
+function widthForTable(value) {
+  return Math.round(window.innerWidth * (value / 100))
+}
 
 const TablePageShort = (props) => {
 
   const leadObj = {
-    Header: () => <strong>Дата обращения</strong>,
+    Header: 'Дата первого контакта',
     accessor: 'rent',
-    width: 300,
-    headerClassName: 'headerTable',
+    width: widthForTable(25),
     sortMethod: (a, b) => {
       const dayA = getDaysLeft(a);
       const dayB = getDaysLeft(b);
@@ -18,23 +25,14 @@ const TablePageShort = (props) => {
     }
   }
   const employeeObj = {
-    Header: () => <strong>Депозит</strong>,
-    width: 150,
-    headerClassName: 'headerTable',
+    Header: 'Депозит',
+    width: widthForTable(25),
     accessor: 'deposite'
   }
   const lostObj = {
-    Header: () => (
-      <strong>
-        Срок действия
-        {' '}
-        <br />
-        последнего абонемента
-      </strong>
-    ),
+    Header: 'Срок действия последнего абонемента',
     accessor: 'days',
-    width: 300,
-    headerClassName: 'headerTable',
+    width: widthForTable(25),
     sortMethod: (a, b) => {
       const dayA = getDaysLeft(a);
       const dayB = getDaysLeft(b);
@@ -51,6 +49,7 @@ const TablePageShort = (props) => {
   return (
     <div className="table font_white_shadow">
       <ReactTable
+        className="-striped -highlight"
         previousText="Назад"
         nextText="Вперед"
         loadingText="Загрузка"
@@ -58,38 +57,31 @@ const TablePageShort = (props) => {
         pageText="Страница"
         ofText="из"
         rowsText="профилей"
-        className="-striped -highlight"
+        column={columnDefaults}
         data={(JSON.parse(props.personData)).filter(obj => { return obj.contract === props.tableType })}
         filterable
         defaultFilterMethod={(filter, row) =>
           String(row[filter.id]) === filter.value}
         columns={[
           {
-            Header: () => <strong>Фото</strong>,
-            headerClassName: 'headerTable',
-            width: 95,
+            Header: 'Фото',
+            width: widthForTable(25),
             Cell: (value) => (
               <img onClick={() => renderPersonFunc(value.original.code)} id="tablePhoto" alt="tablePhoto" height={80} src={getPhotoFunc(value.original.photoId)} />)
           },
           {
-            Header: () => 'Имя',
+            Header: 'Имя',
             id: 'rowCode',
-            width: 150,
-            headerClassName: 'headerTable',
+            width: widthForTable(50),
+            style: { whiteSpace: 'unset' },
             getFooterProps: () => ({ style: { background: 'blue' } }),
             filterMethod: (filter, row) => {
               const name = row._original.personName;
               const code = row._original.code;
-              if (name.toLowerCase().startsWith(filter.value.toLowerCase())) { // sort by second name
-                return true;
-              }
-              if (code.toLowerCase().startsWith(filter.value.toLowerCase())) { // sort by second name
-                return true;
-              }
+              if (name.toLowerCase().startsWith(filter.value.toLowerCase())) return true; // sort by second name
+              if (code.toLowerCase().startsWith(filter.value.toLowerCase())) return true; // sort by second name
               if (name.includes(" ")) { // sort by first name
-                if (name.toLowerCase().split(' ')[1].startsWith(filter.value.toLowerCase())) {
-                  return true;
-                }
+                if (name.toLowerCase().split(' ')[1].startsWith(filter.value.toLowerCase())) return true;
               }
             },
             Cell: (value) => (<button type="link" onClick={() => renderPersonFunc(value.original.code)}>{value.original.personName}</button>)
