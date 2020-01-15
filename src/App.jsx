@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import './react-table.css';
 import moment from 'moment';
-import cowsay from 'cowsay-browser';
 import { Provider } from 'react-redux';
 import MainContent from './Components/MainContent';
 import Header from './Components/Header';
@@ -207,7 +206,5 @@ function saveData(data, dataType) {
             break;
     }
 }
-
-console.log(cowsay.say({text:'Все будет хорошо, Макс!'}));
 
 export default App;

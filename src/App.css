@@ -17,11 +17,18 @@
 
 html {
     font-size: 1rem;
-    background-color: rgb(0, 0, 0);
-    background-image: url('./images/bg.jpeg');
+    /* background-color: rgb(0, 0, 0); */
+    background-image: none;
     background-size: 100vw;
     background-attachment: fixed;
     background-repeat: no-repeat;
+    background: rgb(2, 0, 36);
+}
+
+@media (min-width: 500px) {
+    html {
+        background-image: url('./images/bg.jpeg');
+    }
 }
 
 .font_white_shadow {
@@ -34,6 +41,7 @@ html {
     background-color: var(--back-color);
     text-align: center;
 }
+
 .tableHeader {
     white-space: pre-line !important;
     word-wrap: break-word;
@@ -49,8 +57,8 @@ html {
 }
 
 .table button {
-    background:none;
-    border:none;
+    background: none;
+    border: none;
     text-shadow: 2px 2px 0.1rem black;
     font-size: 1.2rem;
     color: white;
@@ -138,7 +146,8 @@ html {
     }
 }
 
-*>label, .tableHeader {
+*>label,
+.tableHeader {
     display: block;
     font-size: 1.4rem;
     font-weight: 700;
