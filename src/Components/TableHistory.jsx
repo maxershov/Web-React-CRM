@@ -1,10 +1,8 @@
 import React from 'react';
-import ReactTable, { ReactTableDefaults } from 'react-table';
+import ReactTable from 'react-table-6/react-table.min';
 import { connect } from 'react-redux';
 import { getDaysLeft } from '../App';
 
-// set classname to headers => in css set word-wrap for small screens 
-const columnDefaults = { ...ReactTableDefaults.column, headerClassName: 'tableHeader' }
 
 // set width to table colums by .className size
 function widthForTable(value) {
@@ -26,16 +24,17 @@ const TableHistory = (props) => {
         ofText="из"
         rowsText="профилей"
         data={parsedData[0].activity}
-        column={columnDefaults}
         columns={[{
           Header: 'Тип',
           accessor: 'type',
+          headerClassName: 'tableHeader',
           style: { whiteSpace: 'unset' },
           width: widthForTable(20)
         }, {
           Header: 'Дата',
           accessor: 'date',
           width: widthForTable(10),
+          headerClassName: 'tableHeader',
           sortMethod: (a, b) => {
             const dayA = getDaysLeft(a);
             const dayB = getDaysLeft(b);
@@ -44,16 +43,19 @@ const TableHistory = (props) => {
         }, {
           Header: 'Время',
           width: widthForTable(10),
-          accessor: 'time'
+          accessor: 'time',
+          headerClassName: 'tableHeader'
         }, {
           Header: 'Имя',
           accessor: 'person',
           style: { whiteSpace: 'unset' },
-          width: widthForTable(20)
+          width: widthForTable(20),
+          headerClassName: 'tableHeader'
         }, {
           Header: 'Значение',
           accessor: 'amount',
           width: widthForTable(40),
+          headerClassName: 'tableHeader',
           style: { 'whiteSpace': 'unset' }
         }]}
         defaultSorted={[{ id: 'date', desc: true }]}

@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import ReactTable, { ReactTableDefaults } from 'react-table';
+import ReactTable from 'react-table-6/react-table.min';
 import Calendar from 'react-calendar';
 import AreaNotes from './AreaNotes';
 import CodeScanner from './CodeScanner'
 
 import FormData from './FormData';
 import { getPhotoFunc, renderPersonFunc, getIndexByCode, getDateObj  } from '../App';
-
-// set classname to headers => in css set word-wrap for small screens 
-const columnDefaults = { ...ReactTableDefaults.column, headerClassName: 'tableHeader' }
 
 
 // set width to table colums by .className size
@@ -45,12 +42,12 @@ const MainPage = (props) => {
           ofText="из"
           rowsText="профилей"
           data={data.history}
-          column={columnDefaults}
           columns={[
             {
               Header: 'Фото',
               width: widthForTable(20),
               accessor: 'code',
+              headerClassName: 'tableHeader',
               Cell: ({ value }) => (
                 <img onClick={() => renderPersonFunc(value)} id="tablePhoto" alt="tablePhoto" height={80} src={getPhotoFunc(personData[getIndexByCode(value)].photoId)} />)
             },
@@ -58,13 +55,15 @@ const MainPage = (props) => {
               Header: 'Имя',
               accessor: 'code',
               width: widthForTable(60),
+              headerClassName: 'tableHeader',
               style: { whiteSpace: 'unset' },
               Cell: ({ value }) => (<button type="link" onClick={() => renderPersonFunc(value)}>{personData[getIndexByCode(value)].personName}</button>)
             },
             {
               Header: 'Время',
               width: widthForTable(20),
-              accessor: 'time'
+              accessor: 'time',
+              headerClassName: 'tableHeader',
             }]}
           defaultSorted={[{
             id: 'time',

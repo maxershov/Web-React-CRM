@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const {BundleAnalyzerPlugin} = require("webpack-bundle-analyzer");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 
 module.exports = {
   context: path.resolve(__dirname),
@@ -27,7 +27,11 @@ module.exports = {
   },
   resolve: {
     extensions: [".jsx", ".js", ".json"],
-    modules: ["node_modules"]
+    modules: ["node_modules"],
+    alias: {
+      'react-dom$': 'react-dom/profiling',
+      'scheduler/tracing': 'scheduler/tracing-profiling',
+    }
   },
   module: {
     rules: [

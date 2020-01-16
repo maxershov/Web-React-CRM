@@ -1,7 +1,8 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const webpack = require("webpack");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 module.exports = {
   context: path.resolve(__dirname),
@@ -9,19 +10,18 @@ module.exports = {
   mode: "production",
   output: {
     path: path.join(__dirname, "dist"),
-    filename: "main.js",
-    chunkFilename: "[name].bundle.js",
+    filename: "[name].bundle.js",
     publicPath: "/"
   },
   devServer: {
     port: 8080,
     open: true,
     hot: true,
+    writeToDisk: true,
     compress: true,
     watchContentBase: true,
     progress: true,
     contentBase: path.join(__dirname, "dist"),
-    writeToDisk: true,
     overlay: true,
     historyApiFallback: true // on 404 load publicPath => for BrowserRouter on refresh
   },
@@ -54,14 +54,7 @@ module.exports = {
   optimization: {
     runtimeChunk: "single",
     splitChunks: {
-      cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name: "vendors",
-          enforce: true,
-          chunks: "all"
-        }
-      }
+      chunks: "all"
     }
   },
   plugins: [
@@ -78,9 +71,10 @@ module.exports = {
         minifyURLs: true
       }
     }),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/, /^\.\/es$/),
     new UglifyJsPlugin({
       parallel: true
     }),
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+    new BundleAnalyzerPlugin()
   ]
 };

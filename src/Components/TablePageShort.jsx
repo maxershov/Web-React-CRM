@@ -1,11 +1,8 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import ReactTable, { ReactTableDefaults } from 'react-table';
+import ReactTable from 'react-table-6/react-table.min';
 import { connect } from 'react-redux';
 import { getPhotoFunc, renderPersonFunc, getDaysLeft } from '../App';
-
-// set classname to headers => in css set word-wrap for small screens 
-const columnDefaults = { ...ReactTableDefaults.column, headerClassName: 'tableHeader' }
 
 // set width to table colums by .className size
 function widthForTable(value) {
@@ -18,6 +15,7 @@ const TablePageShort = (props) => {
     Header: 'Дата первого контакта',
     accessor: 'rent',
     width: widthForTable(25),
+    headerClassName: 'tableHeader',
     sortMethod: (a, b) => {
       const dayA = getDaysLeft(a);
       const dayB = getDaysLeft(b);
@@ -27,12 +25,14 @@ const TablePageShort = (props) => {
   const employeeObj = {
     Header: 'Депозит',
     width: widthForTable(25),
-    accessor: 'deposite'
+    accessor: 'deposite',
+    headerClassName: 'tableHeader'
   }
   const lostObj = {
     Header: 'Срок действия последнего абонемента',
     accessor: 'days',
     width: widthForTable(25),
+    headerClassName: 'tableHeader',
     sortMethod: (a, b) => {
       const dayA = getDaysLeft(a);
       const dayB = getDaysLeft(b);
@@ -57,7 +57,6 @@ const TablePageShort = (props) => {
         pageText="Страница"
         ofText="из"
         rowsText="профилей"
-        column={columnDefaults}
         data={(JSON.parse(props.personData)).filter(obj => { return obj.contract === props.tableType })}
         filterable
         defaultFilterMethod={(filter, row) =>
@@ -66,6 +65,7 @@ const TablePageShort = (props) => {
           {
             Header: 'Фото',
             width: widthForTable(25),
+            headerClassName: 'tableHeader',
             Cell: (value) => (
               <img onClick={() => renderPersonFunc(value.original.code)} id="tablePhoto" alt="tablePhoto" height={80} src={getPhotoFunc(value.original.photoId)} />)
           },
@@ -74,7 +74,7 @@ const TablePageShort = (props) => {
             id: 'rowCode',
             width: widthForTable(50),
             style: { whiteSpace: 'unset' },
-            getFooterProps: () => ({ style: { background: 'blue' } }),
+            headerClassName: 'tableHeader',
             filterMethod: (filter, row) => {
               const name = row._original.personName;
               const code = row._original.code;

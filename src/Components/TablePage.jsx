@@ -1,6 +1,6 @@
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
-import ReactTable, { ReactTableDefaults } from 'react-table';
+import ReactTable from 'react-table-6/react-table.min';
 import { connect } from 'react-redux';
 import { getDaysLeft, renderPersonFunc, getPhotoFunc} from '../App';
 
@@ -11,7 +11,7 @@ function widthForTable(value) {
 }
 
 // set classname to headers => in css set word-wrap for small screens 
-const columnDefaults = { ...ReactTableDefaults.column, headerClassName: 'tableHeader' }
+
 
 
 const TablePage = (props) => {
@@ -26,7 +26,6 @@ const TablePage = (props) => {
       ofText="из"
       rowsText="профилей"
       headerClassName="tableHeader"
-      column={columnDefaults}
       data={(JSON.parse(props.personData)).filter(obj => { return obj.contract !== 'СОТРУДНИК' && obj.contract !== 'НЕТ' && obj.contract !== 'ЛИД' })}
       filterable
       defaultFilterMethod={(filter, row) =>
@@ -35,6 +34,7 @@ const TablePage = (props) => {
         {
           Header: 'Фото',
           width: widthForTable(10),
+          headerClassName: 'tableHeader',
           Cell: (value) => (
             <img onClick={() => renderPersonFunc(value.original.code)} id="tablePhoto" alt="tablePhoto" height={80} src={getPhotoFunc(value.original.photoId)} />)
         },
@@ -43,6 +43,7 @@ const TablePage = (props) => {
           id: 'rowCode',
           width: widthForTable(25),
           style: { whiteSpace: 'unset' },
+          headerClassName: 'tableHeader',
           filterMethod: (filter, row) => {
             const name = row._original.personName;
             const code = row._original.code;
@@ -58,6 +59,7 @@ const TablePage = (props) => {
           Header: 'Контракт',
           accessor: 'contract',
           style: { whiteSpace: 'unset' },
+          headerClassName: 'tableHeader',
           width: widthForTable(17,5),
           filterMethod: (filter, row) => {
             if (row[filter.id].toLowerCase().startsWith(filter.value.toLowerCase())) return true;// sort by second name
@@ -69,6 +71,7 @@ const TablePage = (props) => {
           Header: 'Остаток Дней',
           width: widthForTable(9),
           accessor: 'days',
+          headerClassName: 'tableHeader',
           sortMethod: (a, b) => {
             const dayA = getDaysLeft(a);
             const dayB = getDaysLeft(b);
@@ -78,11 +81,13 @@ const TablePage = (props) => {
         }, {
           Header: 'Тренировки',
           width: widthForTable(9),
-          accessor: 'remain'
+          accessor: 'remain',
+          headerClassName: 'tableHeader',
         }, {
           Header: 'Аренда Дней',
           width: widthForTable(9),
           accessor: 'rent',
+          headerClassName: 'tableHeader',
           sortMethod: (a, b) => {
             const dayA = getDaysLeft(a);
             const dayB = getDaysLeft(b);
@@ -92,11 +97,13 @@ const TablePage = (props) => {
         }, {
           Header: 'Депозит',
           width: widthForTable(11,5),
-          accessor: 'deposite'
+          accessor: 'deposite',
+          headerClassName: 'tableHeader'
         }, {
           Header: 'Парковка',
           width: widthForTable(9),
-          accessor: 'autoMonth'
+          accessor: 'autoMonth',
+          headerClassName: 'tableHeader'
         }
       ]}
       defaultSorted={[{ id: 'personName', desc: false }]}
