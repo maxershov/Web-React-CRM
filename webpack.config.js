@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const webpack = require("webpack");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const myLocalHost = require('./host');
 
 module.exports = {
   context: path.resolve(__dirname),
@@ -14,6 +15,7 @@ module.exports = {
     publicPath: "/"
   },
   devServer: {
+    host: myLocalHost.host,
     port: 8080,
     open: true,
     hot: true,
