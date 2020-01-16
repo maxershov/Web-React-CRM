@@ -1,4 +1,4 @@
-const personData = [{"personName":"Иванов Иван Иванович","contract":"6 мес","dateBirth":"","telNum":"","code":"111111","autoMonth":"","remain":null,"days":null,"photoId":0,"rent":null,"deposite":2000,"notes":""},{"personName":"Test Person One","contract":"3 мес","dateBirth":"01-01-1970","telNum":"","code":"222222","autoMonth":"","remain":null,"days":null,"photoId":0,"rent":null,"deposite":null,"notes":""}];
+import {personData} from '../testData';
 
 const initialState = { data: JSON.stringify(personData) };
 
