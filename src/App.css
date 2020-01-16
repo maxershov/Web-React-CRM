@@ -18,18 +18,40 @@
 html {
     font-size: 1rem;
     /* background-color: rgb(0, 0, 0); */
-    background-image: none;
+    background-image:url('./images/bg.jpeg');
     background-size: 100vw;
     background-attachment: fixed;
     background-repeat: no-repeat;
-    background: rgb(2, 0, 36);
+    background-color: #151A20;
 }
 
-@media (min-width: 500px) {
+.askPhoneTurn {
+    display: none;
+}
+
+@media (max-width: 600px) {
     html {
-        background-image: url('./images/bg.jpeg');
+        /* background-image: none !important;  */
+        /* background: red; */
+        font-size: 0.6em;
     }
 }
+
+@media (max-width: 600px) and (orientation: portrait) { 
+    html{
+        visibility: hidden;
+    }
+    .askPhoneTurn {
+        display: block;
+        visibility: visible;
+        font-size: 4rem !important;
+        text-align: center;
+    }
+
+
+}
+
+
 
 .font_white_shadow {
     text-shadow: 2px 2px 0.1rem black;
