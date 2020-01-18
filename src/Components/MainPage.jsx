@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { Link, useHistory } from "react-router-dom";
 import moment from 'moment';
 import ReactTable from 'react-table-6/react-table.min';
 import Calendar from 'react-calendar';
@@ -7,7 +8,7 @@ import AreaNotes from './AreaNotes';
 import CodeScanner from './CodeScanner'
 
 import FormData from './FormData';
-import { getPhotoFunc, renderPersonFunc, getIndexByCode, getDateObj  } from '../App';
+import { getPhotoFunc, getIndexByCode, getDateObj  } from '../App';
 
 
 // set width to table colums by .className size
@@ -16,9 +17,11 @@ function widthForTable(value) {
 }
 
 const MainPage = (props) => {
+  const history = useHistory();
   const personData = JSON.parse(props.personData);
   const [loadedDate, setLoadedDate] = useState(moment(new Date()).format('DD-MM-YYYY'));
   const data = JSON.parse(getDateObj(loadedDate));
+  
   const changeLoadDate = (date) => {
     const formatedDate = moment(date).format('DD-MM-YYYY');
     setLoadedDate(formatedDate);
@@ -28,7 +31,7 @@ const MainPage = (props) => {
       <div className="mainPage">
         <h1 className="askPhoneTurn font_white_shadow">Rotate screen to landscape mode<br />⤵</h1>
         <Calendar className="calendar calendarMain" value={moment(loadedDate, 'DD-MM-YYYY').toDate()} onChange={(date) => changeLoadDate(date)} />
-        <div className="notesMain"><AreaNotes notesValue={data.notes} type="DAY_DATA" dayObject={data} cols="80" rows="10" /></div>
+        <div className="notesMain"><AreaNotes notesValue={data.notes} type="DAY_DATA" dayObject={data} /></div>
         <div className="newProfileField"><FormData baseValue="" formLabel="Новый профиль:" type="NEW_PERSON" /></div>
         <div className="newCodeField"><CodeScanner dayObject={data} date={loadedDate} /></div>
       </div>
@@ -50,7 +53,7 @@ const MainPage = (props) => {
               accessor: 'code',
               headerClassName: 'tableHeader',
               Cell: ({ value }) => (
-                <img onClick={() => renderPersonFunc(value)} id="tablePhoto" alt="tablePhoto" height={80} src={getPhotoFunc(personData[getIndexByCode(value)].photoId)} />)
+                <button type="button" onClick={() => history.push(`/profile/${  value}`)}><img id="tablePhoto" alt="tablePhoto" height={80} src={getPhotoFunc(personData[getIndexByCode(value)].photoId)} /></button>)
             },
             {
               Header: 'Имя',
@@ -58,7 +61,7 @@ const MainPage = (props) => {
               width: widthForTable(60),
               headerClassName: 'tableHeader',
               style: { whiteSpace: 'unset' },
-              Cell: ({ value }) => (<button type="link" onClick={() => renderPersonFunc(value)}>{personData[getIndexByCode(value)].personName}</button>)
+              Cell: ({value}) => (<Link to={`/profile/${value}`}>{personData[getIndexByCode(value)].personName}</Link>)
             },
             {
               Header: 'Время',

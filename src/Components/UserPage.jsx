@@ -4,8 +4,8 @@
 /* eslint-disable spaced-comment */
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { useParams, useHistory } from 'react-router-dom'
 import { getPhotoFunc, deletePerson } from '../App';
-import { getStoreId } from '../store/storeGetters';
 import FormData from './FormData';
 import CalendarHideable from './CalendarHideable';
 import FieldDeposite from './FieldDeposite';
@@ -14,99 +14,111 @@ import TableHistory from './TableHistory';
 import AreaNotes from './AreaNotes';
 
 
-function getPersonNames(data) {
+function getAllPersonNames(data) {
   return data.map(obj => { return obj.personName });
 }
 
 const UserPage = (props) => {
   /** Show fields with User data and change it on submit*/
   const [renderPhotoId, changeRenderPhotoId] = useState(false);
-  const id = getStoreId();
+  const { codeLink } = useParams();
+  const history = useHistory();
+
   const data = JSON.parse(props.personData);
+
+  let person = data.find(profile => {
+    return profile.code === codeLink
+  })
+
+  if (person === undefined) {
+    // TODO kill this CRAP => prevent from crash if unvalid code in URL path
+    [person, ] = data;
+    history.push('/clients');
+  }
+
 
 
   let renderFields = '';
-  if (data[id].contract === 'ЛИД') { renderFields = <LeadParams data={data} id={id} /> }
-  else if (data[id].contract === 'СОТРУДНИК') { renderFields = <EmployeeParams data={data} id={id} /> }
-  else if (data[id].contract === 'НЕТ') { renderFields = <LostPersonParams data={data} id={id} /> }
-  else { renderFields = <PersonParams data={data} id={id} /> }
-
+  if (person.contract === 'ЛИД') { renderFields = <LeadParams person={person} /> }
+  else if (person.contract === 'СОТРУДНИК') { renderFields = <EmployeeParams person={person} /> }
+  else if (person.contract === 'НЕТ') { renderFields = <LostPersonParams person={person} /> }
+  else { renderFields = <PersonParams person={person} /> }
 
   return (
     <div className="userPage">
-      <div className="img-container"><img onClick={() => changeRenderPhotoId(!renderPhotoId)} alt="profilePhoto" src={getPhotoFunc(data[id].photoId)} /></div>
+      <div className="img-container"><img onClick={() => changeRenderPhotoId(!renderPhotoId)} alt="profilePhoto" src={getPhotoFunc(person.photoId)} /></div>
       <div className="userPage-container">
         {renderPhotoId ? (
           <>
-            <FormData className="photoId" formLabel="Изменить код фото:" baseValue={data[id].photoId} inputType="photoId" type="PERSON" />
+            <FormData className="photoId" formLabel="Изменить код фото:" baseValue={person.photoId} inputType="photoId" type="PERSON" />
             <label>Удаление:</label>
-            <button type="button" onClick={() => deletePerson(data[id].code)}>Удалить пользователя</button>
+            <button type="button" onClick={() => deletePerson(person.code)}>Удалить пользователя</button>
           </>
         ) : undefined}
-        <FormData formLabel="Имя:" baseValue={data[id].personName} inputType="personName" type="PERSON" />
-        <FormData formLabel="Номер телефона:" baseValue={data[id].telNum} inputType="telNum" type="PERSON" />
+        <FormData formLabel="Имя:" baseValue={person.personName} inputType="personName" type="PERSON" />
+        <FormData formLabel="Номер телефона:" baseValue={person.telNum} inputType="telNum" type="PERSON" />
         {renderFields}
       </div>
       <div className="notesField">
         <label>Заметки:</label>
-        <AreaNotes notesValue={data[id].notes} type="PERSON" />
+        <AreaNotes notesValue={person.notes} type="PERSON" />
       </div>
-      <FieldsAction code={data[id].code} namesArr={getPersonNames(data)} />
-      <TableHistory tableDataType="personData" code={data[id].code} />
+      <FieldsAction code={person.code} namesArr={getAllPersonNames(data)} />
+      <TableHistory tableDataType="personData" code={person.code} />
     </div>
   );
 }
 
 const PersonParams = (props) => {
-  const { data, id } = props;
+  const { person } = props;
   return (
     <>
-      <FormData formLabel="Дата рождения:" baseValue={data[id].dateBirth} inputType="dateBirth" type="PERSON" />
-      <FormData formLabel="Абонемент:" baseValue={data[id].contract} inputType="contract" type="PERSON" />
-      <FormData formLabel="Остаток тренировок:" baseValue={data[id].remain} inputType="remain" type="PERSON" />
-      <FormData formLabel="Код карты:" baseValue={data[id].code} inputType="code" type="PERSON" />
-      <FormData formLabel="Месяц парковки:" baseValue={data[id].autoMonth} inputType="autoMonth" type="PERSON" />
-      <CalendarHideable сalendarName="Срок контракта:" dateType="days" date={data[id].days} />
-      <CalendarHideable сalendarName="Срок аренды шкафа:" dateType="rent" date={data[id].rent} />
-      <FieldDeposite depositeValue={data[id].deposite} />
+      <FormData formLabel="Дата рождения:" baseValue={person.dateBirth} inputType="dateBirth" type="PERSON" />
+      <FormData formLabel="Абонемент:" baseValue={person.contract} inputType="contract" type="PERSON" />
+      <FormData formLabel="Остаток тренировок:" baseValue={person.remain} inputType="remain" type="PERSON" />
+      <FormData formLabel="Код карты:" baseValue={person.code} inputType="code" type="PERSON" />
+      <FormData formLabel="Месяц парковки:" baseValue={person.autoMonth} inputType="autoMonth" type="PERSON" />
+      <CalendarHideable сalendarName="Срок контракта:" dateType="days" date={person.days} />
+      <CalendarHideable сalendarName="Срок аренды шкафа:" dateType="rent" date={person.rent} />
+      <FieldDeposite depositeValue={person.deposite} />
     </>
   )
 }
 
 
 const LeadParams = (props) => {
-  const { data, id } = props;
+  const { person } = props;
   return (
     <>
-      <FormData formLabel="Тип профиля:" baseValue={data[id].contract} inputType="contract" type="PERSON" />
-      <CalendarHideable сalendarName="Дата первого обращения:" dateType="rent" date={data[id].rent} />
+      <FormData formLabel="Тип профиля:" baseValue={person.contract} inputType="contract" type="PERSON" />
+      <CalendarHideable сalendarName="Дата первого обращения:" dateType="rent" date={person.rent} />
     </>
   )
 }
 
 const LostPersonParams = (props) => {
-  const { data, id } = props;
+  const { person } = props;
   return (
     <>
-      <FormData formLabel="Тип профиля:" baseValue={data[id].contract} inputType="contract" type="PERSON" />
-      <FormData formLabel="Дата рождения:" baseValue={data[id].dateBirth} inputType="dateBirth" type="PERSON" />
-      <FormData formLabel="Код карты:" baseValue={data[id].code} inputType="code" type="PERSON" />
-      <FieldDeposite depositeValue={data[id].deposite} />
-      <CalendarHideable сalendarName="Дата окончания контракта:" dateType="days" date={data[id].days} />
+      <FormData formLabel="Тип профиля:" baseValue={person.contract} inputType="contract" type="PERSON" />
+      <FormData formLabel="Дата рождения:" baseValue={person.dateBirth} inputType="dateBirth" type="PERSON" />
+      <FormData formLabel="Код карты:" baseValue={person.code} inputType="code" type="PERSON" />
+      <FieldDeposite depositeValue={person.deposite} />
+      <CalendarHideable сalendarName="Дата окончания контракта:" dateType="days" date={person.days} />
     </>
   )
 }
 
 
 const EmployeeParams = (props) => {
-  const { data, id } = props;
+  const { person } = props;
   return (
     <>
-      <FormData formLabel="Дата рождения:" baseValue={data[id].dateBirth} inputType="dateBirth" type="PERSON" />
-      <FormData formLabel="Тип профиля:" baseValue={data[id].contract} inputType="contract" type="PERSON" />
-      <FormData formLabel="Код карты:" baseValue={data[id].code} inputType="code" type="PERSON" />
-      <FormData formLabel="Парковка оплачена до:" baseValue={data[id].autoMonth} inputType="autoMonth" type="PERSON" />
-      <FieldDeposite depositeValue={data[id].deposite} />
+      <FormData formLabel="Дата рождения:" baseValue={person.dateBirth} inputType="dateBirth" type="PERSON" />
+      <FormData formLabel="Тип профиля:" baseValue={person.contract} inputType="contract" type="PERSON" />
+      <FormData formLabel="Код карты:" baseValue={person.code} inputType="code" type="PERSON" />
+      <FormData formLabel="Парковка оплачена до:" baseValue={person.autoMonth} inputType="autoMonth" type="PERSON" />
+      <FieldDeposite depositeValue={person.deposite} />
     </>
   )
 }

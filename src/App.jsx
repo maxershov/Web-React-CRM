@@ -3,6 +3,7 @@ import './App.css';
 import './react-table.css';
 import moment from 'moment';
 import { Provider } from 'react-redux';
+import { BrowserRouter as Router} from 'react-router-dom';
 import MainContent from './Components/MainContent';
 import Header from './Components/Header';
 import store from './store/store'
@@ -12,8 +13,10 @@ import { getPersonStore, getDayDataStore, getActivityStore, getActivityStoreCode
 const App = (props) => {
     return (
       <Provider store={store}>
-        <Header />
-        <MainContent />
+        <Router>        
+          <Header />
+          <MainContent />
+        </Router>
       </Provider>
     );
 }
@@ -53,7 +56,6 @@ function deleteCodeDayData(codeToDel) {
     );
     saveData(data, 'DAY');
 }
-
 
 export function getIndexByCode(code) {
     return JSON.parse(getPersonStore()).findIndex(x => x.code === code);
@@ -132,9 +134,10 @@ function changeCode(oldCode, newCode, activityObj) {
 
 
 
-export function ChangeProfileValue(id, inputValue, inputType, date = moment(new Date()).format('DD-MM-YYYY')) {
+export function ChangeProfileValue(codeLink, inputValue, inputType, date = moment(new Date()).format('DD-MM-YYYY')) {
     /** Change field in profiles page -> get data from field and change in JSON file -> send to SQL dB */
     const data = JSON.parse(store.getState().personStore.data);
+    const id = getIndexByCode(codeLink);
     const oldFieldValue = data[id][inputType];
     data[id][inputType] = inputValue;
 

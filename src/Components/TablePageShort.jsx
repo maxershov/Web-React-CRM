@@ -1,8 +1,10 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import ReactTable from 'react-table-6/react-table.min';
 import { connect } from 'react-redux';
-import { getPhotoFunc, renderPersonFunc, getDaysLeft } from '../App';
+import { Link, useHistory, useParams } from "react-router-dom";
+import { getPhotoFunc, getDaysLeft } from '../App';
 
 // set width to table colums by .className size
 function widthForTable(value) {
@@ -10,7 +12,14 @@ function widthForTable(value) {
 }
 
 const TablePageShort = (props) => {
+  const {pageNum } = useParams();
+  const history = useHistory();
 
+  // TODO Another CRAP => can't change page in path => get path from history and del number 
+  const path = history.location.pathname.replace(/[0-9]/g, '');
+
+
+  // some obj for table => don't repeat photo and name column 
   const leadObj = {
     Header: 'Дата первого контакта',
     accessor: 'rent',
@@ -50,6 +59,8 @@ const TablePageShort = (props) => {
     <div className="table font_white_shadow">
       <ReactTable
         className="-striped -highlight"
+        page={parseInt(pageNum,10)-1}
+        onPageChange={(pageIndex) => {history.push(path + (pageIndex+ 1))}} 
         previousText="Назад"
         nextText="Вперед"
         loadingText="Загрузка"
@@ -67,7 +78,7 @@ const TablePageShort = (props) => {
             width: widthForTable(25),
             headerClassName: 'tableHeader',
             Cell: (value) => (
-              <img onClick={() => renderPersonFunc(value.original.code)} id="tablePhoto" alt="tablePhoto" height={80} src={getPhotoFunc(value.original.photoId)} />)
+              <button type="button" onClick={() => history.push(`/profile/${  value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" height={80} src={getPhotoFunc(value.original.photoId)} /></button>)
           },
           {
             Header: 'Имя',
@@ -77,19 +88,19 @@ const TablePageShort = (props) => {
             headerClassName: 'tableHeader',
             filterMethod: (filter, row) => {
               const name = row._original.personName;
-              const code = row._original.code;
+              const {code} = row._original;
               if (name.toLowerCase().startsWith(filter.value.toLowerCase())) return true; // sort by second name
               if (code.toLowerCase().startsWith(filter.value.toLowerCase())) return true; // sort by second name
               if (name.includes(" ")) { // sort by first name
                 if (name.toLowerCase().split(' ')[1].startsWith(filter.value.toLowerCase())) return true;
               }
             },
-            Cell: (value) => (<button type="link" onClick={() => renderPersonFunc(value.original.code)}>{value.original.personName}</button>)
+            Cell: (value) => (<Link to={`/profile/${value.original.code}`}>{value.original.personName}</Link>)
           },
           tableRow
         ]}
         defaultSorted={[{ id: 'personName', desc: false }]}
-        defaultPageSize={20}
+        defaultPageSize={5}
       />
     </div>
   )

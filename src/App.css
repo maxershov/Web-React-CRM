@@ -97,7 +97,12 @@ html {
     margin: 0 0 0.3em 0;
 }
 
-.menu-container>button {
+a {
+    color:inherit;
+    text-decoration: none;
+}
+
+.menu-container>a{
     color: black;
     background-color: var(--back-color);
     flex: 1;
@@ -109,10 +114,10 @@ html {
     letter-spacing: 0.1em;
     cursor: pointer;
     border: none;
+    text-align: center;
 }
 
-.menu-container>button:hover,
-.menu-container>button:focus {
+.menu-container .is-active {
     border: none;
     background-color: var(--back-color-light);
     color: white;

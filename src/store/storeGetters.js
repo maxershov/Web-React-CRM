@@ -1,10 +1,5 @@
 import store from './store';
 
-
-export function getStoreId() {
-    return store.getState().idStore.id;
-}
-
 export function getPersonStore() {
     return store.getState().personStore.data;
 }

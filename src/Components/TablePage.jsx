@@ -1,8 +1,10 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import ReactTable from 'react-table-6/react-table.min';
+import { Link, useHistory, useParams } from "react-router-dom";
 import { connect } from 'react-redux';
-import { getDaysLeft, renderPersonFunc, getPhotoFunc} from '../App';
+import { getDaysLeft, getPhotoFunc} from '../App';
 
 
 // set width to table colums by .className size
@@ -10,14 +12,15 @@ function widthForTable(value) {
   return Math.round(window.innerWidth * (value / 100))
 }
 
-// set classname to headers => in css set word-wrap for small screens 
-
-
-
 const TablePage = (props) => {
+
+  const history = useHistory();
+  const {pageNum } = useParams();
   return (
     <ReactTable
       className="table font_white_shadow -striped -highlight"
+      page={parseInt(pageNum,10)-1}
+      onPageChange={(pageIndex) => {history.push(`/clients/page/${  pageIndex+1}`)}} 
       previousText="Назад"
       nextText="Вперед"
       loadingText="Загрузка"
@@ -36,7 +39,7 @@ const TablePage = (props) => {
           width: widthForTable(10),
           headerClassName: 'tableHeader',
           Cell: (value) => (
-            <img onClick={() => renderPersonFunc(value.original.code)} id="tablePhoto" alt="tablePhoto" height={80} src={getPhotoFunc(value.original.photoId)} />)
+            <button type="button" onClick={() => history.push(`/profile/${  value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" height={80} src={getPhotoFunc(value.original.photoId)} /></button>)
         },
         {
           Header: 'Имя',
@@ -46,14 +49,14 @@ const TablePage = (props) => {
           headerClassName: 'tableHeader',
           filterMethod: (filter, row) => {
             const name = row._original.personName;
-            const code = row._original.code;
+            const {code} = row._original;
             if (name.toLowerCase().startsWith(filter.value.toLowerCase())) return true; // sort by second name
             if (code.toLowerCase().startsWith(filter.value.toLowerCase())) return true; // sort by second name
             if (name.includes(" ")) { // sort by first name
               if (name.toLowerCase().split(' ')[1].startsWith(filter.value.toLowerCase())) return true;
-            }
+            } return false;
           },
-          Cell: (value) => (<button type="link" onClick={() => renderPersonFunc(value.original.code)}>{value.original.personName}</button>)
+          Cell: (value) => (<Link to={`/profile/${value.original.code}`}>{value.original.personName}</Link>)
         }
         ,{
           Header: 'Контракт',
@@ -65,7 +68,7 @@ const TablePage = (props) => {
             if (row[filter.id].toLowerCase().startsWith(filter.value.toLowerCase())) return true;// sort by second name
             if (row[filter.id].includes(" ")) { // sort by first name
               if (row[filter.id].toLowerCase().split(' ')[1].startsWith(filter.value.toLowerCase())) return true;
-            }
+            } return false;
           },
         }, {
           Header: 'Остаток Дней',
@@ -93,7 +96,7 @@ const TablePage = (props) => {
             const dayB = getDaysLeft(b);
             return (dayA === null) - (dayB === null) || +(dayA > dayB) || -(dayA < dayB);
           },
-          Cell: ({ value }) => (getDaysLeft(value))
+          Cell: ({ value }) => (getDaysLeft(value)),
         }, {
           Header: 'Депозит',
           width: widthForTable(11,5),
@@ -107,7 +110,7 @@ const TablePage = (props) => {
         }
       ]}
       defaultSorted={[{ id: 'personName', desc: false }]}
-      defaultPageSize={20}
+      defaultPageSize={5}
     />
   )
 }

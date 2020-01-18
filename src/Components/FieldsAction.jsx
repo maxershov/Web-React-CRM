@@ -10,14 +10,14 @@ const MyActionFields = (props) => {
   const [actionAmout, setActionAmout] = useState('');
   const [actionDate, setActionDate] = useState(moment(new Date()).format('DD-MM-YYYY'));  // change!
   const [actionPerson, setActionPerson] = useState('');
-  const sendActionsToSQL = (event) => {
+  const sendActionsToDb = (event) => {
     event.preventDefault();
     const newActivity = { "date": actionDate, "time": moment(new Date()).format('HH:mm:ss'), "type": actionType, "person": actionPerson, "amount": actionAmout };
     pushNewActivity(props.code, JSON.stringify(newActivity));
   }
   return (
     <div className="FieldsAction">
-      <form onSubmit={sendActionsToSQL}>
+      <form onSubmit={sendActionsToDb}>
         <label>Тип события:</label>
         <input type="text" value={actionType} placeholder="Выберите или введите тип события" name="type" list="typeList" onChange={event => setActionType(event.target.value)} />
         <datalist id="typeList">

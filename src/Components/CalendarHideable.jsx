@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import moment from 'moment';
+import {useParams} from 'react-router-dom';
 import Calendar from 'react-calendar';
 import { ChangeProfileValue } from '../App';
-import { getStoreId } from '../store/storeGetters';
+
 
 
 const CalendarHideable = (props) => {
   const [renderCalendar,setRenderCalendar] = useState('none');
+  const { codeLink } = useParams();
 
   function changeDate(dateTo) {
     const date = moment(dateTo).format('DD-MM-YYYY');
     props.dateType === 'setParent' ?
       props.setParentDate(date) :
-      ChangeProfileValue(getStoreId(), date, props.dateType);
+      ChangeProfileValue(codeLink, date, props.dateType);
       setRenderCalendar('none');
   }
   return (

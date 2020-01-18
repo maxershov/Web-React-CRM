@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
+import {useParams} from 'react-router-dom';
 import { ChangeProfileValue, addNewPersonToJSON } from '../App';
-import { getStoreId } from '../store/storeGetters';
+
 
 const FormData = (props) => {
+  const { codeLink } = useParams();
   const [inputValue, setValue] = useState(props.baseValue);
   const placeholder = `Добавить ${  props.formLabel.slice(0, -1).toLowerCase()}`;
   const sendToDb = (event) => {
     event.preventDefault();
-    if (props.type === 'PERSON') ChangeProfileValue(getStoreId(), inputValue, props.inputType);
+    if (props.type === 'PERSON') ChangeProfileValue(codeLink, inputValue, props.inputType);
     if (props.type === 'NEW_PERSON') {
       addNewPersonToJSON(inputValue, true);
     }

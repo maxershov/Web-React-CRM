@@ -1,24 +1,26 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { ChangeProfileValue, addNewDayDataToJSON } from '../App';
-import { getStoreId } from '../store/storeGetters';
 
 
 const AreaNotes = (props) => {
-  const [notesData, setNotesData] = useState(props.notesValue);
+  const { notesValue, type, dayObject } = props;
+  const [notesData, setNotesData] = useState(notesValue);
+  const { codeLink } = useParams();
 
   const saveNotes = (event) => {
     if (event.key === 'Enter' || event.target.id === 'clickNotes') {
-      if (props.type === 'PERSON') {
-        ChangeProfileValue(getStoreId(), notesData, "notes")
-      } else if (props.type === 'DAY_DATA') {
-        props.dayObject.notes = notesData;
-        addNewDayDataToJSON(props.dayObject);
+      if (type === 'PERSON') {
+        ChangeProfileValue(codeLink, notesData, "notes")
+      } else if (type === 'DAY_DATA') {
+        dayObject.notes = notesData;
+        addNewDayDataToJSON(dayObject);
       }
     }
   }
   useEffect(() => {
-    setNotesData(props.notesValue);
-  }, [props.notesValue]);
+    setNotesData(notesValue);
+  }, [notesValue]);
   return (
     <>
       <textarea onChange={event => setNotesData(event.target.value)} onKeyDown={saveNotes} value={notesData} />

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import moment from 'moment';
+import {useParams} from 'react-router-dom';
 import CalendarHideable from './CalendarHideable';
 import { ChangeProfileValue } from '../App';
-import { getStoreId } from '../store/storeGetters';
+
 
 const FieldDeposite = (props) => {
+  const { codeLink } = useParams();
   const [renderDeposite, changeRenderDeposite] = useState(false);
   const [amount, setAmount] = useState('');
   const [deposite, setDeposite] = useState(props.depositeValue);
@@ -14,14 +16,14 @@ const FieldDeposite = (props) => {
     const sum = Number(deposite) + Number(amount);
     setDeposite(sum);
     changeRenderDeposite(false);
-    ChangeProfileValue(getStoreId(), sum, 'deposite', dateDeposite);
+    ChangeProfileValue(codeLink, sum, 'deposite', dateDeposite);
   }
 
   const minus = () => {
     const sum = Number(deposite) - Number(amount);
     setDeposite(sum);
     changeRenderDeposite(false);
-    ChangeProfileValue(getStoreId(), sum, 'deposite', dateDeposite)
+    ChangeProfileValue(codeLink, sum, 'deposite', dateDeposite)
   }
   
   return (
