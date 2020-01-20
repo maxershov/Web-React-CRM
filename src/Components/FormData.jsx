@@ -4,21 +4,25 @@ import { ChangeProfileValue, addNewPersonToJSON } from '../App';
 
 
 const FormData = (props) => {
+
+  // Pass @route for last prop => to use history.push on input to open new profile
+  const {formLabel, baseValue, inputType, type, route=''} = props;
   const { codeLink } = useParams();
-  const [inputValue, setValue] = useState(props.baseValue);
-  const placeholder = `Добавить ${  props.formLabel.slice(0, -1).toLowerCase()}`;
+  const [inputValue, setValue] = useState(baseValue);
+  const placeholder = `Добавить ${  formLabel.slice(0, -1).toLowerCase()}`;
   const sendToDb = (event) => {
     event.preventDefault();
-    if (props.type === 'PERSON') ChangeProfileValue(codeLink, inputValue, props.inputType);
-    if (props.type === 'NEW_PERSON') {
-      addNewPersonToJSON(inputValue, true);
+    if (type === 'PERSON') ChangeProfileValue(codeLink, inputValue, inputType);
+    if (type === 'NEW_PERSON') {
+      // create new profile and open it's page
+      addNewPersonToJSON(inputValue, true, route);
     }
   }
   return (
-    <div className={`${props.inputType}Field absolute_position_button`}>
+    <div className={`${inputType}Field absolute_position_button`}>
       <form name="myForm" onSubmit={sendToDb}>
-        <label>{props.formLabel}</label>
-        <input placeholder={placeholder} type="text" name={props.inputType} onChange={event => setValue(event.target.value)} value={inputValue} />
+        <label>{formLabel}</label>
+        <input placeholder={placeholder} type="text" name={inputType} onChange={event => setValue(event.target.value)} value={inputValue} />
         <button type="submit">Изменить</button>
       </form>
     </div>

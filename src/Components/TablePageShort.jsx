@@ -15,11 +15,11 @@ const TablePageShort = (props) => {
   const {pageNum } = useParams();
   const history = useHistory();
 
-  // TODO Another CRAP => can't change page in path => get path from history and del number 
+  // TODO CRAP => can't change page in path => get path from history and del number 
   const path = history.location.pathname.replace(/[0-9]/g, '');
 
 
-  // some obj for table => don't repeat photo and name column 
+  // some obj's for table => don't repeat photo and name column 
   const leadObj = {
     Header: 'Дата первого контакта',
     accessor: 'rent',
@@ -100,7 +100,7 @@ const TablePageShort = (props) => {
           tableRow
         ]}
         defaultSorted={[{ id: 'personName', desc: false }]}
-        defaultPageSize={5}
+        defaultPageSize={20}
       />
     </div>
   )

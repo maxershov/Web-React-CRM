@@ -33,7 +33,7 @@ const UserPage = (props) => {
   if (person === undefined) {
     // TODO kill this CRAP => prevent from crash if unvalid code in URL path
     [person, ] = data;
-    history.push('/clients');
+    history.push('/main');
   }
 
 

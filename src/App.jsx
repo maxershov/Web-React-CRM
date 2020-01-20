@@ -10,6 +10,8 @@ import store from './store/store'
 import { getPersonStore, getDayDataStore, getActivityStore, getActivityStoreCode } from './store/storeGetters'
 
 
+
+
 const App = (props) => {
     return (
       <Provider store={store}>
@@ -42,8 +44,6 @@ export function deletePerson(codeToDel) {
     const newActivityData = activityData.filter(obj => {return obj.code !== codeToDel});
     saveData(newPersonData, 'PERSON');
     saveData(newActivityData, 'ACTIVITY');
-    store.dispatch({ type: 'CHANGE_PAGE', page: 'TABLE_PAGE' })
-    store.dispatch({ type: 'CHANGE_ID', id: 0});
 }
 
 function deleteCodeDayData(codeToDel) {
@@ -86,7 +86,7 @@ export function addNewDayDataToJSON(obj) {
 }
 
 
-export function addNewPersonToJSON(code, renderProfile) {
+export function addNewPersonToJSON(code, renderProfile, route) {
     const data = JSON.parse(getPersonStore());
     const indexDate = data.findIndex(x => x.code === code);
     if (indexDate !== -1) code+='*';
@@ -96,8 +96,8 @@ export function addNewPersonToJSON(code, renderProfile) {
     addNewActivityDataToJSON({ "code": code, "activity": [{ "date": moment(new Date()).format('DD-MM-YYYY'), "time": moment(new Date()).format('HH:mm:ss'), "type": "Создание профиля", "person": "", "amount": "" }] });
     
     if (renderProfile) {
-        store.dispatch({ type: 'CHANGE_ID', id: JSON.parse(getPersonStore()).length - 1});
-        store.dispatch({ type: 'CHANGE_PAGE', page: 'PROFILE_PAGE' })
+        // Open profile page with new person
+        route.push(`/profile/${  code}`)
     }
 }
 
@@ -161,12 +161,6 @@ export function getDaysLeft(date) {
         return (moment(date, 'DD-MM-YYYY').startOf('day').diff(moment().startOf('day'), 'days'))
 }
 
-export function renderPersonFunc(code) {
-    /** Take id and render page for person with this id */
-    const idNum = getIndexByCode(code);
-    store.dispatch({ type: 'CHANGE_ID', id: idNum });
-    store.dispatch({ type: 'CHANGE_PAGE', page: 'PROFILE_PAGE' })
-}
 
 
 export function getPhotoFunc(photoId) {

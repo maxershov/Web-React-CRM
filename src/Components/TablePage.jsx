@@ -110,7 +110,7 @@ const TablePage = (props) => {
         }
       ]}
       defaultSorted={[{ id: 'personName', desc: false }]}
-      defaultPageSize={5}
+      defaultPageSize={20}
     />
   )
 }
