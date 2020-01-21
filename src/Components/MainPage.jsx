@@ -16,7 +16,7 @@ function widthForTable(value) {
   return Math.round(window.innerWidth * (value / 100))
 }
 
-const MainPage = (props) => {
+export const MainPage = (props) => {
   const history = useHistory();
   const personData = JSON.parse(props.personData);
   const [loadedDate, setLoadedDate] = useState(moment(new Date()).format('DD-MM-YYYY'));

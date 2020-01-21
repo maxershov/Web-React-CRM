@@ -1,0 +1,8 @@
+{
+  "setupFiles": [
+    "<rootDir>/src/tests/setupEnzyme.js"
+  ],
+  "moduleNameMapper": {
+    "\\.(css|less)$": "<rootDir>/src/tests/__mocks__/styleMock.js"
+  }
+}

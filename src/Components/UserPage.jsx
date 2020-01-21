@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable import/no-cycle */
-/* eslint-disable spaced-comment */
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom'
@@ -19,7 +18,7 @@ function getAllPersonNames(data) {
 }
 
 const UserPage = (props) => {
-  /** Show fields with User data and change it on submit*/
+  /** Show fields with User data and change it on submit */
   const [renderPhotoId, changeRenderPhotoId] = useState(false);
   const { codeLink } = useParams();
   const history = useHistory();

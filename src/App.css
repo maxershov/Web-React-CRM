@@ -7,7 +7,7 @@
     --back-color: rgba(224, 224, 224, 0.2);
     --back-color-light: rgba(224, 224, 224, 0.1);
     --form-color: rgba(224, 224, 224, 0.6);
-    --table-color: #005ccc
+    --table-color: rgba(0, 92, 204)
 }
 
 ::-webkit-scrollbar {
@@ -18,7 +18,7 @@
 html {
     font-size: 1rem;
     /* background-color: rgb(0, 0, 0); */
-    background-image:url('./images/bg.jpeg');
+    background-image: url('./images/bg.jpeg');
     background-size: 100vw;
     background-attachment: fixed;
     background-repeat: no-repeat;
@@ -37,8 +37,8 @@ html {
     }
 }
 
-@media (max-width: 600px) and (orientation: portrait) { 
-    html{
+@media (max-width: 600px) and (orientation: portrait) {
+    html {
         visibility: hidden;
     }
     .askPhoneTurn {
@@ -47,11 +47,7 @@ html {
         font-size: 4rem !important;
         text-align: center;
     }
-
-
 }
-
-
 
 .font_white_shadow {
     text-shadow: 2px 2px 0.1rem black;
@@ -72,9 +68,9 @@ html {
 #tablePhoto:hover {
     position: absolute;
     object-fit: contain;
-    width: 15vw;
-    height: 40vh;
-    background-color: var(--table-color);
+    width: 20vw;
+    height: 45vh;
+    background-color: rgba(0, 92, 204, 0.3);
     cursor: pointer;
 }
 
@@ -98,11 +94,11 @@ html {
 }
 
 a {
-    color:inherit;
+    color: inherit;
     text-decoration: none;
 }
 
-.menu-container>a{
+.menu-container>a {
     color: black;
     background-color: var(--back-color);
     flex: 1;
@@ -156,10 +152,7 @@ a {
     object-fit: contain;
 }
 
-.userPage label,
-.table,
-.calendar,
-.mainPage textarea {
+.userPage label, .table, .calendar, .mainPage textarea {
     animation: fadein .5s;
 }
 
@@ -173,8 +166,7 @@ a {
     }
 }
 
-*>label,
-.tableHeader {
+*>label, .tableHeader {
     display: block;
     font-size: 1.4rem;
     font-weight: 700;
@@ -215,8 +207,7 @@ a {
     position: absolute;
 }
 
-.userPage button,
-.mainPage button {
+.userPage button, .mainPage button {
     width: 30vw;
     border-style: none;
     text-transform: uppercase;
@@ -226,16 +217,11 @@ a {
     background-image: linear-gradient(to right, #005C97 0%, #363795 51%, #005C97 100%);
 }
 
-.userPage-container form button,
-FieldsAction button,
-.newProfileField button {
+.userPage-container form button, FieldsAction button, .newProfileField button {
     display: none;
 }
 
-.userPage-container>*:hover>form>button,
-.userPage-container>*:hover>button,
-FieldsAction>*:hover button,
-.newProfileField:hover button {
+.userPage-container>*:hover>form>button, .userPage-container>*:hover>button, FieldsAction>*:hover button, .newProfileField:hover button {
     display: block;
 }
 

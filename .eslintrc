@@ -1,11 +1,14 @@
 {
-  "extends": [    
+  "extends": [
     "airbnb",
     "react-app",
     "prettier"
   ],
   "rules": {
-    "jsx-quotes": [ 1, "prefer-double"],
+    "jsx-quotes": [
+      1,
+      "prefer-double"
+    ],
     "jsx-a11y/label-has-associated-control": "off",
     "react/prop-types": 0,
     "react/jsx-one-expression-per-line": "off",
