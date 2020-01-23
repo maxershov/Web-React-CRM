@@ -39,3 +39,5 @@ test('getDaysLeft with null', () => {
   const daysLeft = getDaysLeft(null);
   expect(daysLeft).toBe(null);
 })
+
+

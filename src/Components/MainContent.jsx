@@ -5,8 +5,6 @@ import TablePage from './TablePage';
 import TablePageShort from './TablePageShort';
 import MainPage from './MainPage';
 
-//      <Route component={Header} />
-
 const MainContent = () => {
   return (
     <Switch>

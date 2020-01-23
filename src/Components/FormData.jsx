@@ -5,7 +5,7 @@ import { ChangeProfileValue, addNewPersonToJSON } from '../App';
 
 const FormData = (props) => {
 
-  // Pass @route for last prop => to use history.push on input to open new profile
+  // Pass @route for last prop => to use history.push on input(MainPage - new Person) to open new profile
   const {formLabel, baseValue, inputType, type, route=''} = props;
   const { codeLink } = useParams();
   const [inputValue, setValue] = useState(baseValue);

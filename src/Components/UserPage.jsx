@@ -17,7 +17,7 @@ function getAllPersonNames(data) {
   return data.map(obj => { return obj.personName });
 }
 
-const UserPage = (props) => {
+export const UserPage = (props) => {
   /** Show fields with User data and change it on submit */
   const [renderPhotoId, changeRenderPhotoId] = useState(false);
   const { codeLink } = useParams();
@@ -68,7 +68,7 @@ const UserPage = (props) => {
   );
 }
 
-const PersonParams = (props) => {
+export const PersonParams = (props) => {
   const { person } = props;
   return (
     <>
@@ -85,7 +85,7 @@ const PersonParams = (props) => {
 }
 
 
-const LeadParams = (props) => {
+export const LeadParams = (props) => {
   const { person } = props;
   return (
     <>
@@ -95,7 +95,7 @@ const LeadParams = (props) => {
   )
 }
 
-const LostPersonParams = (props) => {
+export const LostPersonParams = (props) => {
   const { person } = props;
   return (
     <>
@@ -109,7 +109,7 @@ const LostPersonParams = (props) => {
 }
 
 
-const EmployeeParams = (props) => {
+export const EmployeeParams = (props) => {
   const { person } = props;
   return (
     <>

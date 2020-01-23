@@ -20,7 +20,7 @@ exports[`should render MainPage correctly 1`] = `
       returnValue="start"
       showNavigation={true}
       showNeighboringMonth={true}
-      value={2020-01-21T21:00:00.000Z}
+      value={1970-01-01T00:00:00.000Z}
       view="month"
     />
     <div
@@ -29,12 +29,12 @@ exports[`should render MainPage correctly 1`] = `
       <AreaNotes
         dayObject={
           Object {
-            "date": "22-01-2020",
+            "date": "01-01-1970",
             "history": Array [],
-            "notes": "Заметки меняются при изменении даты",
+            "notes": "",
           }
         }
-        notesValue="Заметки меняются при изменении даты"
+        notesValue=""
         type="DAY_DATA"
       />
     </div>
@@ -56,12 +56,12 @@ exports[`should render MainPage correctly 1`] = `
       className="newCodeField"
     >
       <CodeScanner
-        date="22-01-2020"
+        date="01-01-1970"
         dayObject={
           Object {
-            "date": "22-01-2020",
+            "date": "01-01-1970",
             "history": Array [],
-            "notes": "Заметки меняются при изменении даты",
+            "notes": "",
           }
         }
       />
