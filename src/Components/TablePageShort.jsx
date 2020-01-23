@@ -6,18 +6,18 @@ import { connect } from 'react-redux';
 import { Link, useHistory, useParams } from "react-router-dom";
 import { getPhotoFunc, getDaysLeft } from '../App';
 
+
 // set width to table colums by .className size
 function widthForTable(value) {
   return Math.round(window.innerWidth * (value / 100))
 }
 
-const TablePageShort = (props) => {
-  const {pageNum } = useParams();
-  const history = useHistory();
 
+const TablePageShort = (props) => {
+  const { pageNum } = useParams();
+  const history = useHistory();
   // TODO CRAP => can't change page in path => get path from history and del number 
   const path = history.location.pathname.replace(/[0-9]/g, '');
-
 
   // some obj's for table => don't repeat photo and name column 
   const leadObj = {
@@ -54,13 +54,12 @@ const TablePageShort = (props) => {
   if (props.tableType === 'СОТРУДНИК') tableRow = employeeObj;
   if (props.tableType === 'НЕТ') tableRow = lostObj;
 
-
   return (
     <div className="table font_white_shadow">
       <ReactTable
         className="-striped -highlight"
-        page={parseInt(pageNum,10)-1}
-        onPageChange={(pageIndex) => {history.push(path + (pageIndex+ 1))}} 
+        page={parseInt(pageNum, 10) - 1}
+        onPageChange={(pageIndex) => { history.push(path + (pageIndex + 1)) }}
         previousText="Назад"
         nextText="Вперед"
         loadingText="Загрузка"
@@ -68,7 +67,7 @@ const TablePageShort = (props) => {
         pageText="Страница"
         ofText="из"
         rowsText="профилей"
-        data={(JSON.parse(props.personData)).filter(obj => { return obj.contract === props.tableType })}
+        data={(JSON.parse(props.personData)).filter(obj => obj.contract === props.tableType )}
         filterable
         defaultFilterMethod={(filter, row) =>
           String(row[filter.id]) === filter.value}
@@ -78,7 +77,7 @@ const TablePageShort = (props) => {
             width: widthForTable(25),
             headerClassName: 'tableHeader',
             Cell: (value) => (
-              <button type="button" onClick={() => history.push(`/profile/${  value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" height={80} src={getPhotoFunc(value.original.photoId)} /></button>)
+              <button type="button" onClick={() => history.push(`/profile/${value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" height={80} src={getPhotoFunc(value.original.photoId)} /></button>)
           },
           {
             Header: 'Имя',
@@ -88,12 +87,12 @@ const TablePageShort = (props) => {
             headerClassName: 'tableHeader',
             filterMethod: (filter, row) => {
               const name = row._original.personName;
-              const {code} = row._original;
+              const { code } = row._original;
               if (name.toLowerCase().startsWith(filter.value.toLowerCase())) return true; // sort by second name
-              if (code.toLowerCase().startsWith(filter.value.toLowerCase())) return true; // sort by second name
+              if (code.toLowerCase().startsWith(filter.value.toLowerCase())) return true; // sort by code
               if (name.includes(" ")) { // sort by first name
                 if (name.toLowerCase().split(' ')[1].startsWith(filter.value.toLowerCase())) return true;
-              }
+              } return false;
             },
             Cell: (value) => (<Link to={`/profile/${value.original.code}`}>{value.original.personName}</Link>)
           },
@@ -106,10 +105,12 @@ const TablePageShort = (props) => {
   )
 }
 
+
 const mapStateToProps = state => {
   return {
     personData: state.personStore.data
   }
 }
+
 
 export default connect(mapStateToProps)(TablePageShort);

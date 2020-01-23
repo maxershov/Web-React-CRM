@@ -14,5 +14,5 @@ export function getActivityStore() {
 
 export function getActivityStoreCode(codeTo) {
   const data = JSON.parse(getActivityStore());
-  return JSON.stringify(data.filter(obj => { return obj.code === codeTo }));
+  return JSON.stringify(data.filter(obj => obj.code === codeTo ));
 }

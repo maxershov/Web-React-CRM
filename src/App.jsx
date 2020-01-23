@@ -22,6 +22,7 @@ const App = (props) => {
 
 
 function changeCodeDayData(oldCode, newCode) {
+  // if change code in personData => change code in historyData
   const data = JSON.parse(getDayDataStore());
   data.forEach(element => {
     element.history = element.history.filter(obj => {
@@ -34,10 +35,10 @@ function changeCodeDayData(oldCode, newCode) {
 export function deletePerson(codeToDel) {
   deleteCodeDayData(codeToDel);
   const personData = JSON.parse(getPersonStore());
-  const newPersonData = personData.filter(obj => { return obj.code !== codeToDel });
+  const newPersonData = personData.filter(obj => obj.code !== codeToDel);
 
   const activityData = JSON.parse(getActivityStore());
-  const newActivityData = activityData.filter(obj => { return obj.code !== codeToDel });
+  const newActivityData = activityData.filter(obj => obj.code !== codeToDel);
   saveData(newPersonData, 'PERSON');
   saveData(newActivityData, 'ACTIVITY');
 }
