@@ -144,7 +144,7 @@ exports[`should render UserPage person correctly 1`] = `
           "notes": "Заметка",
           "personName": "Иванов Иван Иванович",
           "photoId": 0,
-          "remain": null,
+          "remain": "",
           "rent": "10-02-2021",
           "telNum": "",
         }

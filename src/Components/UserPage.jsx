@@ -31,7 +31,7 @@ export const UserPage = (props) => {
 
   if (person === undefined) {
     // TODO kill this CRAP => prevent from crash if unvalid code in URL path
-    [person, ] = data;
+    [person,] = data;
     history.push('/main');
   }
 

@@ -35,9 +35,9 @@ test('get index by code', () => {
   expect(index).toBe(0);
 })
 
-test('getDaysLeft with null', () => {
-  const daysLeft = getDaysLeft(null);
-  expect(daysLeft).toBe(null);
+test('getDaysLeft with empty string', () => {
+  const daysLeft = getDaysLeft("");
+  expect(daysLeft).toBe("");
 })
 
 

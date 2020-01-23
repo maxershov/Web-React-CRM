@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import moment from 'moment';
-import {useParams} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import CalendarHideable from './CalendarHideable';
 import { ChangeProfileValue } from '../App';
 
@@ -25,7 +25,7 @@ const FieldDeposite = (props) => {
     changeRenderDeposite(false);
     ChangeProfileValue(codeLink, sum, 'deposite', dateDeposite)
   }
-  
+
   return (
     renderDeposite ?
       (
@@ -39,7 +39,7 @@ const FieldDeposite = (props) => {
           </form>
           <CalendarHideable setParentDate={setDateDeposite} сalendarName="Дата изменения депозита:" dateType="setParent" date={dateDeposite} />
         </>
-)
+      )
       :
       (
         <>
@@ -48,7 +48,7 @@ const FieldDeposite = (props) => {
             <input onClick={() => changeRenderDeposite(true)} type="number" readOnly value={deposite} />
           </form>
         </>
-)
+      )
   );
 }
 

@@ -78,7 +78,7 @@ const TablePage = (props) => {
           sortMethod: (a, b) => {
             const dayA = getDaysLeft(a);
             const dayB = getDaysLeft(b);
-            return (dayA === null) - (dayB === null) || +(dayA > dayB) || -(dayA < dayB);
+            return (dayA === "") - (dayB === "") || +(dayA > dayB) || -(dayA < dayB);
           },
           Cell: ({ value }) => (getDaysLeft(value))
         }, {
@@ -94,7 +94,7 @@ const TablePage = (props) => {
           sortMethod: (a, b) => {
             const dayA = getDaysLeft(a);
             const dayB = getDaysLeft(b);
-            return (dayA === null) - (dayB === null) || +(dayA > dayB) || -(dayA < dayB);
+            return (dayA === "") - (dayB === "") || +(dayA > dayB) || -(dayA < dayB);
           },
           Cell: ({ value }) => (getDaysLeft(value)),
         }, {

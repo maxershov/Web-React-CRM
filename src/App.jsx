@@ -9,9 +9,6 @@ import Header from './Components/Header';
 import store from './store/store'
 import { getPersonStore, getDayDataStore, getActivityStore, getActivityStoreCode } from './store/storeGetters'
 
-
-
-
 const App = (props) => {
   return (
     <Provider store={store}>
@@ -22,7 +19,6 @@ const App = (props) => {
     </Provider>
   );
 }
-
 
 
 function changeCodeDayData(oldCode, newCode) {
@@ -90,7 +86,7 @@ export function addNewPersonToJSON(code, renderProfile, route) {
   const data = JSON.parse(getPersonStore());
   const indexDate = data.findIndex(x => x.code === code);
   if (indexDate !== -1) code += '*';
-  const newPerson = { "personName": code, "contract": "", "dateBirth": "", "telNum": "", "code": code, "autoMonth": "", "notes": "", "remain": null, "days": null, "photoId": 0, "rent": null, "deposite": null, };
+  const newPerson = { "personName": code, "contract": "", "dateBirth": "", "telNum": "", "code": code, "autoMonth": "", "notes": "", "remain": "", "days": "", "photoId": 0, "rent": "", "deposite": "", };
   data.push(newPerson);
   saveData(data, 'PERSON');
   addNewActivityDataToJSON({ "code": code, "activity": [{ "date": moment(new Date()).format('DD-MM-YYYY'), "time": moment(new Date()).format('HH:mm:ss'), "type": "Создание профиля", "person": "", "amount": "" }] });
@@ -122,6 +118,8 @@ export function addNewActivityDataToJSON(obj) {
 }
 
 function changeCode(oldCode, newCode, activityObj) {
+  // TODO set URL => '/new code'
+
   const data = JSON.parse(getActivityStore());
   const id = data.findIndex(x => x.code === oldCode);
   data[id].code = newCode;
@@ -131,9 +129,6 @@ function changeCode(oldCode, newCode, activityObj) {
 }
 
 
-
-
-
 export function ChangeProfileValue(codeLink, inputValue, inputType, date = moment(new Date()).format('DD-MM-YYYY')) {
   /** Change field in profiles page -> get data from field and change in JSON file -> send to SQL dB */
   const data = JSON.parse(store.getState().personStore.data);
@@ -141,23 +136,24 @@ export function ChangeProfileValue(codeLink, inputValue, inputType, date = momen
   const oldFieldValue = data[id][inputType];
   data[id][inputType] = inputValue;
 
-  // in LEAD person date field for rent == field for first call => if change LEAD to other => rent=null
-  if (oldFieldValue === 'ЛИД' && inputType === 'contract') data[id].rent = null;
+  // in LEAD date field used for first call date. In PERSON used for rent => change LEAD to other => rent=""
+  if (oldFieldValue === 'ЛИД' && inputType === 'contract') data[id].rent = "";
 
   let time = moment(new Date()).format('HH:mm:ss');
+  // Set time to 00:00:00 if date not today => doesn't set incorrect time)
   if (date !== moment(new Date()).format('DD-MM-YYYY')) time = '00:00:00'
   const activityObj = { "date": date, "time": time, "type": `Изменение ${inputType}`, "person": "", "amount": `${oldFieldValue} => ${inputValue}` };
 
+  // use different func for code => to change URL and other
   if (inputType === 'code') changeCode(oldFieldValue, inputValue, activityObj);
+
   if (inputType !== 'photoId' && inputType !== 'notes' && inputType !== 'code') pushNewActivity(data[id].code, JSON.stringify(activityObj));
 
   saveData(data, 'PERSON');
 }
 
 export function getDaysLeft(date) {
-  if (date === undefined || date === null) {
-    return null;
-  }
+  if (date === "") return date;
   return (moment(date, 'DD-MM-YYYY').startOf('day').diff(moment().startOf('day'), 'days'))
 }
 
