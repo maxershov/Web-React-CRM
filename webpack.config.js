@@ -7,7 +7,7 @@ const myLocalHost = require('./host');
 
 module.exports = {
   context: path.resolve(__dirname),
-  entry: "./src/index.js",
+  entry: ["@babel/polyfill", "./src/index.js"],
   mode: "production",
   output: {
     path: path.join(__dirname, "dist"),
