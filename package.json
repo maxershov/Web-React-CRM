@@ -31,7 +31,7 @@
         "react-table-6": "^6.11.0",
         "redux": "^4.0.5"
     },
-    "browserslist": "last 1 version",
+    "browserslist": [">1%", "not OperaMini all"],
     "devDependencies": {
         "@babel/core": "^7.8.3",
         "@babel/preset-env": "^7.8.3",

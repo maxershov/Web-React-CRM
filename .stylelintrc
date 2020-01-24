@@ -4,7 +4,7 @@
   ],
   "rules": {
     "plugin/no-unsupported-browser-features": [true, {
-      "browsers": ["Last 1 versions"],
+      "browsers": [">1%", "not OperaMini all"],
       "severity": "warning"
     }]
   }
