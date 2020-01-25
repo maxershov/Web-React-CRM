@@ -119,4 +119,8 @@ dist
 /build
 /dist
 
+# host adress
 host.js
+
+# VSCode counter ext
+/.VSCodeCounter
