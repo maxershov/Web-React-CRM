@@ -13,14 +13,14 @@ const FieldDeposite = (props) => {
   const [dateDeposite, setDateDeposite] = useState(moment(new Date()).format('DD-MM-YYYY'))
 
   const plus = () => {
-    const sum = Number(deposite) + Number(amount);
+    const sum = +deposite + +amount;
     setDeposite(sum);
     changeRenderDeposite(false);
     ChangeProfileValue(codeLink, sum, 'deposite', dateDeposite);
   }
 
   const minus = () => {
-    const sum = Number(deposite) - Number(amount);
+    const sum = +deposite - +amount;
     setDeposite(sum);
     changeRenderDeposite(false);
     ChangeProfileValue(codeLink, sum, 'deposite', dateDeposite)

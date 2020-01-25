@@ -10,7 +10,7 @@ function widthForTable(value) {
 }
 
 const TableHistory = (props) => {
-  const parsedData = JSON.parse(props.activityData).filter(obj => { return obj.code === props.code });
+  const parsedData = JSON.parse(props.activityData).filter(obj => obj.code === props.code);
 
   return (
     <div className="tableHistory">
