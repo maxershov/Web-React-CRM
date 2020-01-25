@@ -2,12 +2,13 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
-const myLocalHost = require('./host');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const myLocalHost = require("./host");
 
 module.exports = {
   context: path.resolve(__dirname),
   mode: "development",
-  entry: "./src/index.js",
+  entry: ["@babel/polyfill", "./src/index.js"],
   devtool: "source-map",
   output: {
     path: path.join(__dirname, "dist"),
@@ -31,8 +32,8 @@ module.exports = {
     extensions: [".jsx", ".js", ".json"],
     modules: ["node_modules"],
     alias: {
-      'react-dom$': 'react-dom/profiling',
-      'scheduler/tracing': 'scheduler/tracing-profiling',
+      "react-dom$": "react-dom/profiling",
+      "scheduler/tracing": "scheduler/tracing-profiling"
     }
   },
   module: {
@@ -44,7 +45,18 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: ["style-loader", "css-loader"]
+        use: [
+          { loader: MiniCssExtractPlugin.loader },
+          { loader: "css-loader", options: { importLoaders: 1 } },
+          {
+            loader: "postcss-loader",
+            options: {
+              config: {
+                path: "postcss.config.js"
+              }
+            }
+          }
+        ]
       },
       {
         loader: require.resolve("file-loader"),
@@ -62,6 +74,7 @@ module.exports = {
       template: path.join(__dirname, "src", "assets", "index.html"),
       title: "Web-React-CRM"
     }),
+    new MiniCssExtractPlugin(),
     new BundleAnalyzerPlugin()
   ]
 };

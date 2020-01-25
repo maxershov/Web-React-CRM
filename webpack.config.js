@@ -1,9 +1,10 @@
+const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
-const webpack = require("webpack");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-const myLocalHost = require('./host');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const myLocalHost = require("./host");
 
 module.exports = {
   context: path.resolve(__dirname),
@@ -40,7 +41,18 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: ["style-loader", "css-loader"]
+        use: [
+          { loader: MiniCssExtractPlugin.loader },
+          { loader: "css-loader", options: { importLoaders: 1 } },
+          {
+            loader: "postcss-loader",
+            options: {
+              config: {
+                path: "postcss.config.js"
+              }
+            }
+          }
+        ]
       },
       {
         loader: require.resolve("file-loader"),
@@ -77,6 +89,7 @@ module.exports = {
     new UglifyJsPlugin({
       parallel: true
     }),
-    new BundleAnalyzerPlugin()
+    new BundleAnalyzerPlugin(),
+    new MiniCssExtractPlugin()
   ]
 };
