@@ -75,6 +75,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "src", "assets", "index.html"),
       title: "Web-React-CRM",
+      favicon: path.join(__dirname, "src", "assets", "favicon.ico"),
       minify: {
         removeComments: true,
         collapseWhitespace: true,
