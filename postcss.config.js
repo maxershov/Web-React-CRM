@@ -1,5 +1,6 @@
 module.exports = {
   plugins: {
+    "postcss-css-variables": {},
     "postcss-preset-env": {
       stage: 1,
       autoprefixer: { grid: true },
