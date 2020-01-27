@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link, useHistory } from "react-router-dom";
 import moment from 'moment';
 import ReactTable from 'react-table-6/react-table.min';
-import Calendar from 'react-calendar';
+import Calendar from 'react-calendar/dist/entry.nostyle';
 import AreaNotes from './AreaNotes';
 import CodeScanner from './CodeScanner'
 

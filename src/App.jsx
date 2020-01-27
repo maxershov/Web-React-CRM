@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import './react-table.css';
+import './react-calendar.css';
 import moment from 'moment';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';

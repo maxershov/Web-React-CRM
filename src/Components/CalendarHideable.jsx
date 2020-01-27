@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import moment from 'moment';
 import { useParams } from 'react-router-dom';
-import Calendar from 'react-calendar';
+import Calendar from 'react-calendar/dist/entry.nostyle';
 import { ChangeProfileValue } from '../App';
 
 
