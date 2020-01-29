@@ -85,6 +85,7 @@ const TablePageShort = (props) => {
             width: widthForTable(50),
             style: { whiteSpace: 'unset' },
             headerClassName: 'tableHeader',
+            accessor: 'personName',
             filterMethod: (filter, row) => {
               const name = row._original.personName;
               const { code } = row._original;
@@ -94,7 +95,7 @@ const TablePageShort = (props) => {
                 if (name.toLowerCase().split(' ')[1].startsWith(filter.value.toLowerCase())) return true;
               } return false;
             },
-            Cell: (value) => (<Link to={`/profile/${value.original.code}`}>{value.original.personName}</Link>)
+            Cell: row => (<Link to={`/profile/${row.original.code}`}>{row.original.personName}</Link>)
           },
           tableRow
         ]}
