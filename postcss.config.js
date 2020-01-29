@@ -1,5 +1,6 @@
 module.exports = {
   plugins: {
+    "cssnano":{ preset:'default'},
     "postcss-css-variables": {},
     "postcss-preset-env": {
       stage: 1,

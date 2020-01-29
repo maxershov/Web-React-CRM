@@ -3,12 +3,14 @@
 const express = require("express");
 const history = require('connect-history-api-fallback');
 const path = require("path");
+const compression = require("compression");
 const myLocalHost = require("./host");
 
 const staticFiles = express.static(path.join(__dirname, "dist"));
 
 const app = express();
 app.use(staticFiles);
+app.use(compression);
 app.use(history());
 const port = 8080;
 app.listen(port, myLocalHost.host);
