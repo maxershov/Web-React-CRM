@@ -4,7 +4,7 @@ import React from 'react';
 import ReactTable from 'react-table-6/react-table.min';
 import { connect } from 'react-redux';
 import { Link, useHistory, useParams } from "react-router-dom";
-import { getPhotoFunc, getDaysLeft } from '../App';
+import { getDaysLeft } from '../App';
 
 
 // set width to table colums by .className size
@@ -77,7 +77,7 @@ const TablePageShort = (props) => {
             width: widthForTable(25),
             headerClassName: 'tableHeader',
             Cell: (value) => (
-              <button type="button" onClick={() => history.push(`/profile/${value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" height={80} src={getPhotoFunc(value.original.photoId)} /></button>)
+              <button type="button" onClick={() => history.push(`/profile/${value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" src={require(`../images/${value.original.photoId}.jpg`)} /></button>)
           },
           {
             Header: 'Имя',

@@ -4,7 +4,7 @@ import React from 'react';
 import ReactTable from 'react-table-6/react-table.min';
 import { Link, useHistory, useParams } from "react-router-dom";
 import { connect } from 'react-redux';
-import { getDaysLeft, getPhotoFunc } from '../App';
+import { getDaysLeft} from '../App';
 
 
 // set width to table colums by .className size
@@ -36,15 +36,15 @@ const TablePage = (props) => {
       columns={[
         {
           Header: 'Фото',
-          width: widthForTable(10),
+          width: widthForTable(15),
           headerClassName: 'tableHeader',
           Cell: (value) => (
-            <button type="button" onClick={() => history.push(`/profile/${value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" height={80} src={getPhotoFunc(value.original.photoId)} /></button>)
+            <button id="tablePhotoButton" type="button" onClick={() => history.push(`/profile/${value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" src={require(`../images/${value.original.photoId}.jpg`)} /></button>)
         },
         {
           Header: 'Имя',
           id: 'rowCode',
-          width: widthForTable(25),
+          width: widthForTable(20),
           style: { whiteSpace: 'unset' },
           headerClassName: 'tableHeader',
           filterMethod: (filter, row) => {
@@ -71,7 +71,7 @@ const TablePage = (props) => {
             } return false;
           },
         }, {
-          Header: 'Остаток Дней',
+          Header: 'Остаток дней',
           width: widthForTable(9),
           accessor: 'days',
           headerClassName: 'tableHeader',
@@ -87,7 +87,7 @@ const TablePage = (props) => {
           accessor: 'remain',
           headerClassName: 'tableHeader',
         }, {
-          Header: 'Аренда Дней',
+          Header: 'Аренда дней',
           width: widthForTable(9),
           accessor: 'rent',
           headerClassName: 'tableHeader',

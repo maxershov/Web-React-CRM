@@ -253,7 +253,7 @@ export const personData = [
     autoMonth: 4,
     remain: "",
     days: "10-07-2020",
-    photoId: 0,
+    photoId: 3,
     rent: "21-04-2020",
     deposite: 3699,
     notes: "diam. Pellentesque habitant morbi tristique"
@@ -267,7 +267,7 @@ export const personData = [
     autoMonth: 7,
     remain: "",
     days: "21-05-2020",
-    photoId: 0,
+    photoId: 6,
     rent: "26-10-2019",
     deposite: 1085,
     notes: "magna. Phasellus dolor elit, pellentesque"
@@ -309,7 +309,7 @@ export const personData = [
     autoMonth: 9,
     remain: 12,
     days: "24-10-2019",
-    photoId: 0,
+    photoId: 8,
     rent: "12-01-2020",
     deposite: 3724,
     notes: "Curabitur sed tortor. Integer aliquam"
@@ -337,7 +337,7 @@ export const personData = [
     autoMonth: 8,
     remain: 10,
     days: "25-10-2020",
-    photoId: 0,
+    photoId: 7,
     rent: "08-10-2019",
     deposite: 1588,
     notes: "Praesent interdum ligula eu enim."
@@ -351,7 +351,7 @@ export const personData = [
     autoMonth: 3,
     remain: 8,
     days: "29-05-2019",
-    photoId: 0,
+    photoId: 10,
     rent: "03-09-2019",
     deposite: 4755,
     notes: "aliquet, sem ut cursus luctus,"
@@ -379,7 +379,7 @@ export const personData = [
     autoMonth: 8,
     remain: 22,
     days: "08-01-2021",
-    photoId: 0,
+    photoId: 9,
     rent: "01-12-2019",
     deposite: 2972,
     notes: "luctus et ultrices posuere cubilia"
@@ -449,7 +449,7 @@ export const personData = [
     autoMonth: 5,
     remain: 23,
     days: "11-10-2020",
-    photoId: 0,
+    photoId: 11,
     rent: "22-01-2021",
     deposite: 4916,
     notes: "arcu. Vestibulum ut eros non"
@@ -477,7 +477,7 @@ export const personData = [
     autoMonth: 8,
     remain: "",
     days: "05-08-2019",
-    photoId: 0,
+    photoId: 4,
     rent: "06-04-2019",
     deposite: 351,
     notes: "elementum purus, accumsan interdum libero"
@@ -505,7 +505,7 @@ export const personData = [
     autoMonth: 8,
     remain: "",
     days: "17-02-2019",
-    photoId: 0,
+    photoId: 2,
     rent: "26-02-2019",
     deposite: 2104,
     notes: "lectus ante dictum mi, ac"
@@ -519,7 +519,7 @@ export const personData = [
     autoMonth: 9,
     remain: 14,
     days: "30-11-2019",
-    photoId: 0,
+    photoId: 5,
     rent: "07-01-2020",
     deposite: 3493,
     notes: "sapien molestie orci tincidunt adipiscing."

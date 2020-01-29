@@ -4,7 +4,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom'
-import { getPhotoFunc, deletePerson } from '../App';
+import { deletePerson } from '../App';
 import FormData from './FormData';
 import CalendarHideable from './CalendarHideable';
 import FieldDeposite from './FieldDeposite';
@@ -45,7 +45,7 @@ export const UserPage = (props) => {
 
   return (
     <div className="userPage">
-      <div className="img-container"><img onClick={() => changeRenderPhotoId(!renderPhotoId)} alt="profilePhoto" src={getPhotoFunc(person.photoId)} /></div>
+      <div className="img-container"><img onClick={() => changeRenderPhotoId(!renderPhotoId)} alt="profilePhoto" src={require(`../images/${person.photoId}.jpg`)} /></div>
       <div className="userPage-container">
         {renderPhotoId ? (
           <>

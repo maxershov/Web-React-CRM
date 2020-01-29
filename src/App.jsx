@@ -160,32 +160,6 @@ export function getDaysLeft(date) {
 }
 
 
-
-export function getPhotoFunc(photoId) {
-  /* Get path to photo/string with base64 */
-  const NAME_MAX_LENGTH = 50;
-  // Let's the magic begins!
-  if (photoId === 0 || photoId === undefined) {
-    return require('./images/0.jpg')
-  } if ((photoId).toString().length < NAME_MAX_LENGTH && (photoId).toString().length > 1) {
-    try {
-      return require(`./images/${photoId}.JPG`)
-    } catch (err) {
-      try {
-        return require(`./images/${photoId}.jpeg`);
-      } catch (err) {
-        try {
-          return require(`./images/${photoId}.jpg`);
-        } catch (err) {
-          return require('./images/0.jpg');
-        }
-      }
-    }
-  } else {
-    return photoId;
-  }
-}
-
 function saveData(data, dataType) {
   switch (dataType) {
     case 'PERSON':

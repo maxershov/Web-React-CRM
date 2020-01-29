@@ -65,11 +65,19 @@ html {
     word-wrap: break-word;
 }
 
+#tablePhotoButton {
+    align-items: center;
+}
+
+#tablePhoto {
+    height: 5em;
+    max-width: auto;
+}
+
 #tablePhoto:hover {
     position: absolute;
-    object-fit: contain;
-    width: 20vw;
-    height: 45vh;
+    height: 20em;
+    width: auto;
     background-color: rgba(0, 92, 204, 0.3);
     cursor: pointer;
 }
@@ -142,6 +150,7 @@ a {
     height: 90%;
     display: flex;
     background-color: inherit;
+    align-items: center;
 }
 
 .userPage .img-container>img {
@@ -149,7 +158,6 @@ a {
     flex: 1;
     max-width: 95%;
     max-height: 95%;
-    object-fit: contain;
 }
 
 .userPage label,
