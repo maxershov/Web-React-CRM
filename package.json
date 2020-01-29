@@ -7,12 +7,16 @@
         "test": "jest --config ./jest.config.json",
         "dev": "webpack-dev-server  --config ./devWebpack.config.js",
         "prod": "cross-env NODE_ENV=production webpack-dev-server --config ./webpack.config.js",
-        "start": "node express.js",
+        "start": "npm run prod && node express.js",
         "build": "cross-env NODE_ENV=production webpack --config webpack.config.js"
     },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/maxershov/Web-React-CRM.git"
+    },
+    "engines": {
+        "node": "12.14.1",
+        "npm": "6.13.4"
     },
     "author": "MaxErshov",
     "license": "ISC",
