@@ -163,6 +163,7 @@ a {
     flex: 1;
     max-width: 95%;
     max-height: 95%;
+    object-fit: scale-down;
 }
 
 .userPage label,
@@ -280,10 +281,7 @@ FieldsAction>*:hover button,
 
 .calendar button {
     background-image: none;
-}
-
-.calendar {
-    background: var(--back-color) !important;
+    font-size: 1em;
 }
 
 .mainPage {
@@ -317,6 +315,7 @@ FieldsAction>*:hover button,
     width: 100%;
     height: 70%;
     background-color: var(--back-color);
+    font-size: 1.3em;
 }
 
 .newProfileField {
