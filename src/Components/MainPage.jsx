@@ -6,9 +6,8 @@ import ReactTable from 'react-table-6/react-table.min';
 import Calendar from 'react-calendar/dist/entry.nostyle';
 import AreaNotes from './AreaNotes';
 import CodeScanner from './CodeScanner'
-
 import FormData from './FormData';
-import { getPhotoFunc, getIndexByCode, getDateObj  } from '../App';
+import { getIndexByCode, getDateObj  } from '../App';
 
 
 // set width to table colums by .className size
@@ -26,6 +25,11 @@ export const MainPage = (props) => {
     const formatedDate = moment(date).format('DD-MM-YYYY');
     setLoadedDate(formatedDate);
   }
+
+  function getPhotoId(code) {
+    return personData[getIndexByCode(code)].photoId
+  }
+
   return (
     <>
       <div className="mainPage">
@@ -53,7 +57,7 @@ export const MainPage = (props) => {
               accessor: 'code',
               headerClassName: 'tableHeader',
               Cell: ({ value }) => (
-                <button type="button" onClick={() => history.push(`/profile/${  value}`)}><img id="tablePhoto" alt="tablePhoto" height={80} src={getPhotoFunc(personData[getIndexByCode(value)].photoId)} /></button>)
+                <button type="button" onClick={() => history.push(`/profile/${  value}`)}><img id="tablePhoto" alt="tablePhoto" height={80} src={require(`../images/${getPhotoId(value)}.jpg`)} /></button>)                
             },
             {
               Header: 'Имя',

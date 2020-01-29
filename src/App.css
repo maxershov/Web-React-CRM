@@ -32,8 +32,13 @@ html {
 @media (max-width: 600px) {
     html {
         /* background-image: none !important;  */
-        /* background: red; */
         font-size: 0.6em;
+    }
+}
+
+@media (min-width: 3840px) {
+    html {
+        font-size: 2.5em;
     }
 }
 
