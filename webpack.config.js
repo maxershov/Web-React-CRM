@@ -1,10 +1,9 @@
 const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+// const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const myLocalHost = require("./host");
 
 module.exports = {
   context: path.resolve(__dirname),
@@ -14,19 +13,6 @@ module.exports = {
     path: path.join(__dirname, "dist"),
     filename: "[name].bundle.js",
     publicPath: "/"
-  },
-  devServer: {
-    host: myLocalHost.host,
-    port: 8080,
-    open: true,
-    hot: true,
-    writeToDisk: true,
-    compress: true,
-    watchContentBase: true,
-    progress: true,
-    contentBase: path.join(__dirname, "dist"),
-    overlay: true,
-    historyApiFallback: true // on 404 load publicPath => for BrowserRouter on refresh
   },
   resolve: {
     extensions: [".jsx", ".js", ".json"],
@@ -90,7 +76,7 @@ module.exports = {
     new UglifyJsPlugin({
       parallel: true
     }),
-    new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
     new MiniCssExtractPlugin()
   ]
 };
