@@ -246,13 +246,13 @@ export const activityData = [
 export const personData = [
   {
     personName: "Murphy Mccarthy",
-    contract: "6 ТА",
+    contract: "МИНИГРУППА",
     dateBirth: "17-10-1979",
     telNum: "1-256-471-0997",
     code: "1",
     autoMonth: 4,
-    remain: "",
-    days: "10-07-2020",
+    remain: "10",
+    days: "",
     photoId: 3,
     rent: "21-04-2020",
     deposite: 3699,

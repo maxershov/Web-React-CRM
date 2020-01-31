@@ -131,10 +131,10 @@ function changeCode(oldCode, newCode, activityObj) {
 }
 
 
-export function ChangeProfileValue(codeLink, inputValue, inputType, date = moment(new Date()).format('DD-MM-YYYY')) {
+export function ChangeProfileValue(code, inputValue, inputType, date = moment(new Date()).format('DD-MM-YYYY')) {
   /** Change field in profiles page -> get data from field and change in JSON file -> send to SQL dB */
   const data = JSON.parse(store.getState().personStore.data);
-  const id = getIndexByCode(codeLink);
+  const id = getIndexByCode(code);
   const oldFieldValue = data[id][inputType];
   data[id][inputType] = inputValue;
 
