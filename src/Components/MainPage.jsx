@@ -15,6 +15,13 @@ function widthForTable(value) {
   return Math.round(window.innerWidth * (value / 100))
 }
 
+
+function isToday(date){
+  const todayDate  = moment(new Date()).format('DD-MM-YYYY')
+  return todayDate === date;
+}
+
+
 export const MainPage = (props) => {
   const history = useHistory();
   const personData = JSON.parse(props.personData);
@@ -37,7 +44,8 @@ export const MainPage = (props) => {
         <Calendar className="calendar calendarMain" value={moment(loadedDate, 'DD-MM-YYYY').toDate()} onChange={(date) => changeLoadDate(date)} />
         <div className="notesMain"><AreaNotes notesValue={data.notes} type="DAY_DATA" dayObject={data} /></div>
         <div className="newProfileField"><FormData baseValue="" formLabel="Новый профиль:" type="NEW_PERSON" route={history} /></div>
-        <div className="newCodeField"><CodeScanner dayObject={data} date={loadedDate} /></div>
+        {isToday(loadedDate) 
+        ? <div className="newCodeField"><CodeScanner dayObject={data} date={loadedDate} /></div> : undefined}
       </div>
       <div className="tableMain">
         <ReactTable
