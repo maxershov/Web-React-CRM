@@ -29,7 +29,7 @@ exports[`should render MainPage correctly 1`] = `
       <AreaNotes
         dayObject={
           Object {
-            "date": "01-01-1970",
+            "date": "31-12-1969",
             "history": Array [],
             "notes": "",
           }
@@ -56,10 +56,10 @@ exports[`should render MainPage correctly 1`] = `
       className="newCodeField"
     >
       <CodeScanner
-        date="01-01-1970"
+        date="31-12-1969"
         dayObject={
           Object {
-            "date": "01-01-1970",
+            "date": "31-12-1969",
             "history": Array [],
             "notes": "",
           }
