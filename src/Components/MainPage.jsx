@@ -40,9 +40,8 @@ export const MainPage = (props) => {
   return (
     <>
       <div className="mainPage">
-        <h1 className="askPhoneTurn font_white_shadow">Rotate screen to landscape mode<br />⤵</h1>
         <Calendar className="calendar calendarMain" value={moment(loadedDate, 'DD-MM-YYYY').toDate()} onChange={(date) => changeLoadDate(date)} />
-        <div className="notesMain"><AreaNotes notesValue={data.notes} type="DAY_DATA" dayObject={data} /></div>
+        <div className="notesMain font-white-shadow"><AreaNotes notesValue={data.notes} type="DAY_DATA" dayObject={data} /></div>
         <div className="newProfileField"><FormData baseValue="" formLabel="Новый профиль:" type="NEW_PERSON" route={history} /></div>
         {isToday(loadedDate) 
         ? <div className="newCodeField"><CodeScanner dayObject={data} date={loadedDate} /></div> : undefined}

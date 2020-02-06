@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 const Header = () => {
   return (
     <nav className="menu-container">
+      <h1 className="askPhoneTurn font_white_shadow">Rotate screen to landscape mode<br />⤵</h1>
       <NavLink activeClassName="is-active" to="/main">Главная</NavLink>
       <NavLink activeClassName="is-active" to="/clients/page/1">Клиенты</NavLink>
       <NavLink activeClassName="is-active" to="/lead/page/1">Лид</NavLink>      

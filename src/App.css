@@ -4,7 +4,7 @@
     --img-width: 25vw;
     --img-height: 25vw;
     --form-width: 25vw;
-    --back-color: rgba(224, 224, 224, 0.2);
+    --back-color: rgba(224, 224, 224, 0.315);
     --back-color-light: rgba(224, 224, 224, 0.1);
     --form-color: rgba(224, 224, 224, 0.6);
     --table-color: rgba(0, 92, 204);
@@ -45,6 +45,7 @@ html {
 @media (max-width: 600px) and (orientation: portrait) {
     html {
         visibility: hidden;
+        background-image: none;
     }
     .askPhoneTurn {
         display: block;
@@ -237,15 +238,17 @@ a {
 }
 
 .userPage-container form button,
-FieldsAction button,
-.newProfileField button {
+.FieldsAction button,
+.newProfileField button,
+.notesMain button {
     display: none;
 }
 
 .userPage-container>*:hover>form>button,
 .userPage-container>*:hover>button,
-FieldsAction>*:hover button,
-.newProfileField:hover button {
+.FieldsAction>*:hover button,
+.newProfileField:hover button,
+.notesMain:hover button {
     display: block;
 }
 
