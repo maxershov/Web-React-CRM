@@ -29,9 +29,8 @@ html {
     display: none;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 750px) {
     html {
-        /* background-image: none !important;  */
         font-size: 0.6em;
     }
 }
