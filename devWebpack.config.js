@@ -3,6 +3,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const WebpackMonitor = require('webpack-monitor');
 const myLocalHost = require("./host");
 
 module.exports = {
@@ -76,6 +77,10 @@ module.exports = {
       favicon: path.join(__dirname, "src", "assets", "favicon.ico"),
     }),
     new MiniCssExtractPlugin(),
-    new BundleAnalyzerPlugin()
+    new BundleAnalyzerPlugin(),
+    new WebpackMonitor({
+      capture: true,
+      launch: true,
+    })
   ]
 };
