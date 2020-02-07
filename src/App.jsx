@@ -2,13 +2,15 @@ import React from 'react';
 import './App.css';
 import './react-table.css';
 import './react-calendar.css';
-import moment from 'moment';
+import { format, differenceInDays, parse, startOfDay } from 'date-fns'
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import MainContent from './Components/MainContent';
 import Header from './Components/Header';
 import store from './store/store'
 import { getPersonStore, getDayDataStore, getActivityStore, getActivityStoreCode } from './store/storeGetters'
+
+
 
 const App = (props) => {
   return (
@@ -91,7 +93,7 @@ export function addNewPersonToJSON(code, renderProfile, route) {
   const newPerson = { "personName": code, "contract": "", "dateBirth": "", "telNum": "", "code": code, "autoMonth": "", "notes": "", "remain": "", "days": "", "photoId": 0, "rent": "", "deposite": "", };
   data.push(newPerson);
   saveData(data, 'PERSON');
-  addNewActivityDataToJSON({ "code": code, "activity": [{ "date": moment(new Date()).format('DD-MM-YYYY'), "time": moment(new Date()).format('HH:mm:ss'), "type": "Создание профиля", "person": "", "amount": "" }] });
+  addNewActivityDataToJSON({ "code": code, "activity": [{ "date": format(new Date(),'dd-MM-yyyy'), "time": format(new Date(),'HH:mm:ss'), "type": "Создание профиля", "person": "", "amount": "" }] });
 
   if (renderProfile) {
     // Open profile page with new person
@@ -131,7 +133,7 @@ function changeCode(oldCode, newCode, activityObj) {
 }
 
 
-export function ChangeProfileValue(code, inputValue, inputType, date = moment(new Date()).format('DD-MM-YYYY')) {
+export function ChangeProfileValue(code, inputValue, inputType, date = format(new Date(),'dd-MM-yyyy')) {
   /** Change field in profiles page -> get data from field and change in JSON file -> send to SQL dB */
   const data = JSON.parse(store.getState().personStore.data);
   const id = getIndexByCode(code);
@@ -141,9 +143,9 @@ export function ChangeProfileValue(code, inputValue, inputType, date = moment(ne
   // in LEAD date field used for first call date. In PERSON used for rent => change LEAD to other => rent=""
   if (oldFieldValue === 'ЛИД' && inputType === 'contract') data[id].rent = "";
 
-  let time = moment(new Date()).format('HH:mm:ss');
+  let time = format(new Date(),'HH:mm:ss');
   // Set time to 00:00:00 if date not today => doesn't set incorrect time)
-  if (date !== moment(new Date()).format('DD-MM-YYYY')) time = '00:00:00'
+  if (date !== format(new Date(),'dd-MM-yyyy')) time = '00:00:00'
   const activityObj = { "date": date, "time": time, "type": `Изменение ${inputType}`, "person": "", "amount": `${oldFieldValue} => ${inputValue}` };
 
   // use different func for code => to change URL and other
@@ -156,7 +158,7 @@ export function ChangeProfileValue(code, inputValue, inputType, date = moment(ne
 
 export function getDaysLeft(date) {
   if (date === "") return date;
-  return (moment(date, 'DD-MM-YYYY').startOf('day').diff(moment().startOf('day'), 'days'))
+  return differenceInDays(startOfDay(parse(date, 'dd-MM-yyyy', new Date())), startOfDay(new Date()));
 }
 
 

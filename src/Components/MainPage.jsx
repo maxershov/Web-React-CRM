@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, useHistory } from "react-router-dom";
-import moment from 'moment';
+import { format, parse } from 'date-fns'
 import ReactTable from 'react-table-6/react-table.min';
 import Calendar from 'react-calendar/dist/entry.nostyle';
 import AreaNotes from './AreaNotes';
@@ -17,7 +17,7 @@ function widthForTable(value) {
 
 
 function isToday(date){
-  const todayDate  = moment(new Date()).format('DD-MM-YYYY')
+  const todayDate  = format(new Date(),'dd-MM-yyyy')
   return todayDate === date;
 }
 
@@ -25,11 +25,11 @@ function isToday(date){
 export const MainPage = (props) => {
   const history = useHistory();
   const personData = JSON.parse(props.personData);
-  const [loadedDate, setLoadedDate] = useState(moment(new Date()).format('DD-MM-YYYY'));
+  const [loadedDate, setLoadedDate] = useState(format(new Date(),'dd-MM-yyyy'));
   const data = JSON.parse(getDateObj(loadedDate));
   
   const changeLoadDate = (date) => {
-    const formatedDate = moment(date).format('DD-MM-YYYY');
+    const formatedDate = format(date, 'dd-MM-yyyy');
     setLoadedDate(formatedDate);
   }
 
@@ -40,7 +40,7 @@ export const MainPage = (props) => {
   return (
     <>
       <div className="mainPage">
-        <Calendar className="calendar calendarMain" value={moment(loadedDate, 'DD-MM-YYYY').toDate()} onChange={(date) => changeLoadDate(date)} />
+        <Calendar className="calendar calendarMain" value={parse(loadedDate, 'dd-MM-yyyy', new Date())} onChange={(date) => changeLoadDate(date)} />
         <div className="notesMain font-white-shadow"><AreaNotes notesValue={data.notes} type="DAY_DATA" dayObject={data} /></div>
         <div className="newProfileField"><FormData baseValue="" formLabel="Новый профиль:" type="NEW_PERSON" route={history} /></div>
         {isToday(loadedDate) 

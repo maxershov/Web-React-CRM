@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import moment from 'moment';
+import { format } from 'date-fns'
 import { addNewDayDataToJSON, addNewPersonToJSON, ChangeProfileValue, getIndexByCode } from '../App';
 import { getPersonStore } from '../store/storeGetters'
 
@@ -15,7 +15,7 @@ function substractOneRemain(code){
 
 
 function addToTodayHistory(code, dayObject) {
-  const codeObj = { "code": code, "time": moment(new Date()).format('HH:mm:ss') };
+  const codeObj = { "code": code, "time": format(new Date(),'HH:mm:ss') };
   // find if person already in history
   const index = dayObject.history.findIndex(x => x.code === code);
   if (index === -1) {

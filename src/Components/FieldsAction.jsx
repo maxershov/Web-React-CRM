@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import moment from 'moment';
+import { format} from 'date-fns'
 import CalendarHideable from './CalendarHideable';
 import { pushNewActivity} from '../App';
 
@@ -8,11 +8,11 @@ import { pushNewActivity} from '../App';
 const MyActionFields = (props) => {
   const [actionType, setActionType] = useState('');
   const [actionAmout, setActionAmout] = useState('');
-  const [actionDate, setActionDate] = useState(moment(new Date()).format('DD-MM-YYYY'));  // change!
+  const [actionDate, setActionDate] = useState(format(new Date(),'dd-MM-yyyy'));  // change!
   const [actionPerson, setActionPerson] = useState('');
   const sendActionsToDb = (event) => {
     event.preventDefault();
-    const newActivity = { "date": actionDate, "time": moment(new Date()).format('HH:mm:ss'), "type": actionType, "person": actionPerson, "amount": actionAmout };
+    const newActivity = { "date": actionDate, "time": format(new Date(),'HH:mm:ss'), "type": actionType, "person": actionPerson, "amount": actionAmout };
     pushNewActivity(props.code, JSON.stringify(newActivity));
   }
   return (

@@ -77,10 +77,10 @@ module.exports = {
       favicon: path.join(__dirname, "src", "assets", "favicon.ico"),
     }),
     new MiniCssExtractPlugin(),
-    new BundleAnalyzerPlugin(),
-    new WebpackMonitor({
-      capture: true,
-      launch: true,
-    })
+    // new BundleAnalyzerPlugin(),
+    // new WebpackMonitor({
+    //   capture: true,
+    //   launch: true,
+    // })
   ]
 };

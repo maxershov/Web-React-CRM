@@ -1,8 +1,7 @@
-import moment from "moment";
-
+import { format } from 'date-fns'
 export const dayData = [
   {
-    date: moment(new Date()).format("DD-MM-YYYY"),
+    date: format(new Date(),"dd-MM-yyyy"),
     notes: "Заметки меняются при изменении даты",
     history: []
   }

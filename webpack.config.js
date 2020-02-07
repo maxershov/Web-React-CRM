@@ -73,7 +73,6 @@ module.exports = {
         minifyURLs: true
       }
     }),
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/, /^\.\/es$/),
     new UglifyJsPlugin({
       parallel: true
     }),

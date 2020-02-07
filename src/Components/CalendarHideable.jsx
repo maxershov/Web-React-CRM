@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import moment from 'moment';
 import { useParams } from 'react-router-dom';
+import { format} from 'date-fns'
 import Calendar from 'react-calendar/dist/entry.nostyle';
 import { ChangeProfileValue } from '../App';
 
@@ -10,7 +10,7 @@ const CalendarHideable = (props) => {
   const { codeLink } = useParams();
 
   function changeDate(dateTo) {
-    const date = moment(dateTo).format('DD-MM-YYYY');
+    const date = format(dateTo, 'dd-MM-yyyy');
     props.dateType === 'setParent' ?
       props.setParentDate(date) :
       ChangeProfileValue(codeLink, date, props.dateType);
