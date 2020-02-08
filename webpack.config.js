@@ -2,7 +2,7 @@ const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 // const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
-const WebpackMonitor = require('webpack-monitor');
+// const WebpackMonitor = require('webpack-monitor');
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
@@ -89,10 +89,10 @@ module.exports = {
       parallel: true
     }),
     // new BundleAnalyzerPlugin(),
-    new WebpackMonitor({
-      capture: true,
-      launch: true,
-    }),
+    // new WebpackMonitor({
+    //   capture: true,
+    //   launch: true,
+    // }),
     new MiniCssExtractPlugin()
   ]
 };
