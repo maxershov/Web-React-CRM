@@ -6,11 +6,11 @@
     "@babel/preset-react"
   ],
   "env": {
-    "test": {
+    "production": {
       "presets": [
-        [
-          "@babel/preset-env"
-        ],
+        ["@babel/preset-env", {
+          "loose": true
+        }],
         "@babel/preset-react"
       ]
     }
