@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 // const WebpackMonitor = require('webpack-monitor');
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
   context: path.resolve(__dirname),
@@ -73,6 +74,9 @@ module.exports = {
         minifyURLs: true
       }
     }),
+    new CompressionPlugin({
+      algorithm:"gzip"
+    }),
     new UglifyJsPlugin({
       uglifyOptions: {
         compress: {
@@ -87,7 +91,7 @@ module.exports = {
       },
       parallel: true
     }),
-    new MiniCssExtractPlugin()
+    new MiniCssExtractPlugin(),
     // new BundleAnalyzerPlugin(),
     // new WebpackMonitor({
     //   capture: true,

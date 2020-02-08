@@ -2,10 +2,12 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const express = require("express");
 const history = require('connect-history-api-fallback');
+const expressStaticGzip = require('express-static-gzip');
 const path = require("path");
 const myLocalHost = require("./host");
 
-const staticFiles = express.static(path.join(__dirname, "dist"));
+// const staticFiles = express.static(path.join(__dirname, "dist"));
+const staticFiles = expressStaticGzip(path.join(__dirname, "dist"));
 
 const app = express();
 app.use(staticFiles);
