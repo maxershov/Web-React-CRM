@@ -79,8 +79,7 @@ module.exports = {
           unsafe: true,
           inline: true,
           passes: 2,
-          keep_fargs: false,
-          safari10: true,
+          keep_fargs: false
         },
         output: {
           beautify: false,
@@ -88,11 +87,11 @@ module.exports = {
       },
       parallel: true
     }),
+    new MiniCssExtractPlugin()
     // new BundleAnalyzerPlugin(),
     // new WebpackMonitor({
     //   capture: true,
     //   launch: true,
     // }),
-    new MiniCssExtractPlugin()
   ]
 };
