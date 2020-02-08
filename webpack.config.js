@@ -91,7 +91,7 @@ module.exports = {
       },
       parallel: true
     }),
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin()
     // new BundleAnalyzerPlugin(),
     // new WebpackMonitor({
     //   capture: true,

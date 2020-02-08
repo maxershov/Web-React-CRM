@@ -29,9 +29,16 @@ html {
     display: none;
 }
 
-@media (max-width: 750px) {
+@media (max-width: 768px) {
     html {
         font-size: 0.6em;
+        background-image: url("./images/bg768.jpg");
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1366px) {
+    html {
+        background-image: url("./images/bg1366.jpg");
     }
 }
 
