@@ -14,7 +14,8 @@
     "react/jsx-one-expression-per-line": "off",
     "react/destructuring-assignment": "off",
     "import/no-cycle": 0,
-    "import/no-named-as-default": 0
+    "import/no-named-as-default": 0,
+    "no-param-reassign": 0
   },
   "plugins": [
     "prettier"
