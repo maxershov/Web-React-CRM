@@ -52,7 +52,7 @@ const CodeScanner = (props) => {
     <>
       <label>Сканер карт:</label>
       <form name="codeForm" onSubmit={enterCode}>
-        <input required minLength={1} placeholder="Нажмите на поле и прислоните карту" type="text" name={props.inputType} onChange={event => setCode(event.target.value)} value={code} />
+        <input required minLength={1} placeholder="Введите код" type="text" name={props.inputType} onChange={event => setCode(event.target.value)} value={code} />
       </form>
     </>
   );
