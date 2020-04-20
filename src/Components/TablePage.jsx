@@ -1,50 +1,66 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/destructuring-assignment */
-import React from 'react';
+import React, { useEffect, useState }  from 'react';
 import ReactTable from 'react-table-6/react-table.min';
 import { Link, useHistory, useParams } from "react-router-dom";
 import { connect } from 'react-redux';
 import { getDaysLeft} from '../App';
+import phoneSvg from "../assets/phone.svg"
 
 
-// set width to table colums by .className size
-function widthForTable(value) {
-  return Math.round(window.innerWidth * (value / 100))
-}
 
 
 const TablePage = (props) => {
   const history = useHistory();
   const { pageNum } = useParams();
+  const [widthCoeff, setWidthCoeff] = useState(window.innerWidth / 100);
+
+  function handleResize() {
+    setWidthCoeff(window.innerWidth / 100);
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
-    <ReactTable
-      className="table font_white_shadow -striped -highlight"
-      page={parseInt(pageNum, 10) - 1}
-      onPageChange={(pageIndex) => { history.push(`/clients/page/${pageIndex + 1}`) }}
-      previousText="Назад"
-      nextText="Вперед"
-      loadingText="Загрузка"
-      noDataText="Нет данных"
-      pageText="Страница"
-      ofText="из"
-      rowsText="профилей"
-      headerClassName="tableHeader"
-      data={(JSON.parse(props.personData)).filter(obj => obj.contract !== 'СОТРУДНИК' && obj.contract !== 'НЕТ' && obj.contract !== 'ЛИД' )}
-      filterable
-      defaultFilterMethod={(filter, row) =>
+    <><img className="askPhoneTurn" alt="turn to landscape" src={phoneSvg} />
+      <ReactTable
+        className="table -striped -highlight portrait-hide"
+        page={parseInt(pageNum, 10) - 1}
+        onPageChange={(pageIndex) => { history.push(`/clients/page/${pageIndex + 1}`) }}
+        previousText="Назад"
+        nextText="Вперед"
+        loadingText="Загрузка"
+        noDataText="Нет данных"
+        pageText="Страница"
+        ofText="из"
+        rowsText="профилей"
+        headerClassName="tableHeader"
+        data={(JSON.parse(props.personData)).filter(obj => obj.contract !== 'СОТРУДНИК' && obj.contract !== 'НЕТ' && obj.contract !== 'ЛИД' )}
+        filterable
+        defaultFilterMethod={(filter, row) =>
         String(row[filter.id]) === filter.value}
-      columns={[
+        columns={[
         {
           Header: 'Фото',
-          width: widthForTable(15),
+          width: widthCoeff * 15,
           headerClassName: 'tableHeader',
           Cell: (value) => (
-            <button id="tablePhotoButton" type="button" onClick={() => history.push(`/profile/${value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" src={require(`../images/${value.original.photoId}.jpg`)} /></button>)
+            <input 
+              type="image" 
+              id="tablePhoto" 
+              alt="Profile image"
+              onClick={() => history.push(`/profile/${value.original.code}`)}
+              src={require(`../images/${value.original.photoId}.jpg`)}
+            />
+)
         },
         {
           Header: 'Имя',
           id: 'rowCode',
-          width: widthForTable(20),
+          width: widthCoeff * 20,
           style: { whiteSpace: 'unset' },
           headerClassName: 'tableHeader',
           accessor: 'personName',
@@ -64,7 +80,7 @@ const TablePage = (props) => {
           accessor: 'contract',
           style: { whiteSpace: 'unset' },
           headerClassName: 'tableHeader',
-          width: widthForTable(17, 5),
+          width: widthCoeff * 17.5,
           filterMethod: (filter, row) => {
             if (row[filter.id].toLowerCase().startsWith(filter.value.toLowerCase())) return true;// sort by second word
             if (row[filter.id].includes(" ")) { // sort by first word
@@ -73,7 +89,7 @@ const TablePage = (props) => {
           },
         }, {
           Header: 'Остаток дней',
-          width: widthForTable(9),
+          width: widthCoeff * 9,
           accessor: 'days',
           headerClassName: 'tableHeader',
           sortMethod: (a, b) => {
@@ -83,13 +99,13 @@ const TablePage = (props) => {
           },
           Cell: ({ value }) => (getDaysLeft(value))
         }, {
-          Header: 'Тренировки',
-          width: widthForTable(9),
+          Header: 'Посещений',
+          width: widthCoeff * 9,
           accessor: 'remain',
           headerClassName: 'tableHeader',
         }, {
           Header: 'Аренда дней',
-          width: widthForTable(9),
+          width: widthCoeff * 9,
           accessor: 'rent',
           headerClassName: 'tableHeader',
           sortMethod: (a, b) => {
@@ -100,19 +116,20 @@ const TablePage = (props) => {
           Cell: ({ value }) => (getDaysLeft(value)),
         }, {
           Header: 'Депозит',
-          width: widthForTable(11, 5),
+          width: widthCoeff * 11.5,
           accessor: 'deposite',
           headerClassName: 'tableHeader'
         }, {
           Header: 'Парковка',
-          width: widthForTable(9),
+          width: widthCoeff * 9,
           accessor: 'autoMonth',
           headerClassName: 'tableHeader'
         }
       ]}
-      defaultSorted={[{ id: 'personName', desc: false }]}
-      defaultPageSize={20}
-    />
+        defaultSorted={[{ id: 'personName', desc: false }]}
+        defaultPageSize={20}
+      />
+    </>
   )
 }
 

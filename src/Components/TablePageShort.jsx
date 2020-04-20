@@ -1,29 +1,36 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactTable from 'react-table-6/react-table.min';
 import { connect } from 'react-redux';
 import { Link, useHistory, useParams } from "react-router-dom";
 import { getDaysLeft } from '../App';
+import phoneSvg from "../assets/phone.svg"
 
-
-// set width to table colums by .className size
-function widthForTable(value) {
-  return Math.round(window.innerWidth * (value / 100))
-}
 
 
 const TablePageShort = (props) => {
   const { pageNum } = useParams();
   const history = useHistory();
+  const [widthCoeff, setWidthCoeff] = useState(window.innerWidth / 100);
   // TODO CRAP => can't change page in path => get path from history and del number 
   const path = history.location.pathname.replace(/[0-9]/g, '');
+
+
+  function handleResize() {
+    setWidthCoeff(window.innerWidth / 100);
+  }
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
 
   // some obj's for table => don't repeat photo and name column 
   const leadObj = {
     Header: 'Дата первого контакта',
     accessor: 'rent',
-    width: widthForTable(25),
+    width: widthCoeff * 25,
     headerClassName: 'tableHeader',
     sortMethod: (a, b) => {
       const dayA = getDaysLeft(a);
@@ -33,14 +40,14 @@ const TablePageShort = (props) => {
   }
   const employeeObj = {
     Header: 'Депозит',
-    width: widthForTable(25),
+    width: widthCoeff * 25,
     accessor: 'deposite',
     headerClassName: 'tableHeader'
   }
   const lostObj = {
     Header: 'Срок действия последнего абонемента',
     accessor: 'days',
-    width: widthForTable(25),
+    width: widthCoeff * 25,
     headerClassName: 'tableHeader',
     sortMethod: (a, b) => {
       const dayA = getDaysLeft(a);
@@ -55,34 +62,43 @@ const TablePageShort = (props) => {
   if (props.tableType === 'НЕТ') tableRow = lostObj;
 
   return (
-    <div className="table font_white_shadow">
-      <ReactTable
-        className="-striped -highlight"
-        page={parseInt(pageNum, 10) - 1}
-        onPageChange={(pageIndex) => { history.push(path + (pageIndex + 1)) }}
-        previousText="Назад"
-        nextText="Вперед"
-        loadingText="Загрузка"
-        noDataText="Нет данных"
-        pageText="Страница"
-        ofText="из"
-        rowsText="профилей"
-        data={(JSON.parse(props.personData)).filter(obj => obj.contract === props.tableType )}
-        filterable
-        defaultFilterMethod={(filter, row) =>
+    <>
+      <img className="askPhoneTurn" alt="turn to landscape" src={phoneSvg} />
+      <div className="table portrait-hide">
+        <ReactTable
+          className="-striped -highlight"
+          page={parseInt(pageNum, 10) - 1}
+          onPageChange={(pageIndex) => { history.push(path + (pageIndex + 1)) }}
+          previousText="Назад"
+          nextText="Вперед"
+          loadingText="Загрузка"
+          noDataText="Нет данных"
+          pageText="Страница"
+          ofText="из"
+          rowsText="профилей"
+          data={(JSON.parse(props.personData)).filter(obj => obj.contract === props.tableType )}
+          filterable
+          defaultFilterMethod={(filter, row) =>
           String(row[filter.id]) === filter.value}
-        columns={[
+          columns={[
           {
             Header: 'Фото',
-            width: widthForTable(25),
+            width: widthCoeff * 15,
             headerClassName: 'tableHeader',
             Cell: (value) => (
-              <button type="button" onClick={() => history.push(`/profile/${value.original.code}`)}><img id="tablePhoto" alt="tablePhoto" src={require(`../images/${value.original.photoId}.jpg`)} /></button>)
+              <input
+                type="image"
+                id="tablePhoto"
+                onClick={() => history.push(`/profile/${value.original.code}`)}
+                alt="Profile image"
+                src={require(`../images/${value.original.photoId}.jpg`)}
+              />
+)
           },
           {
             Header: 'Имя',
             id: 'rowCode',
-            width: widthForTable(50),
+            width: widthCoeff * 50,
             style: { whiteSpace: 'unset' },
             headerClassName: 'tableHeader',
             accessor: 'personName',
@@ -99,10 +115,11 @@ const TablePageShort = (props) => {
           },
           tableRow
         ]}
-        defaultSorted={[{ id: 'personName', desc: false }]}
-        defaultPageSize={20}
-      />
-    </div>
+          defaultSorted={[{ id: 'personName', desc: false }]}
+          defaultPageSize={20}
+        />
+      </div>
+    </>
   )
 }
 

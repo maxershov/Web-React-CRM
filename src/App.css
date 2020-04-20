@@ -1,13 +1,36 @@
-* {
-    font-family: "Roboto", sans-serif;
+:root {
+    /* @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap"); */
+    font-family: "Montserrat", sans-serif;
     box-sizing: border-box;
-    --img-width: 25vw;
-    --img-height: 25vw;
-    --form-width: 25vw;
-    --back-color: rgba(224, 224, 224, 0.315);
-    --back-color-light: rgba(224, 224, 224, 0.1);
-    --form-color: rgba(224, 224, 224, 0.6);
-    --table-color: rgba(0, 92, 204);
+    letter-spacing: -0.2px;
+    --back-color: #DBDBDB;
+    --background-color: #EBECF0;
+    --grey: #8F9094;
+    --white: #FFF;
+    --red: #FF0F0F;
+    --light-grey: #BABECC;
+    --input-text-color: #464646;
+    --text-color: #BABECC;
+    /* --back-color: #272727;
+    --background-color: #272727;
+    --white: #212121;
+    --light-grey: #141414;
+    --grey: #feeeee;
+    --input-text-color: #feeeee;
+    --text-color: #868686; */
+}
+
+.ReactTable.-highlight .rt-tbody .rt-tr:not(.-padRow):hover {
+    background: var(--text-color);
+}
+
+.ReactTable .rt-thead.-header {
+    box-shadow: inset 0px 4px 4px var(--grey);
+    border-radius: 6px;
+}
+
+body {
+    margin: 0;
 }
 
 ::-webkit-scrollbar {
@@ -17,12 +40,7 @@
 
 html {
     font-size: 1rem;
-    /* background-color: rgb(0, 0, 0); */
-    background-image: url("./images/bg.jpeg");
-    background-size: 100vw;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-color: #151a20;
+    background-color: var(--background-color);
 }
 
 .askPhoneTurn {
@@ -31,16 +49,44 @@ html {
 
 @media (max-width: 768px) {
     html {
-        font-size: 0.6em;
-        background-image: url("./images/bg768.jpg");
+        font-size: 0.7em;
+    }
+    #burgerBtn {
+        width: 4rem;
+        height: 4rem;
+        border: none;
+        box-shadow: none;
+        display: block !important;
+    }
+    .menu-container {
+        display: none !important;
+    }
+    .menu-container_open a {
+        overflow: hidden;
+        text-align: left;
+        color: var(--grey);
+        border-bottom: solid 1px var(--light-grey);
+        position: relative;
+        padding: 0.7em;
+        display: block;
+        font-size: 1.1em;
+        width: 100%;
+    }
+    .mainPage {
+        grid-template-columns: 1fr !important;
+        grid-template-rows: repeat(5, auto);
+        grid-template-areas: "calendar" "notes" "newCode" "newProfile" "table" !important;
+    }
+    .userPage {
+        display: grid;
+        grid-template-columns: 1fr 2fr !important;
+        grid-template-rows: repeat(4, auto);
+        grid-template-areas: "image userPage-container" "image userPage-container" "fieldsAction fieldsAction" "notesUser notesUser" "tableHistory tableHistory" !important;
+        text-align: center;
     }
 }
 
-@media (min-width: 769px) and (max-width: 1366px) {
-    html {
-        background-image: url("./images/bg1366.jpg");
-    }
-}
+@media (min-width: 769px) and (max-width: 1366px) {}
 
 @media (min-width: 3840px) {
     html {
@@ -49,27 +95,23 @@ html {
 }
 
 @media (max-width: 600px) and (orientation: portrait) {
-    html {
-        visibility: hidden;
-        background-image: none;
-    }
     .askPhoneTurn {
         display: block;
         visibility: visible;
-        font-size: 4rem !important;
+        font-size: 1.3rem !important;
         text-align: center;
     }
-}
-
-.font_white_shadow {
-    text-shadow: 2px 2px 0.1rem black;
-    font-size: 1.2rem;
-    color: white;
+    .portrait-hide {
+        visibility: hidden;
+    }
 }
 
 .table {
     background-color: var(--back-color);
     text-align: center;
+    font-size: 1.1rem;
+    /* box-shadow: inset 2px 2px 5px var(--light-grey), inset -5px -5px 10px var(--white); */
+    color: var(--input-text-color);
 }
 
 .tableHeader {
@@ -77,39 +119,31 @@ html {
     word-wrap: break-word;
 }
 
-#tablePhotoButton {
+#tablePhoto, #profileImg, #scannerPhoto {
     align-items: center;
+    border-radius: 0;
+    box-shadow: none;
 }
 
-#tablePhoto {
-    height: 5em;
-    max-width: auto;
-}
-
-#tablePhoto:hover {
-    position: absolute;
-    height: 20em;
-    width: auto;
-    background-color: rgba(0, 92, 204, 0.3);
+#tablePhoto:hover, #profileImg:hover {
     cursor: pointer;
-}
-
-.table button {
-    background: none;
-    border: none;
-    font-size: 1.2rem;
-    color: white;
-    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.5s ease-in-out;
 }
 
 .table input {
     background-color: var(--back-color) !important;
     cursor: pointer;
+    box-shadow: none;
+}
+
+#burgerBtn {
+    display: none;
 }
 
 .menu-container {
     display: flex;
-    margin: 0 0 0.3em 0;
+    margin: 0.5rem 0 0.3em 0;
 }
 
 a {
@@ -117,46 +151,56 @@ a {
     text-decoration: none;
 }
 
+a:hover {
+    color: var(--white);
+}
+
 .menu-container>a {
-    color: black;
-    background-color: var(--back-color);
     flex: 1;
-    text-shadow: 2px 1px 0.2em white;
     padding: 0.4rem;
     font-size: 1.2rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
     cursor: pointer;
-    border: none;
     text-align: center;
+    color: var(--text-color);
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    text-shadow: 1px 1px 0 var(--white);
 }
 
-.menu-container .is-active {
-    border: none;
-    background-color: var(--back-color-light);
-    color: white;
-    outline: none;
+.menu-container a:first-child {
+    border-bottom-left-radius: 0;
+}
+
+.menu-container a:last-child {
+    border-bottom-right-radius: 0;
+}
+
+.menu-container .menu-nav-active {
+    color: var(--grey);
     transition: color 0.2s linear;
+    box-shadow: inset 2px 1px 2px var(--light-grey), inset -2px -1px 2px var(--white);
 }
 
 .userPage {
     display: grid;
     grid-template-columns: 1fr 2fr 2fr;
     grid-template-rows: repeat(4, auto);
+    grid-template-areas: "image userPage-container fieldsAction" "image userPage-container fieldsAction" "image userPage-container notesUser" "tableHistory tableHistory tableHistory";
     justify-items: center;
     align-content: flex-start;
+    box-shadow: inset 2px 2px 5px var(--light-grey), inset -5px -5px 10px var(--white);
+    border-radius: 25px;
 }
 
 .userPage-container {
-    grid-column: 2/3;
-    grid-row: 1/3;
+    grid-area: userPage-container;
     width: 100%;
 }
 
 .userPage .img-container {
-    grid-column: 1/2;
-    grid-row: 1/3;
+    grid-area: image;
     width: 90%;
     height: 90%;
     display: flex;
@@ -165,177 +209,225 @@ a {
 }
 
 .userPage .img-container>img {
-    padding-top: 1rem;
     flex: 1;
     max-width: 95%;
     max-height: 95%;
     object-fit: scale-down;
 }
 
-.userPage label,
-.table,
-.calendar,
-.mainPage textarea {
-    animation: fadein 0.5s;
+.userPage, .table, .mainPage {
+    animation: fadein 0.4s;
+}
+
+.userPage .img-container {
+    animation: fadein 1s;
 }
 
 @keyframes fadein {
     from {
         opacity: 0;
-        transform: translate(-1em);
     }
     to {
         opacity: 1;
     }
 }
 
-*>label,
-.tableHeader {
+*>label {
     display: block;
-    font-size: 1.4rem;
-    font-weight: 700;
+    font-size: 1.2em;
     width: 80%;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
     text-align: center;
-    color: white;
-    text-shadow: 2px 2px 0.1rem black;
-    letter-spacing: 0.04em;
+    color: var(--grey);
+    text-transform: uppercase;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px var(--white);
+    margin: 1.3rem 0 0.5rem 0;
 }
 
-*>input {
-    color: black;
+.tableHeader {
+    font-size: 1rem;
+    color: var(--grey);
+    text-transform: uppercase;
+}
+
+*>input, * textarea {
+    box-shadow: inset 2px 2px 5px var(--light-grey), inset -5px -5px 10px var(--white);
+    color: var(--input-text-color);
     border: none;
-    border-bottom: 1px solid black;
+    border-radius: 25px;
+    padding: 0.4em 0.7em;
     width: 80%;
-    font-size: 1.35rem;
-    background-color: var(--back-color);
-    margin-bottom: 0.5rem;
-    font-weight: bolder;
-    text-shadow: 0 0 0.1em white;
+    font-size: 1.2rem;
+    background-color: var(--background-color);
+    appearance: none;
+    -webkit-appearance: none;
+    text-shadow: 0 0 0.1em var(--white);
+    outline: none;
 }
 
-*>input:hover {
-    background-color: rgba(224, 224, 224, 0.4);
+*>input:hover, .menu-container a:hover {
+    background-color: var(--white);
     transition: background-color 0.5s linear;
 }
 
-*>input::placeholder {
-    font-size: 1.3rem;
-    color: rgba(0, 0, 0, 0.5);
-    text-shadow: none;
-    font-weight: initial;
+*>input:focus {
+    box-shadow: inset 1px 1px 2px var(--light-grey), inset -1px -1px 2px var(--white);
 }
 
-.absolute_position_button button {
+*>input::placeholder {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    text-shadow: none;
+}
+
+.absolute_position {
     position: absolute;
 }
 
-.userPage button,
-.mainPage button {
-    width: 30vw;
+.userPage button, .notesMain button {
+    margin: auto 10%;
     border-style: none;
     text-transform: uppercase;
     font-weight: bold;
     cursor: pointer;
     margin-bottom: 0.3rem;
-    background-image: linear-gradient( to right, #005c97 0%, #363795 51%, #005c97 100%);
+    border-radius: 25px;
+    padding: 0.5rem 3rem;
+    text-shadow: 1px 1px 0 var(--white);
+    box-shadow: -5px -5px 20px var(--white), 5px 5px 20px var(--light-grey);
 }
 
-.userPage-container form button,
-.FieldsAction button,
-.newProfileField button,
-.notesMain button {
+.calendar {
+    margin: 0 auto;
+}
+
+.calendar button {
+    padding: .75em .5em;
+    display: block !important;
+}
+
+.calendar button:hover {
+    background-color: var(--red) !important;
+}
+
+.userPage button:hover, .notesMain button:hover {
+    color: var(--grey);
+    transition: color 0.2s linear;
+}
+
+.userPage-container form button, .FieldsAction button, .newProfileField button, .notesMain button, .notesField button {
     display: none;
 }
 
-.userPage-container>*:hover>form>button,
-.userPage-container>*:hover>button,
-.FieldsAction>*:hover button,
-.newProfileField:hover button,
-.notesMain:hover button {
+.userPage-container>*:hover>form>button, .userPage-container>*:hover>button, .FieldsAction>*:hover button, .newProfileField:hover button, .notesMain:hover button, .notesField:hover button {
     display: block;
 }
 
-.notesField>button {
-    display: block;
-}
-
-.notesField>textarea {
-    background-color: var(--form-color);
+.notesField textarea {
     width: 80%;
     height: 15vh;
     font-size: inherit;
 }
 
 .notesField {
-    grid-column: 3/4;
-    grid-row: 2/3;
+    grid-area: notesUser;
     width: 100%;
 }
 
 .tableHistory {
-    margin-top: 1vw;
-    grid-column: 1/4;
-    grid-row: 3/4;
+    margin-top: 3rem;
+    grid-area: tableHistory;
     width: 95%;
+    text-shadow: 1px 1px 0 var(--white);
+}
+
+#DeleteButton {
+    color: var(--red);
+    width: auto;
+    padding: 0.5rem;
+    text-shadow: none;
 }
 
 .FieldsAction {
-    grid-column: 3/4;
-    grid-row: 1/2;
+    grid-area: fieldsAction;
     width: 100%;
 }
 
 .calendar button {
-    background-image: none;
-    font-size: 1em;
+    border-radius: 25px;
+    box-shadow: none;
+    border-radius: 25px;
+}
+
+.calendar abbr {
+    text-decoration: none !important;
 }
 
 .mainPage {
-    margin: 1rem;
+    margin-top: 1rem;
     display: grid;
     grid-template-columns: 1fr 2fr;
-    grid-template-rows: repeat(5, auto);
+    grid-template-rows: repeat(4, auto);
+    grid-template-areas: "calendar notes" "calendar notes" "newCode newProfile" "table table";
     justify-items: center;
     align-content: flex-start;
+    grid-row-gap: 1rem;
+    text-align: center;
 }
 
 .tableMain {
-    margin-left: 2%;
-    margin-right: 2%;
-    grid-column: 1/3;
-    grid-row: 4/5;
+    margin-top: 1rem;
+    grid-area: table;
 }
 
 .calendarMain {
-    grid-column: 1/2;
-    grid-row: 1/3;
+    box-shadow: inset 2px 2px 5px var(--light-grey), inset -5px -5px 10px var(--white);
+    grid-area: calendar;
 }
 
 .notesMain {
-    grid-column: 2/3;
-    grid-row: 1/3;
     width: 100%;
+    grid-area: notes;
 }
 
 .notesMain>textarea {
-    width: 100%;
-    height: 70%;
-    background-color: var(--back-color);
-    font-size: 1.3em;
+    width: 80%;
+    height: 80%;
 }
 
 .newProfileField {
-    margin: 1rem;
-    grid-column: 2/3;
-    grid-row: 3/4;
-    width: 50%;
+    width: 100%;
+    grid-area: newProfile;
 }
 
 .newCodeField {
-    margin: 1rem;
-    grid-column: 1/2;
-    grid-row: 3/4;
     width: 100%;
+    grid-area: newCode;
+}
+
+.spinner {
+    margin: 10% 50%;
+    width: 5rem;
+    height: 5rem;
+    border-top-color: var(--grey);
+    border-left-color: var(--light-grey);
+    ;
+    animation: spinner 800ms linear infinite;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 50%;
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+@keyframes spinner {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }

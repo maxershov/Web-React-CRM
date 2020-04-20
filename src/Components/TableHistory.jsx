@@ -1,16 +1,22 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import ReactTable from 'react-table-6/react-table.min';
 import { connect } from 'react-redux';
 import { getDaysLeft } from '../App';
 
 
-// set width to table colums by .className size
-function widthForTable(value) {
-  return Math.round(window.innerWidth * (value / 100))
-}
 
 const TableHistory = (props) => {
   const parsedData = JSON.parse(props.activityData).filter(obj => obj.code === props.code);
+  const [widthCoeff, setWidthCoeff] = useState(window.innerWidth / 100);
+
+  function handleResize() {
+    setWidthCoeff(window.innerWidth - 5 / 100);
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <div className="tableHistory">
@@ -29,11 +35,11 @@ const TableHistory = (props) => {
           accessor: 'type',
           headerClassName: 'tableHeader',
           style: { whiteSpace: 'unset' },
-          width: widthForTable(20)
+          width: widthCoeff * 16,
         }, {
           Header: 'Дата',
           accessor: 'date',
-          width: widthForTable(10),
+          width: widthCoeff * 10,
           headerClassName: 'tableHeader',
           sortMethod: (a, b) => {
             const dayA = getDaysLeft(a);
@@ -42,19 +48,19 @@ const TableHistory = (props) => {
           }
         }, {
           Header: 'Время',
-          width: widthForTable(10),
+          width: widthCoeff * 10,
           accessor: 'time',
           headerClassName: 'tableHeader'
         }, {
           Header: 'Имя',
           accessor: 'person',
           style: { whiteSpace: 'unset' },
-          width: widthForTable(20),
+          width: widthCoeff * 20,
           headerClassName: 'tableHeader'
         }, {
           Header: 'Значение',
           accessor: 'amount',
-          width: widthForTable(40),
+          width: widthCoeff * 40,
           headerClassName: 'tableHeader',
           style: { 'whiteSpace': 'unset' }
         }]}

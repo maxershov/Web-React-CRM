@@ -9,7 +9,6 @@ const FormData = (props) => {
   const {formLabel, baseValue, inputType, type, route=''} = props;
   const { codeLink } = useParams();
   const [inputValue, setValue] = useState(baseValue);
-  const placeholder = `Добавить ${  formLabel.slice(0, -1).toLowerCase()}`;
   const sendToDb = (event) => {
     event.preventDefault();
     if (type === 'PERSON') ChangeProfileValue(codeLink, inputValue, inputType);
@@ -19,11 +18,11 @@ const FormData = (props) => {
     }
   }
   return (
-    <div className={`${inputType}Field absolute_position_button`}>
+    <div className={`${inputType}Field`}>
       <form name="myForm" onSubmit={sendToDb}>
         <label>{formLabel}</label>
-        <input placeholder={placeholder} type="text" name={inputType} onChange={event => setValue(event.target.value)} value={inputValue} />
-        <button type="submit">Изменить</button>
+        <input placeholder={`Добавить ${formLabel.toLowerCase()}`} type="text" name={inputType} onChange={event => setValue(event.target.value)} value={inputValue}  />
+        <button className="absolute_position" type="submit">Изменить</button>
       </form>
     </div>
 );
