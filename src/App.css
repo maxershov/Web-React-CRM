@@ -283,7 +283,7 @@ a:hover {
     position: absolute;
 }
 
-.userPage button, .notesMain button {
+.userPage button, .notesMain button, .newProfileField button {
     margin: auto 10%;
     border-style: none;
     text-transform: uppercase;
