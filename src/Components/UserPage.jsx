@@ -22,6 +22,7 @@ export const UserPage = (props) => {
   const [renderPhotoId, changeRenderPhotoId] = useState(false);
   const { codeLink } = useParams();
   const history = useHistory();
+  
 
   const data = JSON.parse(props.personData);
 
@@ -34,7 +35,7 @@ export const UserPage = (props) => {
     [person,] = data;
     history.push('/main');
   }
-
+  document.title =person.personName; 
 
 
   let renderFields = '';

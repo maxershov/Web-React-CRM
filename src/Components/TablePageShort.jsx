@@ -57,9 +57,18 @@ const TablePageShort = (props) => {
   }
 
   let tableRow = {};
-  if (props.tableType === 'ЛИД') tableRow = leadObj;
-  if (props.tableType === 'СОТРУДНИК') tableRow = employeeObj;
-  if (props.tableType === 'НЕТ') tableRow = lostObj;
+  if (props.tableType === 'ЛИД') {
+    document.title = "Лид CRM"; 
+    tableRow = leadObj;
+  }
+  if (props.tableType === 'СОТРУДНИК') {
+    document.title = "Сотрудники CRM"; 
+    tableRow = employeeObj;
+  }
+  if (props.tableType === 'НЕТ') {
+    document.title = "Прошлые CRM"; 
+    tableRow = lostObj;
+  }
 
   return (
     <>

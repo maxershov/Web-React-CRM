@@ -23,6 +23,7 @@ export const MainPage = (props) => {
   const [loadedDate, setLoadedDate] = useState(format(new Date(), 'dd-MM-yyyy'));
   const data = JSON.parse(getDateObj(loadedDate));
   const [widthCoeff, setWidthCoeff] = useState(window.innerWidth / 100);
+  document.title = `${loadedDate } CRM`;
 
   const changeLoadDate = (date) => {
     const formatedDate = format(date, 'dd-MM-yyyy');

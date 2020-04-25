@@ -20,6 +20,7 @@ const TablePage = (props) => {
   }
 
   useEffect(() => {
+    document.title = "Клиенты CRM";
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
