@@ -1,5 +1,6 @@
 :root {
     font-family: "Montserrat", sans-serif;
+    font-display: swap;
     box-sizing: border-box;
     letter-spacing: -0.2px;
     --back-color: #DBDBDB;
