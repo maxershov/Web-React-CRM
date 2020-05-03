@@ -11,13 +11,18 @@
     --light-grey: #BABECC;
     --input-text-color: #464646;
     --text-color: #BABECC;
-    /* --back-color: #272727;
+    --opacity: 1;
+}
+
+[data-theme="dark"] {
+    --back-color: #272727;
     --background-color: #272727;
-    --white: #212121;
-    --light-grey: #141414;
-    --grey: #feeeee;
-    --input-text-color: #feeeee;
-    --text-color: #868686; */
+    --white: #333333;
+    --light-grey: rgb(17, 16, 16);
+    --grey: rgb(2, 120, 255);
+    --input-text-color: #7991ff;
+    --text-color: #2f3350;
+    --opacity: 0.7;
 }
 
 .ReactTable.-highlight .rt-tbody .rt-tr:not(.-padRow):hover {
@@ -115,7 +120,6 @@ html {
     background-color: var(--back-color);
     text-align: center;
     font-size: 1.1rem;
-    /* box-shadow: inset 2px 2px 5px var(--light-grey), inset -5px -5px 10px var(--white); */
     color: var(--input-text-color);
 }
 
@@ -128,6 +132,7 @@ html {
     align-items: center;
     border-radius: 0;
     box-shadow: none;
+    opacity: var(--opacity);
 }
 
 #tablePhoto:hover, #profileImg:hover {
@@ -144,6 +149,17 @@ html {
 
 #burgerBtn {
     display: none;
+}
+
+.darkThemeIcon {
+    fill: rgba(180, 108, 0, 0.63);
+}
+
+.darkThemeBtn {
+    border: none;
+    background: transparent;
+    position: relative;
+    top: 0.25em;
 }
 
 .menu-container {
@@ -285,8 +301,9 @@ a:hover {
     text-shadow: none;
 }
 
-.absolute_position {
+.absolute_btn {
     position: absolute;
+    background-color: var(--text-color);
 }
 
 .userPage button, .notesMain button, .newProfileField button {
@@ -333,6 +350,7 @@ a:hover {
     width: 80%;
     height: 15vh;
     font-size: inherit;
+    padding-left: 15px;
 }
 
 .notesField {
@@ -360,7 +378,7 @@ a:hover {
 }
 
 .calendar button {
-    border-radius: 25px;
+    border-radius: 15px;
     box-shadow: none;
     border-radius: 25px;
 }
@@ -399,6 +417,7 @@ a:hover {
 .notesMain>textarea {
     width: 80%;
     height: 80%;
+    padding-left: 15px;
 }
 
 .newProfileField {
