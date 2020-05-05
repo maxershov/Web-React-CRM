@@ -365,12 +365,6 @@ a:hover {
     text-shadow: 1px 1px 0 var(--white);
 }
 
-#DeleteButton {
-    color: var(--red);
-    width: auto;
-    padding: 0.5rem;
-    text-shadow: none;
-}
 
 .FieldsAction {
     grid-area: fieldsAction;
