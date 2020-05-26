@@ -7,8 +7,8 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import MainContent from './Components/MainContent';
 import Header from './Components/Header';
-import store from './store/store'
-import { getPersonStore, getDayDataStore, getActivityStore, getActivityStoreCode } from './store/storeGetters'
+import store from './store/store';
+import { getPersonStore, getDayDataStore, getActivityStore, getActivityStoreCode } from './store/storeGetters';
 
 
 
@@ -93,7 +93,7 @@ export function addNewPersonToJSON(code, renderProfile, route) {
   const newPerson = { "personName": code, "contract": "", "dateBirth": "", "telNum": "", "code": code, "autoMonth": "", "notes": "", "remain": "", "days": "", "photoId": 0, "rent": "", "deposite": "", };
   data.push(newPerson);
   saveData(data, 'PERSON');
-  addNewActivityDataToJSON({ "code": code, "activity": [{ "date": format(new Date(),'dd-MM-yyyy'), "time": format(new Date(),'HH:mm:ss'), "type": "Создание профиля", "person": "", "amount": "" }] });
+  addNewActivityDataToJSON({ "code": code, "activity": [{ "date": format(new Date(), 'dd-MM-yyyy'), "time": format(new Date(), 'HH:mm:ss'), "type": "Создание профиля", "person": "", "amount": "" }] });
 
   if (renderProfile) {
     // Open profile page with new person
@@ -133,7 +133,7 @@ function changeCode(oldCode, newCode, activityObj) {
 }
 
 
-export function ChangeProfileValue(code, inputValue, inputType, date = format(new Date(),'dd-MM-yyyy')) {
+export function ChangeProfileValue(code, inputValue, inputType, date = format(new Date(), 'dd-MM-yyyy')) {
   /** Change field in profiles page -> get data from field and change in JSON file -> send to SQL dB */
   const data = JSON.parse(store.getState().personStore.data);
   const id = getIndexByCode(code);
@@ -143,10 +143,10 @@ export function ChangeProfileValue(code, inputValue, inputType, date = format(ne
   // in LEAD date field used for first call date. In PERSON used for rent => change LEAD to other => rent=""
   if (oldFieldValue === 'ЛИД' && inputType === 'contract') data[id].rent = "";
 
-  let time = format(new Date(),'HH:mm:ss');
+  let time = format(new Date(), 'HH:mm:ss');
   // Set time to 00:00:00 if date not today => doesn't set incorrect time)
-  if (date !== format(new Date(),'dd-MM-yyyy')) time = '00:00:00'
-  const activityObj = { "date": date, "time": time, "type": `Изменение ${inputType}`, "person": "", "amount": `${oldFieldValue} => ${inputValue}` };
+  if (date !== format(new Date(), 'dd-MM-yyyy')) time = '00:00:00'
+  const activityObj = { "date": date, "time": time, "type": `Изменение ${activitiesTypes[inputType]}`, "person": "", "amount": `${oldFieldValue} => ${inputValue}` };
 
   // use different func for code => to change URL and other
   if (inputType === 'code') changeCode(oldFieldValue, inputValue, activityObj);
@@ -177,5 +177,20 @@ function saveData(data, dataType) {
       break;
   }
 }
+
+export const activitiesTypes = {
+  "personName": "имени",
+  "contract": "контракта",
+  "dateBirth": "даты рождения",
+  "telNum": "номера телефона",
+  "code": "кода",
+  "autoMonth": "парковки",
+  "remain": "разовых тренировок",
+  "days": "срока контракта",
+  "notes": "заметок",
+  "photoId": "фото",
+  "rent": "аренды",
+  "deposite": "депозита"
+};
 
 export default App;
