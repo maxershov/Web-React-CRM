@@ -98,8 +98,11 @@ export const MainPage = (props) => {
             id: 'time',
             desc: true
           }]}
-          defaultPageSize={5}
+          defaultPageSize={10}
         />
+      </div>
+      <div className="author">
+        <a href="https://github.com/maxershov" className="authorLink">Max Ershov<br />2020</a>
       </div>
     </>
   );

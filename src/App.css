@@ -393,6 +393,17 @@ a:hover {
     text-align: center;
 }
 
+.author {
+    text-align: center;
+}
+
+.authorLink {
+    font-size: 0.75em;
+    color: var(--grey);
+    font-weight: bold;
+    text-shadow: 1px 1px 1px var(--white);
+}
+
 .tableMain {
     margin-top: 1rem;
     grid-area: table;
