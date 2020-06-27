@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable import/no-dynamic-require */
+/* eslint-disable global-require */
+import React, { useState, useEffect } from 'preact/compat';
 import { connect } from 'react-redux';
 import { Link, useHistory } from "react-router-dom";
 import { format, parse } from 'date-fns'
@@ -23,11 +25,11 @@ export const MainPage = (props) => {
   const [loadedDate, setLoadedDate] = useState(format(new Date(), 'dd-MM-yyyy'));
   const data = JSON.parse(getDateObj(loadedDate));
   const [widthCoeff, setWidthCoeff] = useState(window.innerWidth / 100);
-  document.title = `${loadedDate } CRM`;
+  document.title = `${loadedDate} CRM`;
 
   const changeLoadDate = (date) => {
-    const formatedDate = format(date, 'dd-MM-yyyy');
-    setLoadedDate(formatedDate);
+    const formattedDate = format(date, 'dd-MM-yyyy');
+    setLoadedDate(formattedDate);
   }
 
   function getPhotoId(code) {

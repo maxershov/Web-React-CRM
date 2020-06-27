@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import {useParams} from 'react-router-dom';
+import React, { useState } from 'preact/compat';
+import { useParams } from 'react-router-dom';
 import { ChangeProfileValue, addNewPersonToJSON } from '../App';
 
 
 const FormData = (props) => {
 
   // Pass @route for last prop => to use history.push on input(MainPage - new Person) to open new profile
-  const {formLabel, baseValue, inputType, type, route=''} = props;
+  const { formLabel, baseValue, inputType, type, route = '' } = props;
   const { codeLink } = useParams();
   const [inputValue, setValue] = useState(baseValue);
   const sendToDb = (event) => {
@@ -21,11 +21,11 @@ const FormData = (props) => {
     <div className={`${inputType}Field`}>
       <form name="myForm" onSubmit={sendToDb}>
         <label>{formLabel}</label>
-        <input placeholder={`Добавить ${formLabel.toLowerCase()}`} type="text" name={inputType} onChange={event => setValue(event.target.value)} value={inputValue}  />
+        <input placeholder={`Добавить ${formLabel.toLowerCase()}`} type="text" name={inputType} onChange={event => setValue(event.target.value)} value={inputValue} />
         <button className="absolute_btn" type="submit">Изменить</button>
       </form>
     </div>
-);
+  );
 }
 
 

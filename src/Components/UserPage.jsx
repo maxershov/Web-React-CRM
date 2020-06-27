@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable import/no-cycle */
-import React, { useState } from 'react';
+import React, { useState } from 'preact/compat';
 import { connect } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom'
 import { deletePerson } from '../App';
@@ -22,7 +22,7 @@ export const UserPage = (props) => {
   const [renderPhotoId, changeRenderPhotoId] = useState(false);
   const { codeLink } = useParams();
   const history = useHistory();
-  
+
 
   const data = JSON.parse(props.personData);
 
@@ -35,7 +35,7 @@ export const UserPage = (props) => {
     [person,] = data;
     history.push('/main');
   }
-  document.title =person.personName; 
+  document.title = person.personName;
 
 
   let renderFields = '';

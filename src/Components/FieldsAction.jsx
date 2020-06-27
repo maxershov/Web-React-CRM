@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import { format} from 'date-fns'
+import React, { useState } from 'preact/compat';
+import { format } from 'date-fns'
 import CalendarHideable from './CalendarHideable';
-import { pushNewActivity} from '../App';
+import { pushNewActivity } from '../App';
 
 
 
 const MyActionFields = (props) => {
   const [actionType, setActionType] = useState('');
   const [actionAmout, setActionAmout] = useState('');
-  const [actionDate, setActionDate] = useState(format(new Date(),'dd-MM-yyyy'));  // change!
+  const [actionDate, setActionDate] = useState(format(new Date(), 'dd-MM-yyyy'));  // change!
   const [actionPerson, setActionPerson] = useState('');
   const sendActionsToDb = (event) => {
     event.preventDefault();
-    const newActivity = { "date": actionDate, "time": format(new Date(),'HH:mm:ss'), "type": actionType, "person": actionPerson, "amount": actionAmout };
+    const newActivity = { "date": actionDate, "time": format(new Date(), 'HH:mm:ss'), "type": actionType, "person": actionPerson, "amount": actionAmout };
     pushNewActivity(props.code, JSON.stringify(newActivity));
   }
   return (
@@ -47,7 +47,7 @@ const MyActionFields = (props) => {
         <button className="absolute_btn" type="submit">Добавить событие</button>
       </form>
     </div>
-);
+  );
 }
 
 

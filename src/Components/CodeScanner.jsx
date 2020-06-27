@@ -1,21 +1,21 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useState } from 'preact/compat';
 import { format } from 'date-fns'
 import { addNewDayDataToJSON, addNewPersonToJSON, ChangeProfileValue, getIndexByCode } from '../App';
 import { getPersonStore } from '../store/storeGetters'
 
 
 
-function substractOneRemain(code){
+function substractOneRemain(code) {
   const personData = JSON.parse(getPersonStore());
   const index = getIndexByCode(code);
   const person = personData[index];
-  if (person.remain !== "") ChangeProfileValue(code, (+person.remain -1) , 'remain',);
+  if (person.remain !== "") ChangeProfileValue(code, (+person.remain - 1), 'remain',);
 }
 
 
 function addToTodayHistory(code, dayObject) {
-  const codeObj = { "code": code, "time": format(new Date(),'HH:mm:ss') };
+  const codeObj = { "code": code, "time": format(new Date(), 'HH:mm:ss') };
   // find if person already in history
   const index = dayObject.history.findIndex(x => x.code === code);
   if (index === -1) {

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { format} from 'date-fns'
+import React, { useState } from 'preact/compat';
+import { format } from 'date-fns'
 import { useParams } from 'react-router-dom';
 import CalendarHideable from './CalendarHideable';
 import { ChangeProfileValue } from '../App';
@@ -10,7 +10,7 @@ const FieldDeposite = (props) => {
   const [renderDeposite, changeRenderDeposite] = useState(false);
   const [amount, setAmount] = useState('');
   const [deposite, setDeposite] = useState(props.depositeValue);
-  const [dateDeposite, setDateDeposite] = useState(format(new Date(),'dd-MM-yyyy'))
+  const [dateDeposite, setDateDeposite] = useState(format(new Date(), 'dd-MM-yyyy'))
 
   const plus = () => {
     const sum = +deposite + +amount;

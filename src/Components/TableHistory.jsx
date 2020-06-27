@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'preact/compat';
 import ReactTable from 'react-table-6/react-table.min';
 import { connect } from 'react-redux';
 import { getDaysLeft } from '../App';
