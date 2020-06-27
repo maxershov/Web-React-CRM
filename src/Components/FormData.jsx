@@ -21,7 +21,7 @@ const FormData = (props) => {
     <div className={`${inputType}Field`}>
       <form name="myForm" onSubmit={sendToDb}>
         <label>{formLabel}</label>
-        <input placeholder={`Добавить ${formLabel.toLowerCase()}`} type="text" name={inputType} onChange={event => setValue(event.target.value)} value={inputValue} />
+        <input placeholder={`Добавить ${formLabel.toLowerCase()}`} type="text" name={inputType} onChange={event => setValue(event.target.value.trim())} value={inputValue} />
         <button className="absolute_btn" type="submit">Изменить</button>
       </form>
     </div>

@@ -19,7 +19,7 @@ const MyActionFields = (props) => {
     <div className="FieldsAction">
       <form onSubmit={sendActionsToDb}>
         <label>Тип события</label>
-        <input type="text" value={actionType} placeholder="Выберите или введите тип события" name="type" list="typeList" onChange={event => setActionType(event.target.value)} />
+        <input type="text" value={actionType} placeholder="Выберите или введите тип события" name="type" list="typeList" onChange={event => setActionType(event.target.value.trim())} />
         <datalist id="typeList">
           <option value="">Выбрать тип</option>
           <option value="Заморозка">Заморозка</option>
