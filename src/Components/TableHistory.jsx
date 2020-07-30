@@ -33,14 +33,14 @@ const TableHistory = (props) => {
         columns={[{
           Header: 'Тип',
           accessor: 'type',
-          headerClassName: 'tableHeader',
+          headerClassName: 'table__header',
           style: { whiteSpace: 'unset' },
           width: widthCoeff * 16,
         }, {
           Header: 'Дата',
           accessor: 'date',
           width: widthCoeff * 10,
-          headerClassName: 'tableHeader',
+          headerClassName: 'table__header',
           sortMethod: (a, b) => {
             const dayA = getDaysLeft(a);
             const dayB = getDaysLeft(b);
@@ -50,18 +50,18 @@ const TableHistory = (props) => {
           Header: 'Время',
           width: widthCoeff * 10,
           accessor: 'time',
-          headerClassName: 'tableHeader'
+          headerClassName: 'table__header'
         }, {
           Header: 'Имя',
           accessor: 'person',
           style: { whiteSpace: 'unset' },
           width: widthCoeff * 20,
-          headerClassName: 'tableHeader'
+          headerClassName: 'table__header'
         }, {
           Header: 'Значение',
           accessor: 'amount',
           width: widthCoeff * 40,
-          headerClassName: 'tableHeader',
+          headerClassName: 'table__header',
           style: { 'whiteSpace': 'unset' }
         }]}
         defaultSorted={[{ id: 'date', desc: true }]}

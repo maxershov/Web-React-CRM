@@ -8,7 +8,7 @@ import ReactTable from 'react-table-6/react-table.min';
 import Calendar from 'react-calendar/dist/entry.nostyle';
 import AreaNotes from './AreaNotes';
 import CodeScanner from './CodeScanner'
-import FormData from './FormData';
+import ProfileCreator from "./ProfileCreator";
 import { getIndexByCode, getDateObj } from '../App';
 
 
@@ -49,11 +49,16 @@ export const MainPage = (props) => {
   return (
     <>
       <div className="mainPage">
-        <Calendar className="calendar calendarMain" value={parse(loadedDate, 'dd-MM-yyyy', new Date())} onChange={(date) => changeLoadDate(date)} />
-        <div className="notesMain"><AreaNotes notesValue={data.notes} type="DAY_DATA" dayObject={data} /></div>
-        <div className="newProfileField"><FormData baseValue="" formLabel="Новый профиль:" type="NEW_PERSON" route={history} /></div>
-        {isToday(loadedDate)
-          ? <div className="newCodeField"><CodeScanner dayObject={data} date={loadedDate} /></div> : undefined}
+        <Calendar className="calendar calendar--main" value={parse(loadedDate, 'dd-MM-yyyy', new Date())} onChange={(date) => changeLoadDate(date)} />
+        <div className="mainPage-notes"><AreaNotes notesValue={data.notes} type="DAY_DATA" dayObject={data} /></div>
+        {isToday(loadedDate) ? (
+          <>
+            <CodeScanner dayObject={data} date={loadedDate} />
+            <ProfileCreator route={history} />
+          </>
+        ) : (
+            undefined
+          )}
       </div>
       <div className="tableMain">
         <ReactTable
@@ -71,10 +76,10 @@ export const MainPage = (props) => {
               Header: 'Фото',
               width: widthCoeff * 10,
               accessor: 'code',
-              headerClassName: 'tableHeader',
+              headerClassName: 'table__header',
               Cell: ({ value }) => (
                 <input
-                  id="scannerPhoto"
+                  className="person-img"
                   type="image"
                   alt="tablePhoto"
                   onClick={() => history.push(`/profile/${value}`)}
@@ -86,7 +91,7 @@ export const MainPage = (props) => {
               Header: 'Имя',
               accessor: 'code',
               width: widthCoeff * 60,
-              headerClassName: 'tableHeader',
+              headerClassName: 'table__header',
               style: { whiteSpace: 'unset' },
               Cell: ({ value }) => (<Link to={`/profile/${value}`}>{personData[getIndexByCode(value)].personName}</Link>)
             },
@@ -94,7 +99,7 @@ export const MainPage = (props) => {
               Header: 'Время',
               width: widthCoeff * 30,
               accessor: 'time',
-              headerClassName: 'tableHeader',
+              headerClassName: 'table__header',
             }]}
           defaultSorted={[{
             id: 'time',
@@ -103,7 +108,7 @@ export const MainPage = (props) => {
           defaultPageSize={10}
         />
       </div>
-      <div className="author">
+      <div className="footer">
         <a href="https://github.com/maxershov" className="authorLink">Max Ershov<br />2020</a>
       </div>
     </>

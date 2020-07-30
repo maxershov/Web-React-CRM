@@ -16,10 +16,10 @@ const MyActionFields = (props) => {
     pushNewActivity(props.code, JSON.stringify(newActivity));
   }
   return (
-    <div className="FieldsAction">
+    <div className="fields-action">
       <form onSubmit={sendActionsToDb}>
-        <label>Тип события</label>
-        <input type="text" value={actionType} placeholder="Выберите или введите тип события" name="type" list="typeList" onChange={event => setActionType(event.target.value.trim())} />
+        <label className="label">Тип события</label>
+        <input className="input" type="text" value={actionType} placeholder="Выберите или введите тип события" name="type" list="typeList" onChange={event => setActionType(event.target.value.trim())} />
         <datalist id="typeList">
           <option value="">Выбрать тип</option>
           <option value="Заморозка">Заморозка</option>
@@ -31,12 +31,12 @@ const MyActionFields = (props) => {
           <option value="Парковка">Парковка</option>
         </datalist>
         <div>
-          <label>Данные события</label>
-          <input type="text" placeholder="Введите текст или сумму" onChange={event => setActionAmout(event.target.value)} value={actionAmout} />
+          <label className="label">Данные события</label>
+          <input className="input" type="text" placeholder="Введите текст или сумму" onChange={event => setActionAmout(event.target.value)} value={actionAmout} />
         </div>
         <div>
-          <label>Клиент/сотрудник</label>
-          <input type="text" value={actionPerson} placeholder="Выберите сотрудника/клиента" list="personList" onChange={event => setActionPerson(event.target.value)} />
+          <label className="label">Клиент/сотрудник</label>
+          <input className="input" type="text" value={actionPerson} placeholder="Выберите сотрудника/клиента" list="personList" onChange={event => setActionPerson(event.target.value)} />
           <datalist id="personList">
             <option value="">Выбрать тренера</option>
             {props.namesArr.map((person) =>
@@ -44,7 +44,7 @@ const MyActionFields = (props) => {
           </datalist>
         </div>
         <CalendarHideable setParentDate={setActionDate} сalendarName="Дата события:" dateType="setParent" date={actionDate} />
-        <button className="absolute_btn" type="submit">Добавить событие</button>
+        <button className="button" type="submit">Добавить событие</button>
       </form>
     </div>
   );

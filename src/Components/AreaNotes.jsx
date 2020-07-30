@@ -23,9 +23,9 @@ const AreaNotes = (props) => {
   }, [notesValue]);
   return (
     <>
-      <label>Заметки</label>
-      <textarea onChange={event => setNotesData(event.target.value)} onKeyDown={saveNotes} value={notesData} />
-      <button className="absolute_btn" type="button" id="clickNotes" onClick={saveNotes}>Изменить</button>
+      <label className="label">Заметки</label>
+      <textarea className="notes" onChange={event => setNotesData(event.target.value)} onKeyDown={saveNotes} value={notesData} />
+      <button className="button notes__button" type="button" onClick={saveNotes}>Изменить</button>
     </>
   )
 }

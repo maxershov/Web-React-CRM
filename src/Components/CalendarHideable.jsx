@@ -6,7 +6,7 @@ import { ChangeProfileValue } from '../App';
 
 
 const CalendarHideable = (props) => {
-  const [renderCalendar, setRenderCalendar] = useState('none');
+  const [renderCalendar, setRenderCalendar] = useState(false);
   const { codeLink } = useParams();
 
   function changeDate(dateTo) {
@@ -14,24 +14,28 @@ const CalendarHideable = (props) => {
     props.dateType === 'setParent' ?
       props.setParentDate(date) :
       ChangeProfileValue(codeLink, date, props.dateType);
-    setRenderCalendar('none');
+    setRenderCalendar(false);
   }
 
   function deleteDate() {
     ChangeProfileValue(codeLink, "", props.dateType);
-    setRenderCalendar('none');
+    setRenderCalendar(false);
   }
   return (
     <>
       <div className={`${props.dateType}Field`}>
-        <label>{props.сalendarName}</label>
-        <input onClick={() => setRenderCalendar('block')} type="text" readOnly value={props.date} />
-      </div>
-      <div style={{ display: renderCalendar }} className="calendar" id="calendar">
-        <Calendar className="calendar" onChange={date => changeDate(date)} />
-        <button type="button" onClick={() => setRenderCalendar('none')}>Убрать календарь</button>
-        <button type="button" onClick={() => deleteDate()}>Удалить дату</button>
-      </div>
+        <label className="label">{props.сalendarName}</label>
+        <input className="input" onClick={() => setRenderCalendar('block')} type="text" readOnly value={props.date} />
+      </div> 
+      {renderCalendar ? (
+        <div className="modal">
+          <Calendar className="calendar" onChange={date => changeDate(date)} />
+          <div className="one-line-wrapper">
+            <button className="button block-button" type="button" onClick={() => setRenderCalendar(false)}>Убрать календарь</button>
+            <button className="button block-button" type="button" onClick={() => deleteDate()}>Удалить дату</button>
+          </div>
+        </div>
+      ) : undefined}
     </>
   );
 }

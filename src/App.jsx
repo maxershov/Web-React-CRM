@@ -1,5 +1,5 @@
 import React from 'preact/compat';
-import './App.css';
+import './App.scss';
 import './react-table.css';
 import './react-calendar.css';
 import { format, differenceInDays, parse, startOfDay } from 'date-fns'

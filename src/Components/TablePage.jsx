@@ -26,7 +26,7 @@ const TablePage = (props) => {
   }, []);
 
   return (
-    <><img className="askPhoneTurn" alt="turn to landscape" src={phoneSvg} />
+    <><img className="warning-to-landscape" alt="turn to landscape" src={phoneSvg} />
       <ReactTable
         className="table -striped -highlight portrait-hide"
         page={parseInt(pageNum, 10) - 1}
@@ -38,7 +38,7 @@ const TablePage = (props) => {
         pageText="Страница"
         ofText="из"
         rowsText="профилей"
-        headerClassName="tableHeader"
+        headerClassName="table__header"
         data={(JSON.parse(props.personData)).filter(obj => obj.contract !== 'СОТРУДНИК' && obj.contract !== 'НЕТ' && obj.contract !== 'ЛИД')}
         filterable
         defaultFilterMethod={(filter, row) =>
@@ -47,11 +47,11 @@ const TablePage = (props) => {
           {
             Header: 'Фото',
             width: widthCoeff * 15,
-            headerClassName: 'tableHeader',
+            headerClassName: 'table__header',
             Cell: (value) => (
               <input
+                className="person-img" 
                 type="image"
-                id="tablePhoto"
                 alt="Profile image"
                 onClick={() => history.push(`/profile/${value.original.code}`)}
                 src={require(`../images/${value.original.photoId}.jpg`)}
@@ -63,7 +63,7 @@ const TablePage = (props) => {
             id: 'rowCode',
             width: widthCoeff * 20,
             style: { whiteSpace: 'unset' },
-            headerClassName: 'tableHeader',
+            headerClassName: 'table__header',
             accessor: 'personName',
             filterMethod: (filter, row) => {
               const name = row._original.personName;
@@ -80,7 +80,7 @@ const TablePage = (props) => {
             Header: 'Контракт',
             accessor: 'contract',
             style: { whiteSpace: 'unset' },
-            headerClassName: 'tableHeader',
+            headerClassName: 'table__header',
             width: widthCoeff * 17.5,
             filterMethod: (filter, row) => {
               if (row[filter.id].toLowerCase().startsWith(filter.value.toLowerCase())) return true;// sort by second word
@@ -92,7 +92,7 @@ const TablePage = (props) => {
             Header: 'Остаток дней',
             width: widthCoeff * 9,
             accessor: 'days',
-            headerClassName: 'tableHeader',
+            headerClassName: 'table__header',
             sortMethod: (a, b) => {
               const dayA = getDaysLeft(a);
               const dayB = getDaysLeft(b);
@@ -103,12 +103,12 @@ const TablePage = (props) => {
             Header: 'Посещений',
             width: widthCoeff * 9,
             accessor: 'remain',
-            headerClassName: 'tableHeader',
+            headerClassName: 'table__header',
           }, {
             Header: 'Аренда дней',
             width: widthCoeff * 9,
             accessor: 'rent',
-            headerClassName: 'tableHeader',
+            headerClassName: 'table__header',
             sortMethod: (a, b) => {
               const dayA = getDaysLeft(a);
               const dayB = getDaysLeft(b);
@@ -119,12 +119,12 @@ const TablePage = (props) => {
             Header: 'Депозит',
             width: widthCoeff * 11.5,
             accessor: 'deposite',
-            headerClassName: 'tableHeader'
+            headerClassName: 'table__header'
           }, {
             Header: 'Парковка',
             width: widthCoeff * 9,
             accessor: 'autoMonth',
-            headerClassName: 'tableHeader'
+            headerClassName: 'table__header'
           }
         ]}
         defaultSorted={[{ id: 'personName', desc: false }]}

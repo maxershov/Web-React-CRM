@@ -1,9 +1,7 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from 'preact/compat';
-import { format } from 'date-fns'
+import { format } from 'date-fns';
 import { addNewDayDataToJSON, addNewPersonToJSON, ChangeProfileValue, getIndexByCode } from '../App';
 import { getPersonStore } from '../store/storeGetters'
-
 
 
 function substractOneRemain(code) {
@@ -26,21 +24,26 @@ function addToTodayHistory(code, dayObject) {
 }
 
 
-function handleNewCode(code, dayObject) {
-  const personData = JSON.parse(getPersonStore());
-  const index = personData.findIndex(person => person.code === code);
-  // TODO find if already in history..
+const CodeScanner = React.memo(props => {
 
-  // If code not in db => create new + add to history. If already in db => add to history 
-  if (index === -1) {
-    addNewPersonToJSON(code, false);
-    addToTodayHistory(code, dayObject);
-  } else {
-    addToTodayHistory(personData[index].code, dayObject);
+  function handleNewCode(code, dayObject) {
+    const personData = JSON.parse(getPersonStore());
+    const index = personData.findIndex(person => person.code === code);
+    // TODO find if already in history..
+
+    // If code not in db => create new + add to history. If already in db => add to history 
+    if (index === -1) {
+      addNewPersonToJSON(code, false);
+      addToTodayHistory(code, dayObject);
+    } else {
+      addToTodayHistory(personData[index].code, dayObject);
+    }
   }
-}
 
-const CodeScanner = (props) => {
+  function checkPi() {
+    alert("Подключите RFID считыватель и настройте сервер")
+  }
+
   const [code, setCode] = useState('');
   const enterCode = (event) => {
     event.preventDefault();
@@ -48,14 +51,18 @@ const CodeScanner = (props) => {
     setCode(''); // clear codeField
     handleNewCode(codeDb, props.dayObject);
   }
+
   return (
-    <div className="newCodeField">
-      <label>Сканер карт</label>
+    <div className="code-scanner">
+      <label className="label">Сканер карт
+        <button className="code-scanner__button" type="button" onClick={checkPi}>ПОДКЛЮЧИТЬ</button>
+      </label>
       <form name="codeForm" onSubmit={enterCode}>
-        <input required minLength={1} placeholder=" Введите данные" type="text" name={props.inputType} onChange={event => setCode(event.target.value.trim())} value={code} />
+        <input className="input" required minLength={1} placeholder=" Введите данные" type="text" name="SCANNER" onChange={event => setCode(event.target.value.trim())} value={code} />
       </form>
     </div>
   );
-}
+});
+
 
 export default CodeScanner;

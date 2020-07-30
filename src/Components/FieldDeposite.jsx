@@ -31,11 +31,14 @@ const FieldDeposite = (props) => {
       (
         <>
           <form>
-            <label>Сумма списания/пополнения</label>
+            <label className="label">Сумма списания/пополнения</label>
             <br />
-            <input className="numInput" type="number" width="40" height="50" value={amount} onChange={event => setAmount(event.target.value)} />
-            <button type="button" style={{ fontSize: "1.4em", display: "block", marginBottom: "1rem" }} onClick={plus}>+</button>
-            <button type="button" style={{ fontSize: "1.4em", display: "block" }} onClick={minus}>-</button>
+            <input className="input" type="number" width="40" height="50" value={amount} onChange={event => setAmount(event.target.value)} />
+            <div className="one-line-wrapper">
+              <button className="button block-button" type="button" onClick={plus}>+</button>
+              <button className="button block-button" type="button" onClick={() => changeRenderDeposite(false)}>ЗАКРЫТЬ</button>
+              <button className="button block-button" type="button" onClick={minus}>-</button>
+            </div>
           </form>
           <CalendarHideable setParentDate={setDateDeposite} сalendarName="Дата изменения депозита:" dateType="setParent" date={dateDeposite} />
         </>
@@ -44,8 +47,8 @@ const FieldDeposite = (props) => {
       (
         <>
           <form onSubmit={() => changeRenderDeposite(true)}>
-            <label>Депозит</label>
-            <input onClick={() => changeRenderDeposite(true)} type="number" readOnly value={deposite} />
+            <label className="label">Депозит</label>
+            <input className="input" onClick={() => changeRenderDeposite(true)} type="number" readOnly value={deposite} />
           </form>
         </>
       )

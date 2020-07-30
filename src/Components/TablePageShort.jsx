@@ -31,7 +31,7 @@ const TablePageShort = (props) => {
     Header: 'Дата первого контакта',
     accessor: 'rent',
     width: widthCoeff * 25,
-    headerClassName: 'tableHeader',
+    headerClassName: 'table__header',
     sortMethod: (a, b) => {
       const dayA = getDaysLeft(a);
       const dayB = getDaysLeft(b);
@@ -42,13 +42,13 @@ const TablePageShort = (props) => {
     Header: 'Депозит',
     width: widthCoeff * 25,
     accessor: 'deposite',
-    headerClassName: 'tableHeader'
+    headerClassName: 'table__header'
   }
   const lostObj = {
     Header: 'Срок действия последнего абонемента',
     accessor: 'days',
     width: widthCoeff * 25,
-    headerClassName: 'tableHeader',
+    headerClassName: 'table__header',
     sortMethod: (a, b) => {
       const dayA = getDaysLeft(a);
       const dayB = getDaysLeft(b);
@@ -72,7 +72,7 @@ const TablePageShort = (props) => {
 
   return (
     <>
-      <img className="askPhoneTurn" alt="turn to landscape" src={phoneSvg} />
+      <img className="warning-to-landscape" alt="turn to landscape" src={phoneSvg} />
       <div className="table portrait-hide">
         <ReactTable
           className="-striped -highlight"
@@ -93,11 +93,11 @@ const TablePageShort = (props) => {
             {
               Header: 'Фото',
               width: widthCoeff * 15,
-              headerClassName: 'tableHeader',
+              headerClassName: 'table__header',
               Cell: (value) => (
                 <input
+                  className="person-img" 
                   type="image"
-                  id="tablePhoto"
                   onClick={() => history.push(`/profile/${value.original.code}`)}
                   alt="Profile image"
                   src={require(`../images/${value.original.photoId}.jpg`)}
@@ -109,7 +109,7 @@ const TablePageShort = (props) => {
               id: 'rowCode',
               width: widthCoeff * 50,
               style: { whiteSpace: 'unset' },
-              headerClassName: 'tableHeader',
+              headerClassName: 'table__header',
               accessor: 'personName',
               filterMethod: (filter, row) => {
                 const name = row._original.personName;
