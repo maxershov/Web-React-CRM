@@ -7,13 +7,20 @@ import { pushNewActivity } from '../App';
 
 const MyActionFields = (props) => {
   const [actionType, setActionType] = useState('');
-  const [actionAmout, setActionAmout] = useState('');
+  const [actionAmount, setActionAmount] = useState('');
   const [actionDate, setActionDate] = useState(format(new Date(), 'dd-MM-yyyy'));  // change!
   const [actionPerson, setActionPerson] = useState('');
-  const sendActionsToDb = (event) => {
+
+  function setToDefault() {
+    setActionType('');
+    setActionAmount('');
+    setActionPerson('');
+  }
+  function sendActionsToDb(event) {
     event.preventDefault();
-    const newActivity = { "date": actionDate, "time": format(new Date(), 'HH:mm:ss'), "type": actionType, "person": actionPerson, "amount": actionAmout };
+    const newActivity = { "date": actionDate, "time": format(new Date(), 'HH:mm:ss'), "type": actionType, "person": actionPerson, "amount": actionAmount };
     pushNewActivity(props.code, JSON.stringify(newActivity));
+    setToDefault();
   }
   return (
     <div className="fields-action">
@@ -32,7 +39,7 @@ const MyActionFields = (props) => {
         </datalist>
         <div>
           <label className="label">Данные события</label>
-          <input className="input" type="text" placeholder="Введите текст или сумму" onChange={event => setActionAmout(event.target.value)} value={actionAmout} />
+          <input className="input" type="text" placeholder="Введите текст или сумму" onChange={event => setActionAmount(event.target.value)} value={actionAmount} />
         </div>
         <div>
           <label className="label">Клиент/сотрудник</label>
