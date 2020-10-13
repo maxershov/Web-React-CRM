@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Link, useHistory } from "react-router-dom";
 import { format, parse } from 'date-fns'
 import ReactTable from 'react-table-6/react-table.min';
-import Calendar from 'react-calendar/dist/entry.nostyle';
+import Calendar from 'react-calendar';
 import AreaNotes from './AreaNotes';
 import CodeScanner from './CodeScanner'
 import ProfileCreator from "./ProfileCreator";

@@ -1,7 +1,7 @@
 import React, { useState } from 'preact/compat';
 import { useParams } from 'react-router-dom';
 import { format } from 'date-fns'
-import Calendar from 'react-calendar/dist/entry.nostyle';
+import Calendar from 'react-calendar';
 import { ChangeProfileValue } from '../App';
 
 
