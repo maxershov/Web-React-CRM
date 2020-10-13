@@ -13,8 +13,8 @@ module.exports = {
   mode: "production",
   output: {
     path: path.join(__dirname, "dist"),
-    filename: "[name].bundle.js",
-    publicPath: "/"
+    filename: '[name].[contenthash].bundle.js',
+    publicPath: "https://maksershov.ru/crm/"
   },
   resolve: {
     extensions: [".jsx", ".js", ".json"],
@@ -29,7 +29,7 @@ module.exports = {
       {
         test: /\(.js|.jsx?$/,
         loader: require.resolve("babel-loader"),
-        exclude: [/node_modules/]
+        exclude: [/node_modules/],
       },
       {
         test: /\.(sc|c)ss$/,
