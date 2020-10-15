@@ -14,7 +14,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, "dist"),
     filename: '[name].[contenthash].bundle.js',
-    publicPath: "https://maksershov.ru/crm/"
+    publicPath: process.env.PUBLIC_PATH
   },
   resolve: {
     extensions: [".jsx", ".js", ".json"],
