@@ -24,8 +24,8 @@ app.use(helmet.contentSecurityPolicy({
       ],
     }
 }));
-app.use(helmet.noCache());
 app.use(staticFiles);
 app.use(history());
 app.listen(port);
-app.use(staticFiles)
+app.use(staticFiles);
+console.log(`App is listening on port ${port}`);
